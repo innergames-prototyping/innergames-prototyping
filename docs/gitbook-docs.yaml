@@ -1,0 +1,10 @@
+site:
+  title: innergames-prototyping
+  structure:
+    - type: space
+      key: space-docs
+      title: Docs
+      path: docs
+      default: true
+      content:
+        directory: ./
