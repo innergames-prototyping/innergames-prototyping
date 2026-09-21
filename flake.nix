@@ -25,6 +25,7 @@
           mkShell {
             buildInputs = [
               nodejs
+              python3
               pkg-config
             ];
           };
