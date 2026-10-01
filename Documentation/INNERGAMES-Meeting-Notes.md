@@ -148,6 +148,8 @@ InnerGames develops physical games, runs workshops, and uses its games to teach;
 
 - Testing data will be needed, because people do not find everything. Access to existing testing data would be useful; the client will try to find some but is uncertain whether any exists.
 
+---
+
 # Group Meeting 13:00 1 Oct 2026
 
 ## 1. Process Chart
@@ -175,3 +177,13 @@ InnerGames develops physical games, runs workshops, and uses its games to teach;
 - We additionally outlined the three research documents we needed to get published before next week. This was as follows: Competitor Research, System Research & LLM Research. Amilie would take the first two and Ralph would do the final one.
 
 - Ralph would agree to get a wireframe out by the end of the week and Luc would additionally agree to produce a full process chart, bullet point the competitor research.
+
+## 4. Follow Up Discussion
+
+- Following end of the meeting Amilie and Luc got to work on documentation and formalising the process diagram. However some issues came up with optimisation.
+- Luc made the point on LLMs being over used and the pipeline being too janky and not smooth.
+- Amilie and Luc had lengthy debate and discussion over the pipeline structure. Both eventually settled into an agreement by dividing up previously straight simulation & analysis pipeline into segmented optional tabs that could be ran to save on tokens.
+- Simulation would be removed from LLM workload and script would be run locally to be injected into local widgets.
+- Analysis could be prompted by User if deemed necessary.
+- LLM "Blackbox" would be one seamless process to the user but under the hood go through a multi step check internally.
+- We ended up redrawing the latter half of the process chart and getting it pictured.
