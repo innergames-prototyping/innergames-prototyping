@@ -3,14 +3,15 @@
 ## Repository
 
 - GitHub: `innergames-prototyping/innergames-prototyping`, default branch `main`.
-- Documentation lives in `docs/` and is published through GitBook Git Sync.
-
-## GitBook
-
-- `docs/gitbook-docs.yaml` defines the site structure (schema: https://api.gitbook.com/gitbook-docs.yaml).
-- `content.directory` paths are resolved relative to `docs/`.
-- When adding a folder under `docs/` that should become its own space or section, update `docs/gitbook-docs.yaml` in the same commit and check every `content.directory` exists.
+- Documentation lives in `docs/` as Markdown files.
+- `docs-site/` is a Fumadocs static site that renders every Markdown file in `docs/`. See `docs-site/README.md` for development and deployment.
 
 ## Commits
 
+- Use [Conventional Commits](https://www.conventionalcommits.org): `<type>(<optional scope>): <description>`.
+- Types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `build`, `ci`, `perf`, `style`.
+- Write the description in the imperative mood, lowercase, without a trailing period, and keep the first line under 72 characters.
+- Use `docs` for changes to the content in `docs/`, and the scope `docs-site` for changes to the site itself, e.g. `feat(docs-site): add search`.
+- Mark breaking changes with `!` after the type or scope and explain them in a `BREAKING CHANGE:` footer.
+- One logical change per commit.
 - Do not add `Co-Authored-By` or other AI attribution lines to commits or pull requests.
