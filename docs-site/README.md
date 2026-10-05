@@ -1,7 +1,7 @@
 # docs-site
 
 Static documentation site built with [Fumadocs](https://fumadocs.dev). Every Markdown file in
-[`../Documentation`](../Documentation) becomes a page; the first `#` heading is used as its title.
+[`../docs`](../docs) becomes a page; the first heading is used as its title.
 
 ## Develop
 

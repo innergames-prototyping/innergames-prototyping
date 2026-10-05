@@ -9,7 +9,7 @@ const config = {
   // emit /page/index.html so a plain static file server needs no rewrite rules
   trailingSlash: true,
   reactStrictMode: true,
-  // content lives in ../Documentation, outside this app
+  // content lives in ../docs, outside this app
   turbopack: { root: path.join(import.meta.dirname, '..') },
 };
 

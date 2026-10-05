@@ -5,13 +5,13 @@ import { defineDocs } from 'fumadocs-mdx/macro';
 import { metaSchema, pageSchema } from 'fumadocs-core/source/schema';
 
 const docs = defineDocs({
-  dir: '../Documentation',
+  dir: '../docs',
   docs: {
     // the Markdown files have no frontmatter: fall back to their first heading
     schema: (ctx) =>
       pageSchema.extend({
         title: pageSchema.shape.title.default(
-          /^#\s+(.+)$/m.exec(ctx.source)?.[1] ?? path.basename(ctx.path, path.extname(ctx.path)),
+          /^#+\s+(.+)$/m.exec(ctx.source)?.[1] ?? path.basename(ctx.path, path.extname(ctx.path)),
         ),
       }),
     postprocess: {
