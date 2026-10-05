@@ -1,3 +1,4 @@
 .direnv
 /node-modules
 .envrc.local
+.vscode/settings.json
