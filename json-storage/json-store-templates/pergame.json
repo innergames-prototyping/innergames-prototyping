@@ -14,11 +14,6 @@
     "action_round": {"min": 0, "mean": 0.0, "median": 0.0, "max": 0},
     "action_turn": {"min": 0, "mean": 0.0, "median": 0.0, "max": 0}
   },
-
-  "milestones": {
-    "first_score": { "round": null, "minute": null },
-    "score_events": [ { "seat": 0, "round": 0, "minute": 0.0, "points": 0 } ]
-  },
   "outcome": {
     "winner_seats": [0],
     "winning_score": 0,
@@ -28,13 +23,19 @@
     "player_count": {"min": 0, "mean": 0.0, "median": 0.0, "max": 0},
      "player": [{
       "seat": 0,
-      "role": "<string>",
-      "strategy": "<string>",
-      "score": 0,
-      "turns": { "total": 0, "zero_move": 0, "idle": 0, "skipped": 0, "no_legal_move": 0 },
-      "resources_unused_at_end": { "<resource>": 0 }
+      "turns": { "total": 0, "zero_move": 0, "idle": 0, "skipped": 0, "no_legal_move": 0 }
      }]
     },
 
-  "audit": { "illegal_actions": 0, "bound_violations": 0 }
+  "end": {
+    "end_condition": "<string>",
+    "target_end_time": 0.0,
+    "target_mean_round_time": 0.0,
+    "target_mean_turn_time": 0.0,
+    "target_mean_action_per_turn": 0.0,
+    "target_mean_action_per_round": 0.0
+
+  },
+
+  "audit": { "illegal_actions": 0, "bound_violations": 0, "gamesamplenumber": 0}
 }
