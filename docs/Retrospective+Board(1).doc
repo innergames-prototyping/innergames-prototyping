@@ -1,0 +1,393 @@
+Date: Thu, 8 Oct 2026 12:42:48 +0000 (UTC)
+Message-ID: <47254599.35.1791463368451@b58b636c8f02>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_34_627223523.1791463368451"
+
+------=_Part_34_627223523.1791463368451
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>Retrospective Board</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        table {
+            border: solid 1px;
+            border-collapse: collapse;
+        }
+
+        table td, table th {
+            border: solid 1px;
+            padding: 5px;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+@media print {
+    #main {
+        padding-bottom: 1em !important; /* The default padding of 6em is to=
+o much for printouts */
+    }
+
+    body {
+        font: var(--ds-font-body-small, Arial, Helvetica, FreeSans, sans-se=
+rif);
+    }
+
+    body, #full-height-container, #main, #page, #content, .has-personal-sid=
+ebar #content {
+        background: var(--ds-surface, #fff) !important;
+        color: var(--ds-text, #000) !important;
+        border: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    a, a:link, a:visited, a:focus, a:hover, a:active {
+        color: var(--ds-text, #000);
+    }
+
+    #content h1,
+    #content h2,
+    #content h3,
+    #content h4,
+    #content h5,
+    #content h6 {
+        page-break-after: avoid;
+    }
+
+    pre {
+        font: var(--ds-font-code, Monaco, "Courier New", monospace);
+    }
+
+    #header,
+    .aui-header-inner,
+    #navigation,
+    #sidebar,
+    .sidebar,
+    #personal-info-sidebar,
+    .ia-fixed-sidebar,
+    .page-actions,
+    .navmenu,
+    .ajs-menu-bar,
+    .noprint,
+    .inline-control-link,
+    .inline-control-link a,
+    a.show-labels-editor,
+    .global-comment-actions,
+    .comment-actions,
+    .quick-comment-container,
+    #addcomment {
+        display: none !important;
+    }
+
+    /* CONF-28544 cannot print multiple pages in IE */
+    #splitter-content {
+        position: relative !important;
+    }
+
+    .comment .date::before {
+        content: none !important; /* remove middot for print view */
+    }
+
+    h1.pagetitle img {
+        height: auto;
+        width: auto;
+    }
+
+    .print-only {
+        display: block;
+    }
+
+    #footer {
+        position: relative !important; /* CONF-17506 Place the footer at en=
+d of the content */
+        margin: 0;
+        padding: 0;
+        background: none;
+        clear: both;
+    }
+
+    #poweredby {
+        border-top: none;
+        background: none;
+    }
+
+    #poweredby li.print-only {
+        display: list-item;
+        font-style: italic;
+    }
+
+    #poweredby li.noprint {
+        display: none;
+    }
+
+    /* no width controls in print */
+    .wiki-content .table-wrap,
+    .wiki-content p,
+    .panel .codeContent,
+    .panel .codeContent pre,
+    .image-wrap {
+        overflow: visible !important;
+    }
+
+    /* TODO - should this work? */
+    #children-section,
+    #comments-section .comment,
+    #comments-section .comment .comment-body,
+    #comments-section .comment .comment-content,
+    #comments-section .comment p {
+        page-break-inside: avoid;
+    }
+
+    #page-children a {
+        text-decoration: none;
+    }
+
+    /**
+     hide twixies
+
+     the specificity here is a hack because print styles
+     are getting loaded before the base styles. */
+    #comments-section.pageSection .section-header,
+    #comments-section.pageSection .section-title,
+    #children-section.pageSection .section-header,
+    #children-section.pageSection .section-title,
+    .children-show-hide {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .children-show-hide.icon {
+        display: none;
+    }
+
+    /* personal sidebar */
+    .has-personal-sidebar #content {
+        margin-right: 0px;
+    }
+
+    .has-personal-sidebar #content .pageSection {
+        margin-right: 0px;
+    }
+
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>Retrospective Board</h1>
+    <div class=3D"Section1">
+        <h1 local-id=3D"f44dc814dae0" id=3D"RetrospectiveBoard-Sprint0-Temp=
+late{DonotDelete}">Sprint 0 - Template {Do not Delete}</h1>
+<h2 local-id=3D"6ce4e480a668" id=3D"RetrospectiveBoard-GroupFeedback">Group=
+ Feedback</h2>
+<p local-id=3D"7dbd11107f82"><code>[Insert Feedback on how Phase I has gone=
+]</code></p>
+<p local-id=3D"2ecdb2b89b20"></p>
+<h2 local-id=3D"e28c2a7b7542" id=3D"RetrospectiveBoard-IndividualisedFeedba=
+ck">Individualised Feedback</h2>
+<h3 local-id=3D"095dfa28bce2" id=3D"RetrospectiveBoard-Luc"><code>Luc</code=
+></h3>
+<p local-id=3D"47a25b3ff925"><code>[Insert Feedback on Luc]</code></p>
+<h3 local-id=3D"751259ce7bdd" id=3D"RetrospectiveBoard-=C3=81milie"><code>=
+=C3=81milie</code></h3>
+<p local-id=3D"baee382a4631"><code>[Insert Feedback on =C3=81milie]</code><=
+/p>
+<h3 local-id=3D"e050b9b9ff5b" id=3D"RetrospectiveBoard-Ralph"><code>Ralph</=
+code></h3>
+<p local-id=3D"db1e85aa6584"><code>[Insert Feedback on Ralph]</code></p>
+<h2 local-id=3D"f627b61e81cf" id=3D"RetrospectiveBoard-IndividualOpinions">=
+Individual Opinions</h2>
+<h3 local-id=3D"891cb2b3b908" id=3D"RetrospectiveBoard-Luc.1"><code>Luc</co=
+de></h3>
+<p local-id=3D"f9f29d36ef61"><code>[Insert Retrospective Opinion from Luc]<=
+/code></p>
+<h3 local-id=3D"84feddc353d2" id=3D"RetrospectiveBoard-=C3=81milie.1"><code=
+>=C3=81milie</code></h3>
+<p local-id=3D"62d1e77bffa8"><code>[Insert Retrospective Opinion from =C3=
+=81milie]</code></p>
+<h3 local-id=3D"03e9e970b04a" id=3D"RetrospectiveBoard-Ralph.1"><code>Ralph=
+</code></h3>
+<p local-id=3D"580acde01517"><code>[Insert Retrospective Opinion from Ralph=
+]</code></p>
+<p local-id=3D"b6d525afcc05"></p>
+<h1 local-id=3D"6515b331f148" id=3D"RetrospectiveBoard-Sprint1-Concepting&a=
+mp;Research">Sprint 1 - Concepting &amp; Research</h1>
+<h2 local-id=3D"336d93ddfbf9" id=3D"RetrospectiveBoard-GroupFeedback.1">Gro=
+up Feedback</h2>
+<p local-id=3D"bfc2d19e7267"><code>The first sprint has been a slow affair.=
+ Whilst we were able to get most of our objectives complete. However a sign=
+ificant amount of the work was completed by only two individuals, with the =
+other two being mostly absent-- Additionally Communication has been lack lu=
+ster, not only between group members but also between the stakeholders. </c=
+ode></p>
+<p local-id=3D"5895a3ab32a7">In future sprints we must aim towards establis=
+hing weekly correspondence with both the client and stakeholder. Whilst it =
+is too early to be enforcing anything, we must hold each other more account=
+able and push for more communication between members about attendance and w=
+ork done. Especially with us being out of the concepting phase, it is param=
+ount that coding work gets complete and tests get rolled out.</p>
+<h2 local-id=3D"d026be6f5d11" id=3D"RetrospectiveBoard-IndividualisedFeedba=
+ck.1">Individualised Feedback</h2>
+<h3 local-id=3D"68001b6ea4fb" id=3D"RetrospectiveBoard-Luc.2"><code>Luc</co=
+de></h3>
+<p local-id=3D"6782e7b6c7b9"><code>Luc was generally the best performing me=
+mber of this sprint, having been the most communicative between group membe=
+rs and been the one with the best attendance rate. This sprint he put signi=
+ficant effort in critiquing the concept and then realising it through a vis=
+ualised process chart. Additional efforts of his has shone through in keepi=
+ng group cohesion, setting up the GitHub and trying to keep not only himsel=
+f but also others accountable. </code><br><br>
+However there has been some issues, namely with client communication and de=
+reliction of his duties in being the bridge between the group and the clien=
+t following the initial meet up.</p>
+<h3 local-id=3D"e441750c3541" id=3D"RetrospectiveBoard-=C3=81milie.2"><code=
+>=C3=81milie</code></h3>
+<p local-id=3D"53daefe4214a"><code>[Insert Feedback on =C3=81milie]</code><=
+/p>
+<h3 local-id=3D"d51c639ab311" id=3D"RetrospectiveBoard-Ralph.2"><code>Ralph=
+</code></h3>
+<p local-id=3D"ca139a7c32a5"><code>Ralph's work this sprint generally consi=
+sted of a singular wire frame created without research or documentation. Hi=
+s performance this sprint has been poor in terms of contribution to discuss=
+ion, communication, attendance, workload and initiative. </code><br><br>
+He has alot to work on, namely in seeking his passion and energy in the pro=
+ject, as it feels like he is demotivated and unwilling to put in more than =
+the bare minimum of energy. He has indicated that he is pushing to improve,=
+ however only time can tell whether this will be the case.</p>
+<p local-id=3D"9163d187c54f">Yoeri</p>
+<p local-id=3D"56b1cd8a747c">Generally well performing when at campus, howe=
+ver he has been rarely at campus. His main contribution was assisting with =
+a research initiative however not much else outside of that. Other than his=
+ attendance, his communication has also been poor but has improved over tim=
+e.</p>
+<p local-id=3D"e18b0eb911f6">Generally he needs to work on his attendance s=
+o that he is actually present for when work needs to be done. In addition t=
+o communicating better with the other group individuals with regards to wor=
+k load and attendance.</p>
+<h2 local-id=3D"de3316816eb1" id=3D"RetrospectiveBoard-IndividualOpinions.1=
+">Individual Opinions</h2>
+<h3 local-id=3D"e0ce699ede70" id=3D"RetrospectiveBoard-Luc.3"><code>Luc</co=
+de></h3>
+<p local-id=3D"19c87e4f7de0"><code>Personal: I feel like I did decent work =
+when I was here. I wrote a research document and I worked on getting the pr=
+oject on the rails with the group, or with whoever happened to be there tha=
+t day. Besides monday-thursday I did very little though. A lot of days I ha=
+d work and even if I didn't I would fill the time with cycling or doomscrol=
+ling or going to a movie over getting work done. I'm not really happy with =
+how productive I was, I basically only made one document and that's it. I d=
+idn't get in contact with the stakeholder, and I'm overall a bit of a disas=
+ter in terms of the digital communication in the group. Not having standups=
+ also means I don't have the moment on the day to get started compared to w=
+hat I maybe should have. Overall would give this sprint a 4/10 on my end.</=
+code></p>
+<p local-id=3D"9c0ddc0f3aa8"></p>
+<p local-id=3D"ca0819de4b35"><code>Group: I think if we'd kept attendance f=
+or just the mondays and thursdays we'd be at less than 50%. I was late a fe=
+w days but some people had commitments, and sickness plagued the group too.=
+ Some people are very lax about it which I don't like. Communication was ba=
+d. We do not have a formal standup schedule, and I have no clue what story =
+anyone is working on exactly because nobody is assigned to anything (includ=
+ing me). We have stories but I think pushing them all to GitHub was maybe a=
+ mistake in their current form? Though I have not asked, and nobody has com=
+plained either. I think this is the crux of the problem, everybody works al=
+ongside one another without any structured communication. I'm also not real=
+ly sure if anyone is even doing anything. Even though the project is not of=
+f the rails I'm not super happy about how things are going at the moment.</=
+code></p>
+<h3 local-id=3D"00dbf13af015" id=3D"RetrospectiveBoard-=C3=81milie.3"><code=
+>=C3=81milie</code></h3>
+<p local-id=3D"3aabf167bb8f"><code>Generally my performance has been okay a=
+t best. I've taken alot of initaive with regards to concepting and pushing =
+the group forwards and been the instigator in several manners. However I've=
+ under taken issues with my own punctuality, as I have been on time only on=
+ce the entire time as well as missing two days, the first wasn't communicat=
+ed but the second was. I've also taken on responsibilites that I haven't fu=
+lfilled, such as finishing off some of the research papers. As well as negl=
+ecting to do any work outside of University hours, something which has slow=
+ed down general progress. </code></p>
+<p local-id=3D"89c926e1525f"><br>
+During the next sprint I need to either work on my punctuality or come to a=
+ new agreement within which I can better make it to the school on time. I a=
+lso need to focus on getting more work done at home and outside of universi=
+ty times, otherwise I will have to force myself to come in person to the Ca=
+mpus.</p>
+<h3 local-id=3D"14723e958f78" id=3D"RetrospectiveBoard-Ralph.3"><code>Ralph=
+</code></h3>
+<p local-id=3D"5c333bd80ff5"><code>During this first sprint, things went pr=
+etty well overall. I was still getting used to the new group project, but m=
+y teammates really helped by making the planning and task division clear an=
+d manageable. This made it easier for me to understand what was expected fr=
+om me and where I could contribute the most.</code></p>
+<p local-id=3D"90ebb0871450"><code>In terms of attendance, I mainly showed =
+up on Thursdays. For the next sprint, I want to improve this by being more =
+present on Mondays as well, so I can be more involved from the start of the=
+ week and stay better aligned with the team.</code></p>
+<p local-id=3D"6b52cd676da5"><code>My main responsibility this sprint was w=
+orking on the wireframes. I was also assigned the Web App UI, which means I=
+ am focusing on the visual side of the project. This allowed me to think ab=
+out layout, user flow, and how the design supports the overall concept.</co=
+de></p>
+<p local-id=3D"f829c2bf1d2e"><code>For the next sprint, I want to focus mor=
+e on developing a clear research question to support our design decisions. =
+I also plan to improve the visuals further and start implementing the wiref=
+rames into an actual dashboard. In addition, I want to present and explain =
+the wireframes to the stakeholders, so we can gather feedback early and mak=
+e sure we are moving in the right direction.</code></p>
+    </div>
+</body>
+</html>
+------=_Part_34_627223523.1791463368451--
