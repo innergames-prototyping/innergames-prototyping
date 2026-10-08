@@ -52,7 +52,7 @@ However there has been some issues, namely with client communication and derelic
 
 ### Ámilie
 
-`[Insert Feedback on Ámilie]`
+She's very involved when she's here. She's opinionated and not afraid to speak up which I think is great. She's sometimes late and because of a terrible sleep schedule sometimes gives herself a hard time to stay consistent, but when she's here she becomes very organised. I personally don't find her that agreeable sometimes, but I think that's mostly because we both have very strong opinions on what something should look like and don't necessarily want to give in to what the other person wants. A lesson for both of us I'd say. Overall a decent if somewhat inconsistent worker and one of the stronger parts of the group as a whole.
 
 ### Ralph
 
