@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2",
+  "time": {
+    "total_min": 0.0,
+    "total_rounds": 0,
+    "turns_per_round": 0,
+    "total_turns": 0,
+    "round_min": {"min": 0.0, "mean": 0.0, "median": 0.0, "max": 0.0},
+    "turn_min": { "min": 0.0, "mean": 0.0, "median": 0.0, "max": 0.0 }
+  },
+
+  "actions": {
+    "total_actions": 0,
+    "action_round": {"min": 0, "mean": 0.0, "median": 0.0, "max": 0},
+    "action_turn": {"min": 0, "mean": 0.0, "median": 0.0, "max": 0}
+  },
+
+  "milestones": {
+    "first_score": { "round": null, "minute": null },
+    "score_events": [ { "seat": 0, "round": 0, "minute": 0.0, "points": 0 } ]
+  },
+  "outcome": {
+    "winner_seats": [0],
+    "winning_score": 0,
+    "players_on_zero": 0
+  },
+  "players": {
+    "player_count": {"min": 0, "mean": 0.0, "median": 0.0, "max": 0},
+     "player": [{
+      "seat": 0,
+      "role": "<string>",
+      "strategy": "<string>",
+      "score": 0,
+      "turns": { "total": 0, "zero_move": 0, "idle": 0, "skipped": 0, "no_legal_move": 0 },
+      "resources_unused_at_end": { "<resource>": 0 }
+     }]
+    },
+
+  "audit": { "illegal_actions": 0, "bound_violations": 0 }
+}
