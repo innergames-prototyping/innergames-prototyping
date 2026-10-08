@@ -187,3 +187,22 @@ InnerGames develops physical games, runs workshops, and uses its games to teach;
 - Analysis could be prompted by User if deemed necessary.
 - LLM "Blackbox" would be one seamless process to the user but under the hood go through a multi step check internally.
 - We ended up redrawing the latter half of the process chart and getting it pictured.
+
+# Group Meeting 15:00 8th Oct 2026
+
+## 1. Discussion of Workload
+
+- Weekend work isn't expected.
+- Everyone must claim 1 Github issue and talked about how they worked at it or how they thought about it at the end of next Monday.
+- When working on parts of the application that collide, students must communicate with each other and co-ordinate their research and the parts of their work that intersect with other people's work.
+- Ralph to get multiple wireframes done by Thursday in order to show to the client.
+- Luc to email client, teachers & fill out Feedpulse.
+- Youri to send research material to Amilie.
+- Amilie to document meeting & write up research document for LLM prompt size. 
+
+## 2. Discussion of Communication
+
+- 11am Weekly meeting with teachers
+- Weekly email to client.
+- At least 1 client meeting per sprint for feedback.
+- Students cannot use DMs to talk to each other and must use the discord server.
