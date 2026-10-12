@@ -7,6 +7,7 @@ Documentation for the InnerGames Prototyping project.
 - [Project Plan](./project/ProjectPlan-ProjectPipeline.md)
 - [Technical Requirements](./project/TechnicalRequirements.md)
 - [Design Responsibilities](./project/Design-Responsibilities.md)
+- [Tech Stack](./project/TechStack.md)
 
 ## Team
 
