@@ -8,13 +8,13 @@ This document records which technology the application is built with.
 
 ## Status
 
-Nothing is chosen yet. The options are being researched in [#106](https://github.com/innergames-prototyping/innergames-prototyping/issues/106) and the choice is made in [#64](https://github.com/innergames-prototyping/innergames-prototyping/issues/64).
+The frontend is chosen. The backend and the LLMs are still open: the options are being researched in [#106](https://github.com/innergames-prototyping/innergames-prototyping/issues/106) and the choice is made in [#64](https://github.com/innergames-prototyping/innergames-prototyping/issues/64).
 
 ## The Stack
 
 ### Frontend
 
-To be decided.
+React. The reasons are written down in [#117](https://github.com/innergames-prototyping/innergames-prototyping/issues/117).
 
 ### Backend
 
