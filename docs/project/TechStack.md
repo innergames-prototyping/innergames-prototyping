@@ -33,11 +33,6 @@ What it costs:
 - Two languages: TypeScript in the frontend and Python in the backend. FastAPI generates an OpenAPI description of the API, and the frontend types are generated from that, so the two don't drift apart.
 - A Windows application needs Python packaged with it.
 
-Alternatives:
-
-- Node.js with TypeScript gives one language with the frontend, but the simulation stays Python. That means two runtimes and a bridge between them.
-- .NET has the same drawback, without the shared language.
-
 ### LLMs
 
 To be decided.
