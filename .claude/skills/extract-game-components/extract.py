@@ -18,7 +18,7 @@ independent `claude -p` calls (Haiku by default) that each see one component or 
     extract.py rules                transcribe every rules region until every word has a majority
                                     (or one read matches Tesseract's), and proofread it for
                                     misspellings the transcription corrected
-    extract.py assemble             write <output>/rules.txt, <output>/components.json and
+    extract.py assemble             write <output>/rules.md, <output>/components.json and
                                     <work>/review.html (rules regions beside their text)
     extract.py cost                 total cost of all `claude -p` calls so far
 
@@ -1324,7 +1324,7 @@ def cmd_assemble(a):
         if fix["find"] not in text:
             sys.exit(f"rules_fixes: {fix['find']!r} not found")
         text = text.replace(fix["find"], fix["replace"])
-    (out / "rules.txt").write_text(text)
+    (out / "rules.md").write_text(text)
     write_review(work, cfg)
 
     groups, designs = build_resolved(work, cfg)
@@ -1381,7 +1381,7 @@ def cmd_assemble(a):
                f"Model cost of all reads: ${total_cost(work):.4f}."]}
     save_json(out / "components.json", doc)
     errs = validate(doc)
-    print(f"wrote {out / 'rules.txt'} and {out / 'components.json'}: {'VALID' if not errs else 'INVALID'}")
+    print(f"wrote {out / 'rules.md'} and {out / 'components.json'}: {'VALID' if not errs else 'INVALID'}")
     for e in errs[:30]:
         print("  ", e)
     print("items per kind:", dict(count))
