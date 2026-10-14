@@ -2,3 +2,5 @@
 /node-modules
 .envrc.local
 .vscode/settings.json
+/backend/jobs
+__pycache__/

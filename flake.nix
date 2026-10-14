@@ -25,7 +25,11 @@
           mkShell {
             buildInputs = [
               nodejs
-              python3
+              (python3.withPackages (ps: [
+                ps.fastapi
+                ps.python-multipart
+                ps.uvicorn
+              ]))
               pkg-config
             ];
           };
