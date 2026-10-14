@@ -1,0 +1,35 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color-scheme: light dark;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 60rem;
+  padding: 2rem 1rem;
+}
+
+.drop {
+  display: block;
+  cursor: pointer;
+  border: 2px dashed GrayText;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.drop.over {
+  border-color: Highlight;
+}
+
+.error {
+  color: crimson;
+}
+
+pre {
+  max-height: 30rem;
+  overflow: auto;
+  padding: 1rem;
+  background: color-mix(in srgb, GrayText 12%, transparent);
+  white-space: pre-wrap;
+}
