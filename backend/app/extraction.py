@@ -12,6 +12,9 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
 SKILL = REPO / ".claude" / "skills" / "extract-game-components"
+# The job folder links the skill at this relative path, as the test runs had it: with the absolute
+# path the model starts aliasing it, and the aliased command no longer matches the allowed tool rule.
+SKILL_LINK = ".claude/skills/extract-game-components"
 JOBS = REPO / "backend" / "jobs"
 RESULT_FILES = ("rules.md", "components.json")
 
@@ -41,8 +44,8 @@ def system_prompt(workdir: Path) -> str:
     body_start = [i for i, line in enumerate(lines) if line == "---"][1] + 1
     return (
         f"You extract a tabletop game's rules and components from the PDF files in the working directory "
-        f"({workdir}), following the instructions below. Run the script as {SKILL}/extract.py <command> from "
-        f"the working directory; components.schema.json is in {SKILL}. The machine is NixOS: run other tools "
+        f"({workdir}), following the instructions below. Run the script as {SKILL_LINK}/extract.py <command> from "
+        f"the working directory; components.schema.json is in {SKILL_LINK}. The machine is NixOS: run other tools "
         f'through nix-shell -p <package> --run "<command>". Don\'t delete files.\n\n'
         + "\n".join(lines[body_start:])
     )
@@ -53,7 +56,7 @@ def command(workdir: Path) -> list[str]:
         "claude", "-p", "Extract the PDFs in this folder.",
         "--safe-mode", "--strict-mcp-config", "--no-chrome", "--model", "haiku",
         "--tools", "Bash,Read,Write,Edit", "--permission-mode", "acceptEdits",
-        "--allowedTools", f"Bash({SKILL}/extract.py *)",
+        "--allowedTools", f"Bash({SKILL_LINK}/extract.py *)",
         "--system-prompt", system_prompt(workdir),
         "--output-format", "stream-json", "--verbose",
     ]
@@ -65,6 +68,8 @@ def start(pdfs: dict[str, bytes]) -> Job:
     workdir.mkdir(parents=True)
     for name, data in pdfs.items():
         (workdir / name).write_bytes(data)
+    (workdir / SKILL_LINK).parent.mkdir(parents=True)
+    (workdir / SKILL_LINK).symlink_to(SKILL)
     job = Job(job_id, workdir, sorted(pdfs))
     job.task = asyncio.create_task(run(job))
     jobs[job_id] = job
