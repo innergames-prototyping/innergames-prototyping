@@ -56,7 +56,7 @@ def command(workdir: Path) -> list[str]:
         "claude", "-p", "Extract the PDFs in this folder.",
         "--safe-mode", "--strict-mcp-config", "--no-chrome", "--model", "haiku",
         "--tools", "Bash,Read,Write,Edit", "--permission-mode", "acceptEdits",
-        "--allowedTools", f"Bash({SKILL_LINK}/extract.py *)",
+        "--allowedTools", f"Bash({SKILL_LINK}/extract.py *)", "Bash(nix-shell -p *)",
         "--system-prompt", system_prompt(workdir),
         "--output-format", "stream-json", "--verbose",
     ]
