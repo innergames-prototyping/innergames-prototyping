@@ -127,6 +127,7 @@ async def run_claude(job: Job) -> int:
             stdout=asyncio.subprocess.PIPE,
             stderr=err,
         )
+        assert proc.stdout is not None
         async for line in proc.stdout:
             log.write(line)
             event = json.loads(line)
