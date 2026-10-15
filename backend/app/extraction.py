@@ -14,7 +14,8 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 SKILL = REPO / ".claude" / "skills" / "extract-game-components"
 # The job folder links the skill at this relative path, as the test runs had it: with the absolute
-# path the model starts aliasing it, and the aliased command no longer matches the allowed tool rule.
+# path the model starts aliasing it, and the aliased command no longer matches the allowed tool
+# rule.
 SKILL_LINK = ".claude/skills/extract-game-components"
 JOBS = REPO / "backend" / "jobs"
 RESULT_FILES = ("rules.md", "components.json")
@@ -34,9 +35,7 @@ class Job:
     task: asyncio.Task | None = None
 
     def results(self) -> list[str]:
-        return [
-            name for name in RESULT_FILES if (self.dir / "results" / name).is_file()
-        ]
+        return [name for name in RESULT_FILES if (self.dir / "results" / name).is_file()]
 
 
 jobs: dict[str, Job] = {}
@@ -46,11 +45,11 @@ def system_prompt(workdir: Path) -> str:
     lines = (SKILL / "SKILL.md").read_text().splitlines()
     body_start = [i for i, line in enumerate(lines) if line == "---"][1] + 1
     return (
-        f"You extract a tabletop game's rules and components from the PDF files in the working directory "
-        f"({workdir}), following the instructions below. Run the script as {SKILL_LINK}/extract.py <command> from "
-        f"the working directory; components.schema.json is in {SKILL_LINK}. The machine is NixOS: run other tools "
-        f'through nix-shell -p <package> --run "<command>". Don\'t delete files.\n\n'
-        + "\n".join(lines[body_start:])
+        "You extract a tabletop game's rules and components from the PDF files in the working "
+        f"directory ({workdir}), following the instructions below. Run the script as "
+        f"{SKILL_LINK}/extract.py <command> from the working directory; components.schema.json is "
+        f"in {SKILL_LINK}. The machine is NixOS: run other tools through nix-shell -p <package> "
+        '--run "<command>". Don\'t delete files.\n\n' + "\n".join(lines[body_start:])
     )
 
 
