@@ -1,5 +1,5 @@
 {
   "title": "Project",
   "defaultOpen": true,
-  "pages": ["ProjectPlan-ProjectPipeline", "Research", "TechnicalRequirements", "Design-Responsibilities", "..."]
+  "pages": ["ProjectPlan-ProjectPipeline", "Research", "TechnicalRequirements", "Design-Responsibilities", "ExtractionInputs", "..."]
 }

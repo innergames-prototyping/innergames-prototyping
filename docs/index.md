@@ -8,6 +8,7 @@ Documentation for the InnerGames Prototyping project.
 - [Research](./project/Research.md)
 - [Technical Requirements](./project/TechnicalRequirements.md)
 - [Design Responsibilities](./project/Design-Responsibilities.md)
+- [Extraction Inputs](./project/ExtractionInputs.md)
 
 ## Team
 
