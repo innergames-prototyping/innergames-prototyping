@@ -6,7 +6,17 @@ This project entails taking InnerGames boardgame project PDFs which contain asse
 
 The app takes a game's PDFs and extracts its rules to `rules.md` and its components to `components.json`, with the `extract-game-components` skill in `.claude/skills/`. It needs Nix and a logged-in [Claude Code](https://claude.com/claude-code) (`claude`) on the `PATH`. The extraction calls Claude Haiku and takes about 15 minutes for a 12-page rulebook.
 
-Start the backend and the frontend in two terminals from the repository root, inside the development shell (`nix develop`, or `direnv allow` once):
+The backend's Python packages are pinned in `backend/requirements.txt` and installed in a virtual environment in `.venv`. The development shell (`nix develop`, or `direnv allow` once) creates it, reinstalls it when `backend/requirements.txt` changes and activates it. Without Nix, create it yourself from the repository root:
+
+```sh
+python3 -m venv .venv
+.venv/bin/pip install -r backend/requirements.txt
+source .venv/bin/activate
+```
+
+Point your editor's Python interpreter at `.venv` so it finds the packages.
+
+Start the backend and the frontend in two terminals from the repository root, with the virtual environment active:
 
 ```sh
 cd backend && uvicorn app.main:app

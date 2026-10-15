@@ -25,13 +25,17 @@
           mkShell {
             buildInputs = [
               nodejs
-              (python3.withPackages (ps: [
-                ps.fastapi
-                ps.python-multipart
-                ps.uvicorn
-              ]))
+              python3
               pkg-config
             ];
+            shellHook = ''
+              if ! cmp -s backend/requirements.txt .venv/requirements.txt; then
+                python3 -m venv .venv
+                .venv/bin/pip install -q -r backend/requirements.txt
+                cp backend/requirements.txt .venv/requirements.txt
+              fi
+              source .venv/bin/activate
+            '';
           };
       }
     );
