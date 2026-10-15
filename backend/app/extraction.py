@@ -3,6 +3,7 @@
 Port of the run.sh used for the extraction tests: no user customisations, no MCP servers, only the
 tools the extraction needs, and the skill as the whole system prompt.
 """
+
 import asyncio
 import json
 import time
@@ -33,7 +34,9 @@ class Job:
     task: asyncio.Task | None = None
 
     def results(self) -> list[str]:
-        return [name for name in RESULT_FILES if (self.dir / "results" / name).is_file()]
+        return [
+            name for name in RESULT_FILES if (self.dir / "results" / name).is_file()
+        ]
 
 
 jobs: dict[str, Job] = {}
@@ -53,12 +56,26 @@ def system_prompt(workdir: Path) -> str:
 
 def command(workdir: Path) -> list[str]:
     return [
-        "claude", "-p", "Extract the PDFs in this folder.",
-        "--safe-mode", "--strict-mcp-config", "--no-chrome", "--model", "haiku",
-        "--tools", "Bash,Read,Write,Edit", "--permission-mode", "acceptEdits",
-        "--allowedTools", f"Bash({SKILL_LINK}/extract.py *)", "Bash(nix-shell -p *)",
-        "--system-prompt", system_prompt(workdir),
-        "--output-format", "stream-json", "--verbose",
+        "claude",
+        "-p",
+        "Extract the PDFs in this folder.",
+        "--safe-mode",
+        "--strict-mcp-config",
+        "--no-chrome",
+        "--model",
+        "haiku",
+        "--tools",
+        "Bash,Read,Write,Edit",
+        "--permission-mode",
+        "acceptEdits",
+        "--allowedTools",
+        f"Bash({SKILL_LINK}/extract.py *)",
+        "Bash(nix-shell -p *)",
+        "--system-prompt",
+        system_prompt(workdir),
+        "--output-format",
+        "stream-json",
+        "--verbose",
     ]
 
 
@@ -88,7 +105,7 @@ def describe(tool: dict) -> str | None:
 async def run(job: Job) -> None:
     try:
         returncode = await run_claude(job)
-    except Exception as e:
+    except (OSError, ValueError) as e:
         job.state, job.activity = "failed", f"Failed: {e!r}"
     else:
         ok = returncode == 0 and len(job.results()) == len(RESULT_FILES)
@@ -98,10 +115,17 @@ async def run(job: Job) -> None:
 
 
 async def run_claude(job: Job) -> int:
-    with (job.dir / "claude.jsonl").open("wb") as log, (job.dir / "claude.err").open("wb") as err:
+    with (
+        (job.dir / "claude.jsonl").open("wb") as log,
+        (job.dir / "claude.err").open("wb") as err,
+    ):
         # Read results come back as base64 images, so a single line of output can be megabytes long.
         proc = await asyncio.create_subprocess_exec(
-            *command(job.dir), cwd=job.dir, limit=2**26, stdout=asyncio.subprocess.PIPE, stderr=err,
+            *command(job.dir),
+            cwd=job.dir,
+            limit=2**26,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=err,
         )
         async for line in proc.stdout:
             log.write(line)
