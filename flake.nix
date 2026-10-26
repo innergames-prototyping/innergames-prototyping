@@ -28,6 +28,9 @@
               python3
               pkg-config
             ];
+            shellHook = ''
+              git config core.hooksPath .githooks
+            '';
           };
       }
     );
