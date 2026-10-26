@@ -1,3 +1,9 @@
 .direnv
 /node-modules
 .envrc.local
+*.pdf
+*.PDF
+.env
+.env.*
+!.env.example
+.vscode/settings.json

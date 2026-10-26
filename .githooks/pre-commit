@@ -1,0 +1,15 @@
+#!/bin/sh
+# Blocks files that must never enter git: game PDFs (client material, see the
+# legal agreements in docs/INNERGAMES-Meeting-Notes.md) and local env files.
+# Enable once per clone: git config core.hooksPath .githooks
+# (the nix devshell does this for you).
+
+blocked=$(git diff --cached --name-only --diff-filter=ACMR | grep -iE '\.pdf$|(^|/)\.env(\..+)?$' | grep -vE '(^|/)\.env\.example$')
+
+if [ -n "$blocked" ]; then
+	echo "pre-commit: these files must not be committed:" >&2
+	echo "$blocked" | sed 's/^/  /' >&2
+	echo "Game PDFs and assets stay out of git. Secrets go in .envrc.local." >&2
+	echo "Unstage them with: git restore --staged <file>" >&2
+	exit 1
+fi
