@@ -1,7 +1,6 @@
 # 0002. Backend: Python with FastAPI
 
 Status: accepted (2026-10-12)
-Human version: `docs/decisions/0002-backend-python-fastapi.md`
 
 ## Decision
 

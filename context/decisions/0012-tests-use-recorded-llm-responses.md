@@ -1,7 +1,6 @@
 # 0012. Tests use recorded LLM responses
 
 Status: proposed (2026-10-15)
-Human version: `docs/decisions/0012-tests-use-recorded-llm-responses.md`
 
 ## Decision
 

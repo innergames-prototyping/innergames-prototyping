@@ -1,7 +1,6 @@
 # 0005. Simulation runs locally, not through the LLM
 
 Status: accepted (2026-10-01)
-Human version: `docs/decisions/0005-simulation-runs-locally.md`
 
 ## Decision
 

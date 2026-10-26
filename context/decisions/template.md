@@ -1,7 +1,6 @@
 # NNNN. Title
 
 Status: proposed (YYYY-MM-DD)
-Human version: `docs/decisions/NNNN-title.md`
 
 ## Decision
 

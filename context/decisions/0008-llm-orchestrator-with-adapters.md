@@ -1,7 +1,6 @@
 # 0008. One LLM orchestrator with an adapter per provider
 
 Status: proposed (2026-10-15)
-Human version: `docs/decisions/0008-llm-orchestrator-with-adapters.md`
 
 ## Decision
 

@@ -1,7 +1,6 @@
 # 0010. One Pydantic model per data format
 
 Status: proposed (2026-10-15)
-Human version: `docs/decisions/0010-one-model-per-data-format.md`
 
 ## Decision
 

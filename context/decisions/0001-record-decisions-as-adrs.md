@@ -1,7 +1,6 @@
 # 0001. Record decisions as ADRs
 
 Status: proposed (2026-10-26)
-Human version: `docs/decisions/0001-record-decisions-as-adrs.md`
 
 ## Decision
 

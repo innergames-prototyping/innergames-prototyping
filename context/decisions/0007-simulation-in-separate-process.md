@@ -1,7 +1,6 @@
 # 0007. Simulation in a separate process with a time limit
 
 Status: proposed (2026-10-15)
-Human version: `docs/decisions/0007-simulation-in-separate-process.md`
 
 ## Decision
 

@@ -1,7 +1,6 @@
 # 0009. Choose the model per workload
 
 Status: proposed (2026-10-15)
-Human version: `docs/decisions/0009-model-per-workload.md`
 
 ## Decision
 

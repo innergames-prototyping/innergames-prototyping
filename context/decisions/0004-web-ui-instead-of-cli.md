@@ -1,7 +1,6 @@
 # 0004. Web UI instead of a CLI UI
 
 Status: accepted (2026-10-01)
-Human version: `docs/decisions/0004-web-ui-instead-of-cli.md`
 
 ## Decision
 

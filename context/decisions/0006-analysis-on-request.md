@@ -1,7 +1,6 @@
 # 0006. Analysis only on request
 
 Status: accepted (2026-10-01)
-Human version: `docs/decisions/0006-analysis-on-request.md`
 
 ## Decision
 

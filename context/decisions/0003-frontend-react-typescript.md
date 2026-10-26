@@ -1,7 +1,6 @@
 # 0003. Frontend: React with TypeScript
 
 Status: accepted (2026-10-15)
-Human version: `docs/decisions/0003-frontend-react-typescript.md`
 
 ## Decision
 
