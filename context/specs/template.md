@@ -30,5 +30,19 @@ How we build it.
 
 Small steps in build order. Each task has its own test or check. Do one task, run its check, then go to the next.
 
-1. [ ] Task. Check: the test or command that proves it works.
-2. [ ] Task. Check: ...
+1. [ ] Task: what to build, in one sentence.
+   Check: the test or command that proves it works.
+2. [ ] Task: the next step. It builds on task 1.
+   Check: the test or command for this step.
+3. [ ] Task: add more tasks as needed. Split a task when its check needs more than one test.
+   Check: the test or command for this step.
+
+## Done
+
+The story is done when:
+
+- [ ] Every task and its check passes.
+- [ ] Every success criterion in Spec is met.
+- [ ] The full test suite passes.
+- [ ] A new decision has its own ADR in `context/decisions/` and `docs/decisions/`.
+- [ ] Status at the top is `done`.
