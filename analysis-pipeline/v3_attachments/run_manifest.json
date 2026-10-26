@@ -1,0 +1,56 @@
+{
+  "schema_version": "0.5-draft",
+  "run": {
+    "run_id": "<game>_<SINGLE|STAGED>_<replicate>",
+    "condition": "<SINGLE|STAGED>",
+    "game": "<string>",
+    "rulebook_file": "<string>"
+  },
+  "config": {
+    "target_min": null,
+    "target_basis": "<play|session>",
+    "tolerance_pct": null,
+    "player_counts": [],
+    "headline_clock": "typical"
+  },
+  "engine_versions": [
+    {
+      "id": "v1",
+      "change_note": "<string>"
+    }
+  ],
+  "simulation_ledger": [
+    {
+      "purpose": "<D4_logged|D4_batch|D5|D7_rerun|D8_baseline|D8_strategy|test|debug|other>",
+      "label": "<string, e.g. strategy name>",
+      "engine_version": "v1",
+      "player_count": null,
+      "seed_from": null,
+      "seed_to": null,
+      "games": 0,
+      "new_or_rerun": "<new|deterministic_rerun>"
+    }
+  ],
+  "totals": {
+    "games_executed": 0,
+    "games_new": 0
+  },
+  "flags": [],
+  "vocabulary": {
+    "roles": {
+      "<name>": "<one line>"
+    },
+    "resources": {},
+    "sources": {},
+    "causes": {},
+    "decks": {},
+    "cards": {},
+    "zones": {},
+    "entity_classes": {},
+    "npcs": {},
+    "hazards": {},
+    "goals": {},
+    "phases": {},
+    "action_types": {}
+  }
+}
