@@ -1,6 +1,7 @@
 # Story title
 
 Story: #NNN
+
 Status: draft | ready | done
 
 Size this spec to the change. A small fix needs a few lines per section. Only a large feature needs every part. Delete what does not apply.
