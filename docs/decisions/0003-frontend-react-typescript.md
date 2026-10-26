@@ -8,7 +8,7 @@ The application has an upload page, review screens and a dashboard. The dashboar
 
 ## Decision
 
-The team chose React with TypeScript. Ralph writes the full reasons in #117. [nog invullen: reasons from #117]
+The team chose React with TypeScript.
 
 Known reasons:
 

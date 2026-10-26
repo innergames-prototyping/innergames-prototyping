@@ -11,7 +11,6 @@ The frontend uses React with TypeScript.
 
 - Each dashboard widget is one component (#98, #99).
 - React has much documentation, so a future student learns it quickly.
-- More reasons: #117 [nog invullen].
 
 ## Rules
 
