@@ -7,6 +7,10 @@ Human version: `docs/decisions/0009-model-per-workload.md`
 
 The orchestrator maps each workload tier to a model: heavy steps to Opus, light steps to GLM 5.3 Flash.
 
+## Why
+
+- A strong model for every step costs too many tokens. Light steps do not need it (#102).
+
 ## Rules
 
 - Each pipeline step names its tier, not a model.

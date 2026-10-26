@@ -7,6 +7,12 @@ Human version: `docs/decisions/0007-simulation-in-separate-process.md`
 
 The backend starts each simulation run in a separate Python process with a time limit.
 
+## Why
+
+- An LLM writes the simulation code. It can hang or crash.
+- A separate process keeps the backend running when that happens.
+- Docker per run is too heavy for a student computer.
+
 ## Rules
 
 - Never run generated simulation code inside the backend process.

@@ -7,6 +7,11 @@ Human version: `docs/decisions/0005-simulation-runs-locally.md`
 
 The simulation runs as a local script. The LLM does not run the simulation.
 
+## Why
+
+- The client wants low token cost. The LLM was used too much.
+- Hundreds of simulation runs must not cost tokens.
+
 ## Rules
 
 - Do not call an LLM inside a simulation run.

@@ -7,6 +7,12 @@ Human version: `docs/decisions/0001-record-decisions-as-adrs.md`
 
 Record each architecture decision as an ADR in `context/decisions/`. Each ADR has a version for people in `docs/decisions/` with the same file name.
 
+## Why
+
+- Decisions were spread over meetings, Notion drafts and issues. Agents and new students could not find them.
+- Agents miss the reasons that people learn in conversation. An ADR writes them down.
+- Agents over-apply long ADRs, so this version stays short and the discussion goes to `docs/`.
+
 ## Rules
 
 - Status decides weight: `accepted` is binding, `proposed` is context only, `superseded` and `deprecated` are history.

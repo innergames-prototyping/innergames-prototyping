@@ -7,6 +7,12 @@ Human version: `docs/decisions/0003-frontend-react-typescript.md`
 
 The frontend uses React with TypeScript.
 
+## Why
+
+- Each dashboard widget is one component (#98, #99).
+- React has much documentation, so a future student learns it quickly.
+- More reasons: #117 [nog invullen].
+
 ## Rules
 
 - Write frontend code in TypeScript with `strict` on.

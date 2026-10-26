@@ -7,6 +7,11 @@ Human version: `docs/decisions/0012-tests-use-recorded-llm-responses.md`
 
 Tests do not use the network or a real LLM. They use recorded LLM responses.
 
+## Why
+
+- Real LLM calls cost tokens, are slow and give a different answer each time.
+- Tests must be cheap and repeatable.
+
 ## Rules
 
 - Never call a real LLM or the network in a test.

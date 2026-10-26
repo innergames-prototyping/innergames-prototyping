@@ -7,6 +7,10 @@ Human version: `docs/decisions/NNNN-title.md`
 
 One or two sentences.
 
+## Why
+
+- The main reasons, one line each. The full story is in the human version.
+
 ## Rules
 
 - Only what an agent must do or must not do.

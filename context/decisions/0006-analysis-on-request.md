@@ -7,6 +7,10 @@ Human version: `docs/decisions/0006-analysis-on-request.md`
 
 LLM analysis of results is optional. It runs only when the user asks for it.
 
+## Why
+
+- Analysis costs tokens. The user decides when it is worth it.
+
 ## Rules
 
 - Do not start an LLM analysis step automatically after a simulation.

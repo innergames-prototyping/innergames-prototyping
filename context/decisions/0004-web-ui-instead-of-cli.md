@@ -7,6 +7,10 @@ Human version: `docs/decisions/0004-web-ui-instead-of-cli.md`
 
 The user interface is a web UI. There is no CLI UI.
 
+## Why
+
+- A CLI UI is too clumsy for deployment and testing (group meeting, 1 October 2026).
+
 ## Rules
 
 - Do not build a command-line interface for users.
