@@ -1,0 +1,17 @@
+# 0003. Frontend: React with TypeScript
+
+Status: accepted (2026-10-15)
+Human version: `docs/decisions/0003-frontend-react-typescript.md`
+
+## Decision
+
+The frontend uses React with TypeScript.
+
+## Rules
+
+- Write frontend code in TypeScript with `strict` on.
+- Build each dashboard widget as one component.
+
+## Consequences
+
+- The build tool and the component library are not chosen yet (#117).

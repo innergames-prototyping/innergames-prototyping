@@ -1,0 +1,17 @@
+# 0012. Tests use recorded LLM responses
+
+Status: proposed (2026-10-15)
+Human version: `docs/decisions/0012-tests-use-recorded-llm-responses.md`
+
+## Decision
+
+Tests do not use the network or a real LLM. They use recorded LLM responses.
+
+## Rules
+
+- Never call a real LLM or the network in a test.
+- Store recorded responses next to the tests that use them.
+
+## Consequences
+
+- A test suite run costs no tokens and gives the same result each time.
