@@ -9,7 +9,7 @@ Record each architecture decision as an ADR in `context/decisions/`. Each ADR ha
 
 ## Why
 
-- Decisions were spread over meetings, Notion drafts and issues. Agents and new students could not find them.
+- Decisions were spread over meetings, documents and issues. Agents and new students could not find them.
 - Agents miss the reasons that people learn in conversation. An ADR writes them down.
 - Agents over-apply long ADRs, so this version stays short and the discussion goes to `docs/`.
 

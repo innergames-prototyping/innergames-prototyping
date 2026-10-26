@@ -4,7 +4,7 @@
 
 ## Context
 
-The team made decisions in meetings, in Notion drafts and in issues. An agent or a new student cannot find them. Issue #108 asks for ADRs in the repository.
+The team made decisions in meetings, in documents and in issues. An agent or a new student cannot find them. Issue #108 asks for ADRs in the repository.
 
 Agents miss what people learn in conversation: why the system looks the way it does and which trade-offs the team made (Cane, 2026). Davidson (2026) reports two problems with ADRs and agents. Agents apply an old ADR too strictly, and they make ADRs long with discussion.
 
@@ -22,7 +22,6 @@ The status decides how much weight an agent gives an ADR. When a task conflicts 
 | Option | For | Against |
 | --- | --- | --- |
 | One ADR file for agents and people | One file to keep current | The discussion makes the agent version long; agents then over-apply it |
-| Decisions only in Notion | Easy to write | The team does not work in Notion; agents cannot read it |
 | Two versions (chosen) | Short context for agents, full story for people | Two files can drift apart; change both in one pull request |
 
 ## Consequences
