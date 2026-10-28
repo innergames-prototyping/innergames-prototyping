@@ -1,15 +1,17 @@
 ---
 name: extract-game-components
-description: Extract a tabletop game's rules text and every physical component (cards, tiles, tokens, boards, sheets) from its PDF files into rules.md and a game-agnostic components.json. Components the rules name that no file shows are added as entries too. Use when asked to transcribe or extract a game's rulebook and components from PDFs. Extraction only - no analysis.
+description: Extract a tabletop game's rules text and every physical component (cards, tiles, tokens, boards, sheets) from its PDF files into rules.txt and a game-agnostic components.json. Components the rules name that no file shows are added as entries too. Use when asked to transcribe or extract a game's rulebook and components from PDFs. Extraction only - no analysis.
 ---
 
 # Extract a game's rules and components from PDFs
 
 Turn the game PDFs the user names into two files:
 
-- `results/rules.md`: the rules, transcribed verbatim.
-- `results/components.json`: one entry per physical item the game uses, in the format of
-  `components.schema.json` (next to this file). That is every item the files show, plus every item
+- `results/rules.txt`: the rules, transcribed verbatim.
+- `results/components.json`: every kind of physical component the game uses, and each different
+  piece once with how many there are, in the format of `export.schema.json` (next to this file).
+  `assemble` derives it from `work/components.json`, which lists every item on its own with where it
+  came from, in the format of `components.schema.json`: every item the files show, plus every item
   the rules name that no file shows (see Round 3).
 
 This is **extraction only**: record what is printed, exactly as printed. Don't explain, summarise,
@@ -88,7 +90,7 @@ Fix problems through the layout:
 them apart. Check `work/contact/designs_*.png` and `work/contact/backs.png`. Extra designs are
 harmless. Re-running `group` renumbers designs, so finish it before writing overrides.
 
-**Rules regions.** What belongs in `rules.md`:
+**Rules regions.** What belongs in `rules.txt`:
 
 - All rules text: headings, paragraphs, lists, tables, and captions next to pictures. Anything
   printed on a rules page is rules text unless listed below; when unsure, include it.
@@ -218,9 +220,10 @@ text); make `find` long enough to match only the intended place.
 
 ## Round 5: Reply
 
-`assemble` writes `results/rules.md` and `results/components.json`, validates them (fix the config
-until it prints `VALID`), and writes `work/review.html` with each rules region beside its text. Reply
-with:
+`assemble` writes `work/components.json` and validates it (fix the config until it prints `VALID`),
+then writes `results/rules.txt`, `results/components.json` (the same without sources, ids, notes and
+confidence, identical items merged with a count, for the steps after extraction) and
+`work/review.html` with each rules region beside its text. Reply with:
 
 - the two paths, and the review page for the user to read;
 - the validation result and the item count per kind, with how many of each came from `rules_items`;

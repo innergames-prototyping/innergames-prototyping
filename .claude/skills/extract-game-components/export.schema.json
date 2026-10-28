@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Game components 1.0",
+  "description": "The physical components of a game as printed: every kind of component and each different piece once, with how many there are. Extraction only: no rules modelling, no interpretation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["game", "component_kinds", "components"],
+  "properties": {
+    "game": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title"],
+      "properties": {
+        "title": {"type": "string"},
+        "credits": {"type": "array", "items": {"type": "string"}, "description": "Authors, publisher, illustrators, as printed."}
+      }
+    },
+    "component_kinds": {
+      "description": "One entry per kind of component (a card type, a token type, a board). Declares the fields its pieces carry.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name"],
+        "properties": {
+          "id": {"$ref": "#/$defs/id"},
+          "name": {"type": "string"},
+          "fields": {
+            "description": "Every field the pieces of this kind carry in `fields`. Missing when the kind has none.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["name", "type", "description"],
+              "properties": {
+                "name": {"$ref": "#/$defs/id"},
+                "type": {"enum": ["integer", "string", "enum", "list"]},
+                "enum_values": {"type": "array", "items": {"type": "string"}},
+                "description": {"type": "string", "description": "Where on the piece the value is printed and what exactly it records."}
+              }
+            }
+          },
+          "back": {"type": "string", "description": "What the back of this kind looks like, when known."}
+        }
+      }
+    },
+    "components": {
+      "description": "Each different piece once. Pieces that are identical in everything recorded here are one entry with their number in `count`.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "count"],
+        "properties": {
+          "kind": {"type": "string", "description": "A component_kinds id."},
+          "count": {"type": "integer", "minimum": 1, "description": "How many of this piece the game has."},
+          "title": {"type": "string", "description": "Printed name, spelled exactly as printed, typos included."},
+          "fields": {
+            "type": "object",
+            "description": "Values for the kind's declared fields; null where the value is not printed or not known. Missing when the kind has no fields.",
+            "additionalProperties": {"type": ["integer", "string", "array", "null"]}
+          },
+          "text": {"type": "string", "description": "Other printed text, verbatim, lines joined with ' / '."},
+          "back": {"type": "string", "description": "Only when this piece's back differs from its kind's back."}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_.-]*$"}
+  }
+}

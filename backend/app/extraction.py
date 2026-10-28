@@ -18,7 +18,7 @@ SKILL = REPO / ".claude" / "skills" / "extract-game-components"
 # rule.
 SKILL_LINK = ".claude/skills/extract-game-components"
 JOBS = REPO / "backend" / "jobs"
-RESULT_FILES = ("rules.md", "components.json")
+RESULT_FILES = ("rules.txt", "components.json")
 
 
 @dataclass

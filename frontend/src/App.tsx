@@ -11,7 +11,7 @@ type Extraction = {
   cost_usd: number | null
 }
 
-type Components = { items: { kind: string }[] }
+type Components = { components: { kind: string; count: number }[] }
 
 const api = '/api/extractions'
 
@@ -125,14 +125,15 @@ function Results({ id }: { id: string }) {
   const [components, setComponents] = useState<Components | null>(null)
 
   useEffect(() => {
-    fetch(`${api}/${id}/results/rules.md`)
+    fetch(`${api}/${id}/results/rules.txt`)
       .then((res) => res.text())
       .then(setRules)
     getJson(`${api}/${id}/results/components.json`).then(setComponents)
   }, [id])
 
   const counts = new Map<string, number>()
-  for (const item of components?.items ?? []) counts.set(item.kind, (counts.get(item.kind) ?? 0) + 1)
+  for (const piece of components?.components ?? [])
+    counts.set(piece.kind, (counts.get(piece.kind) ?? 0) + piece.count)
 
   return (
     <>
@@ -150,7 +151,7 @@ function Results({ id }: { id: string }) {
         </tbody>
       </table>
       <h2>
-        <a href={`${api}/${id}/results/rules.md`}>rules.md</a>
+        <a href={`${api}/${id}/results/rules.txt`}>rules.txt</a>
       </h2>
       <pre>{rules}</pre>
     </>

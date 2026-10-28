@@ -4,7 +4,7 @@ This project entails taking InnerGames boardgame project PDFs which contain asse
 
 ## Run the extraction app
 
-The app takes a game's PDFs and extracts its rules to `rules.md` and its components to `components.json`, with the `extract-game-components` skill in `.claude/skills/`. It needs Nix and a logged-in [Claude Code](https://claude.com/claude-code) (`claude`) on the `PATH`. The extraction calls Claude Haiku and takes about 15 minutes for a 12-page rulebook.
+The app takes a game's PDFs and extracts its rules to `rules.txt` and its components to `components.json`, with the `extract-game-components` skill in `.claude/skills/`. It needs Nix and a logged-in [Claude Code](https://claude.com/claude-code) (`claude`) on the `PATH`. The extraction calls Claude Haiku and takes about 15 minutes for a 12-page rulebook.
 
 The backend's Python packages are pinned in `backend/requirements.txt` and installed in a virtual environment in `.venv`. The development shell (`nix develop`, or `direnv allow` once) creates it, reinstalls it when `backend/requirements.txt` changes and activates it. Without Nix, create it yourself from the repository root:
 
