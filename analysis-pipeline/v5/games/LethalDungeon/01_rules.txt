@@ -1,0 +1,179 @@
+# Lethal Dungeon Rulebook
+
+# Project Lethal Dungeon - 18/09/2025
+
+# Introduction
+Game Info
+Game Objective
+Game Pieces
+Game Set Up
+
+# General Rules
+Player Card:
+Lives:
+Inventory:
+Items:
+Turns:
+Dropping:
+Picking up:
+Movement:
+Exploration:
+Action:
+Room Cards:
+Round End Cards
+
+# Introduction
+
+# Game Info
+
+Name: Lethal Dungeon
+Game Time: 30-60 mins
+Player Count: 2-4
+
+GOAT Inspiration: Lethal Company
+Game Subject: Tile Game
+Game Gimmick: Multi Purpose Cards
+
+# Game Objective
+
+The primary goal of the game is to collect as much score as possible by finding “scrap” in the given maze and leaving the maze with said scraps in order to score.
+
+# Game Pieces
+
+- 36 Map Tiles
+- 4 Player Tokens
+- 4 Player Cards
+- 2 six-sided Dice
+- 36 Exploration Markers
+- 50 Room Cards
+- 12 Round Cards
+- 12 HP Tokens
+- 12 Charge Tokens
+- 20 Regular Scrap Tokens
+- 4 Large Scrap Tokens
+- 12 Monster Tokens
+- 4 Lightning Tokens
+- 2 Turret Tokens
+- 2 Risky Jump Markers
+- 2 Spike Trap Markers
+- 1 Entrance Marker
+- 1 Exit Marker
+- 1 Firexit Marker
+- 1 Coin
+
+# Game Set Up
+
+I. Place all the map tiles in a 6x6 grid. Make sure all tiles connect to at least one other tile. The entrance tile starts in the top left corner, at coordinates (1, 1). The exit is placed at the bottom right corner, at coordinates (6,6).
+II. Place the Exit and Entrance on the edge at both corners.
+III. The players can decide turn order by rolling the dice.
+IV. The players must then pick their tool which comes with a colour coordinated player token.
+V. All 4 players then place their tokens on the entrance tile.
+
+# General Rules
+
+# Player Card:
+
+The Player card is attached to a colour corresponding token. Pictured on the card are three lives, 4 inventory slots and their item.
+
+# Lives:
+Each player starts with three lives and can lose them through random events or through other player actions. The only way to regenerate health is to spend one full turn outside the compound, which regenerates 1 life.
+
+If the player loses all three lives they will die, dropping all their scrap and being sent back to the entrance.
+
+If the player manages to exit the compound (extract) before the last turn, they are awarded 2 points.
+
+# Inventory:
+Each player comes with four inventory slots, each slot can be filled up by scrap, however large scrap will take up 2 full slots each.
+
+If the player fills all 4 inventory slots their movement is reduced from 2 tiles per turn to 1.
+
+# Items:
+
+Each player gets an item with whatever player card they select. There are 4 cards with unique abilities that can be used in the action turn.
+
+Spending an entire turn outside restores one item charge and one life; i.e., the player must exit the facility, and only after spending their next turn outside do they get their replenishment.
+
+All items have 3 charges. Activating one of its abilities consumes one charge.
+
+Using the passive ability of an item doesn’t use up a charge.
+
+# I. Shovel – Red
+A. It can kill any monster without losing a life.
+B. It can permanently destroy any tile on the map other than entrance tiles. It cannot destroy a tile that a player is standing on.
+# II. Torch – Green
+A. The player can reexplore the tile that they are on if it has already been explored. A tile that got reexplored once is marked with 2 exploration markers and it cannot be reexplored a third time.
+B. As long as it has charges, it lets the player toss a coin again if they fail a 50/50.
+
+C. Become immune to random room events, such as fog.
+# III. Teleporter - Yellow
+A. Teleports a chosen player to a random location on the map
+B. Swaps any two tiles on the map. The orientation of the tiles can also be swapped.
+# IV. Backpack - Blue
+A. Passive: Gives the player one extra inventory slot
+B. The player moves up to 3 tiles.
+
+# Turns:
+
+Each player gets one turn, their turn gets divided into 3 phases. Phase one is movement and phase two is exploration and phase three is action. Dropping and picking up scrap is independent of these 3 phases.
+
+# Dropping:
+A player can choose to drop one scrap on the tile they are standing on anytime during their turn, which can be picked up by any player or monster. The amount of scrap that can be dropped on a tile is 4.
+
+# Picking up:
+A player can pick up all the scrap that is stored on the tile they are standing on during their turn.
+
+# Movement:
+The player can move 1 or 2 tiles, if the tiles are connected. They can also choose not to move at all.
+
+# Exploration:
+
+If a player has moved then they will land onto a new tile. Once on the tile they must check if it has been explored:
+
+If it has not been explored they can draw a room card that causes a random event. Once done they must mark the tile as explored by putting down an exploration marker.
+
+If the tile has already been explored they skip this phase and move onto their action phase.
+
+Action:
+The player can choose to take one of two different actions, or skip their turn:
+Use ability: They use a special action charge from their Item Card.
+Rotate Tile: If they did not take an action they may rotate the tile they are currently on. Movement is still possible after said rotation.
+
+# Room Cards:
+
+These are drawn by the players when they enter an unexplored tile.
+
+1. Monster Card (x8): Spawns a monster on the tile. The Player can choose to lose a life, which kills the monster, or drop a scrap to run away. If so, the monster stays on the tile, protecting the dropped scrap. In this state, whenever a player enters this tile, they may choose to ignore the monster or lose a life to pick up the scrap. If the player has no scrap, they don't lose a life.
+2. Regular Scrap Card (x20): Gives the player 1 scrap, which occupies one inventory slot. Worth 1 point if the player extracts with it.
+3. Large Scrap Card (x4): Gives the player 1 large scrap, which occupies 2 inventory slots. Worth 3 points if the player extracts with it.
+4. Room Shift Cards - 3 Types
+a. Column Shift Card (x2): Shift a random column up or down, player's choice.
+b. Row Shift Card (x2): Shift a random row left or right, player's choice.
+c. Tile Swap Card (x4): Swap any two tiles if they have no players on them or if they aren't entrance or exit adjacent.
+
+# 5. Random Event Cards
+a. Landmine (x3): Lose 1 life, or drop a scrap from inventory to dodge. The scrap gets destroyed. If the player has no scrap, nothing happens.
+b. Risky Jump Card (x3): If the player chooses to engage, flip a coin. If the player does not engage with it, the Risky Jump Marker stays on the tile the card was drawn. However, if the jump has already been made by a player, the Risky Jump Marker gets removed from the tile.
+
+i. Heads: Get 1 Large scrap
+ii. Tails: Lose 2 lives
+c. Spike Trap Card (x2): If the player chooses to engage, flip a coin. Regardless of player choice, the Spike Trap Marker stays on the tile the card was drawn.
+i. Heads: Move an extra space
+ii. Tails: Lose a life
+d. Fog Card (x1): Skips the next turn of every player on the tile and the 8 tiles surrounding it.
+e. Fire Exit Card (x1): Places a fire exit on the tile it was drawn on. Can be used just like an entrance.
+
+# Round End Cards
+
+These are drawn at the end of each round, after all players had their turn.
+
+1. Vertical Shift Card (x2) - 2 Types:
+a. Move Column Up: Move a random column of the map 1 space up.
+b. Move Column Down: Move a random column of the map 1 space down.
+2. Horizontal Shift Card (x2) - 2 Types:
+a. Move Row Right: Move a random row of the map 1 space right.
+b. Move Row Left: Move a random row of the map 1 space left.
+3. Swap Tiles Card (x2): Swap 2 random tiles of the map. Their rotation cannot be changed.
+
+4. Monster Rush (x2): Spawns 2 random monsters on the map. Then, all monsters move 2 tiles towards their nearest player. For each monster that reaches a tile that the player is standing on, the player loses 1 life. If multiple players are equally close, the monsters move towards the player whose turn comes first. If the monster spawns on a destroyed tile, reroll.
+5. Lightning Storm (x2): Spawn 4 lightning tokens randomly on the map. At the end of the next turn, any player standing on a tile with a lightning token gets struck and loses 2 lives. The lightning disappears after 1 turn.
+6. Turret (x2): Spawn a turret on a random tile. If a player moves through a tile that is connected and adjacent to the turret tile, they take 1 damage. The turret doesn’t disappear and it cannot be destroyed. If the turret spawns on a tile that the player is on, the player doesn’t take any initial damage.

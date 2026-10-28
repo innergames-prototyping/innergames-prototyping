@@ -1,0 +1,4910 @@
+{
+ "spec_version": "extraction-1.0",
+ "game": {
+  "title": "The Bottom Line",
+  "credits": [
+   "Developed by Maastricht Immersive Learning Lab",
+   "Authors: Mark Sanders - Prescott Morley - Kimon Ivanov"
+  ]
+ },
+ "sources": [
+  {
+   "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+   "pages": 2,
+   "content": "component sheet: card fronts on page 1, backs on page 2",
+   "layout": "10 columns x 11 rows, backs mirrored left to right"
+  },
+  {
+   "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+   "pages": 2,
+   "content": "component sheet: card fronts on page 1, backs on page 2",
+   "layout": "10 columns x 11 rows, backs mirrored left to right"
+  },
+  {
+   "file": "spelRegels_page01_MS_v02.pdf",
+   "pages": 1,
+   "content": "rulebook page 1: contents of the box, rules text in two columns",
+   "layout": "A4 portrait, two text columns"
+  },
+  {
+   "file": "spelRegels_page02_MS_v03.pdf",
+   "pages": 1,
+   "content": "rulebook page 2: the 8 characters, examples, end of game, scorecard",
+   "layout": "A4 portrait, two text columns"
+  }
+ ],
+ "component_kinds": [
+  {
+   "id": "chairman",
+   "name": "Chairman card",
+   "fields": [],
+   "count_found": 1,
+   "count_in_rules": 1,
+   "back": "",
+   "notes": ""
+  },
+  {
+   "id": "character",
+   "name": "Character card",
+   "fields": [
+    {
+     "name": "number",
+     "type": "integer",
+     "description": "the large numeral printed in the corner circles (the same digit appears upright at the top right and upside down at the bottom left); read the digit only, not the symbols"
+    }
+   ],
+   "count_found": 8,
+   "count_in_rules": 8,
+   "back": "",
+   "notes": ""
+  },
+  {
+   "id": "overview",
+   "name": "Overview card",
+   "fields": [],
+   "count_found": 14,
+   "count_in_rules": 7,
+   "back": "",
+   "notes": ""
+  },
+  {
+   "id": "asset",
+   "name": "Asset card",
+   "fields": [
+    {
+     "name": "gold",
+     "type": "integer",
+     "description": "number of filled yellow circles in the vertical column of circles along the right edge of the card, near the top (the column is beside the picture, not in a corner); do not count the white circles"
+    },
+    {
+     "name": "silver",
+     "type": "integer",
+     "description": "number of white circles in the same vertical column along the right edge; do not count the yellow circles"
+    },
+    {
+     "name": "color",
+     "type": "enum",
+     "enum_values": [
+      "yellow",
+      "red",
+      "blue",
+      "green",
+      "purple"
+     ],
+     "description": "background colour of the card's illustration: yellow, red, blue, green (light or dark green), or purple"
+    }
+   ],
+   "count_found": 60,
+   "count_in_rules": 60,
+   "back": "",
+   "notes": ""
+  },
+  {
+   "id": "liability",
+   "name": "Liability card",
+   "fields": [
+    {
+     "name": "gold_coins",
+     "type": "integer",
+     "description": "number of yellow gold coin circles in the vertical column of circles along the left or right edge of the card (on cards with an RFR band, the column starts under that band); do not count coins drawn in the picture"
+    },
+    {
+     "name": "rate",
+     "type": "string",
+     "description": "text printed after RFR on the left vertical band, copied as printed (for example + 2%); empty if the band has no RFR text"
+    }
+   ],
+   "count_found": 67,
+   "count_in_rules": 50,
+   "back": "",
+   "notes": ""
+  },
+  {
+   "id": "market_condition",
+   "name": "Market condition card",
+   "fields": [
+    {
+     "name": "rfr",
+     "type": "string",
+     "description": "text printed after RFR on the left band, copied as printed (for example + 2%)"
+    },
+    {
+     "name": "mrp",
+     "type": "string",
+     "description": "text printed after MRP on the left band, copied as printed (for example + 4%)"
+    },
+    {
+     "name": "sign_red",
+     "type": "enum",
+     "enum_values": [
+      "+",
+      "0",
+      "-"
+     ],
+     "description": "sign inside the red circle of the column of five circles"
+    },
+    {
+     "name": "sign_purple",
+     "type": "enum",
+     "enum_values": [
+      "+",
+      "0",
+      "-"
+     ],
+     "description": "sign inside the purple circle of the column of five circles"
+    },
+    {
+     "name": "sign_green",
+     "type": "enum",
+     "enum_values": [
+      "+",
+      "0",
+      "-"
+     ],
+     "description": "sign inside the green circle of the column of five circles"
+    },
+    {
+     "name": "sign_blue",
+     "type": "enum",
+     "enum_values": [
+      "+",
+      "0",
+      "-"
+     ],
+     "description": "sign inside the blue circle of the column of five circles"
+    },
+    {
+     "name": "sign_yellow",
+     "type": "enum",
+     "enum_values": [
+      "+",
+      "0",
+      "-"
+     ],
+     "description": "sign inside the yellow circle of the column of five circles"
+    }
+   ],
+   "count_found": 32,
+   "count_in_rules": 16,
+   "back": "",
+   "notes": ""
+  },
+  {
+   "id": "market_event",
+   "name": "Market event card",
+   "fields": [],
+   "count_found": 18,
+   "count_in_rules": 9,
+   "back": "",
+   "notes": ""
+  },
+  {
+   "id": "filler",
+   "name": "Filler card",
+   "fields": [],
+   "count_found": 16,
+   "count_in_rules": null,
+   "back": "",
+   "notes": ""
+  },
+  {
+   "id": "credit_card",
+   "name": "Credits card",
+   "fields": [],
+   "count_found": 4,
+   "count_in_rules": null,
+   "back": "",
+   "notes": ""
+  }
+ ],
+ "items": [
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r0_c0",
+   "kind": "filler",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 9
+   },
+   "title": null,
+   "fields": {},
+   "text": "OUT / OUT / OUT",
+   "confidence": "high",
+   "notes": "design d001 (14 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r0_c1",
+   "kind": "filler",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 8
+   },
+   "title": null,
+   "fields": {},
+   "text": "OUT / OUT / OUT",
+   "confidence": "high",
+   "notes": "design d001 (14 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r0_c2",
+   "kind": "filler",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 7
+   },
+   "title": null,
+   "fields": {},
+   "text": "OUT / OUT / OUT",
+   "confidence": "high",
+   "notes": "design d001 (14 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r0_c3",
+   "kind": "filler",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 6
+   },
+   "title": null,
+   "fields": {},
+   "text": "OUT / OUT / OUT",
+   "confidence": "high",
+   "notes": "design d001 (14 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r0_c4",
+   "kind": "chairman",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 5
+   },
+   "title": "CHAIRMAN",
+   "fields": {},
+   "text": null,
+   "confidence": "high",
+   "notes": "design d002 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r0_c5",
+   "kind": "filler",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 4
+   },
+   "title": null,
+   "fields": {},
+   "text": "OUT / OUT / OUT",
+   "confidence": "high",
+   "notes": "design d003 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r0_c6",
+   "kind": "filler",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 3
+   },
+   "title": null,
+   "fields": {},
+   "text": "OUT / OUT / OUT",
+   "confidence": "high",
+   "notes": "design d001 (14 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r0_c7",
+   "kind": "filler",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 2
+   },
+   "title": null,
+   "fields": {},
+   "text": "OUT / OUT / OUT",
+   "confidence": "high",
+   "notes": "design d001 (14 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r0_c8",
+   "kind": "filler",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 1
+   },
+   "title": null,
+   "fields": {},
+   "text": "OUT / OUT / OUT",
+   "confidence": "high",
+   "notes": "design d001 (14 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r0_c9",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 0
+   },
+   "title": "R&D LAB",
+   "fields": {
+    "gold": 3,
+    "silver": 1,
+    "color": "purple"
+   },
+   "text": "AT THE END OF THE GAME / FOR ONE COLOR TURN / - INTO 0 OR 0 INTO +",
+   "confidence": "medium",
+   "notes": "design d004 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r1_c0",
+   "kind": "character",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 9
+   },
+   "title": "THE SHAREHOLDER",
+   "fields": {
+    "number": 1
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d005 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r1_c1",
+   "kind": "character",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 8
+   },
+   "title": "THE BANKER",
+   "fields": {
+    "number": 2
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d006 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r1_c2",
+   "kind": "character",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 7
+   },
+   "title": "THE REGULATOR",
+   "fields": {
+    "number": 3
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d007 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r1_c3",
+   "kind": "character",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 6
+   },
+   "title": "CHIEF EXECUTIVE OFFICER",
+   "fields": {
+    "number": 4
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d008 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r1_c4",
+   "kind": "character",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 5
+   },
+   "title": "CHIEF FINANCIAL OFFICER",
+   "fields": {
+    "number": 5
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d009 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r1_c5",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 4
+   },
+   "title": "R&D LAB",
+   "fields": {
+    "gold": 3,
+    "silver": 2,
+    "color": "purple"
+   },
+   "text": "AT THE END OF THE GAME / FOR ONE COLOR TURN / - INTO 0 OR 0 INTO +",
+   "confidence": "medium",
+   "notes": "design d010 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r1_c6",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 3
+   },
+   "title": "R&D LAB",
+   "fields": {
+    "gold": 3,
+    "silver": 3,
+    "color": "purple"
+   },
+   "text": "AT THE END OF THE GAME / FOR ONE COLOR TURN / - INTO 0 OR 0 INTO +",
+   "confidence": "medium",
+   "notes": "design d011 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r1_c7",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 2
+   },
+   "title": "APPLICATION LAB",
+   "fields": {
+    "gold": 4,
+    "silver": 1,
+    "color": "purple"
+   },
+   "text": "AT THE END OF THE GAME / TURN SILVER INTO GOLD / ON ONE ASSET CARD",
+   "confidence": "medium",
+   "notes": "design d012 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r1_c8",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 1
+   },
+   "title": "APPLICATION LAB",
+   "fields": {
+    "gold": 4,
+    "silver": 2,
+    "color": "purple"
+   },
+   "text": "AT THE END OF THE GAME / TURN SILVER INTO GOLD ON ONE ASSET CARD",
+   "confidence": "medium",
+   "notes": "design d013 (1 identical copies); 4 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r1_c9",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 0
+   },
+   "title": "PILOT PLANT",
+   "fields": {
+    "gold": 5,
+    "silver": 1,
+    "color": "purple"
+   },
+   "text": "AT THE END OF THE GAME COUNT ONE OF YOUR ASSETS AS ANY COLOR",
+   "confidence": "medium",
+   "notes": "design d014 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r2_c0",
+   "kind": "character",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 9
+   },
+   "title": "CHIEF SUSTAINABILITY OFFICER",
+   "fields": {
+    "number": 6
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d015 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r2_c1",
+   "kind": "character",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 8
+   },
+   "title": "HEAD OF R&D",
+   "fields": {
+    "number": 7
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d016 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r2_c2",
+   "kind": "character",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 7
+   },
+   "title": "THE STAKEHOLDER",
+   "fields": {
+    "number": null
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d017 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r2_c3",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 6
+   },
+   "title": "STORE",
+   "fields": {
+    "gold": 1,
+    "silver": 1,
+    "color": "yellow"
+   },
+   "text": "94",
+   "confidence": "high",
+   "notes": "design d018 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r2_c4",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 5
+   },
+   "title": "STORE",
+   "fields": {
+    "gold": 1,
+    "silver": 2,
+    "color": "yellow"
+   },
+   "text": "94",
+   "confidence": "high",
+   "notes": "design d019 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r2_c5",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 4
+   },
+   "title": "WORKER'S COUNSIL",
+   "fields": {
+    "gold": 1,
+    "silver": 1,
+    "color": "red"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d020 (1 identical copies); 8 independent reads; design overridden: checked at full size: WORKER'S COUNSIL, one yellow and one white circle, red card"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r2_c6",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 3
+   },
+   "title": "WORKER'S COUNSIL",
+   "fields": {
+    "gold": 1,
+    "silver": 2,
+    "color": "red"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d021 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r2_c7",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 2
+   },
+   "title": "WORKER'S COUNSIL",
+   "fields": {
+    "gold": 1,
+    "silver": 3,
+    "color": "red"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d022 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r2_c8",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 1
+   },
+   "title": "DIVERSITY & INCLUSION",
+   "fields": {
+    "gold": 2,
+    "silver": 1,
+    "color": "red"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d023 (1 identical copies); 8 independent reads; design overridden: checked at full size: DIVERSITY & INCLUSION, two yellow and one white circle, red card"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r2_c9",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 0
+   },
+   "title": "DIVERSITY & INCLUSION",
+   "fields": {
+    "gold": 2,
+    "silver": 2,
+    "color": "red"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d024 (1 identical copies); 8 independent reads; design overridden: checked at full size: DIVERSITY & INCLUSION, two yellow and two white circles, red card"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r3_c0",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 9
+   },
+   "title": "STORE",
+   "fields": {
+    "gold": 1,
+    "silver": 3,
+    "color": "yellow"
+   },
+   "text": "94",
+   "confidence": "high",
+   "notes": "design d025 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r3_c1",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 8
+   },
+   "title": "MACHINE",
+   "fields": {
+    "gold": 2,
+    "silver": 1,
+    "color": "yellow"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d026 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r3_c2",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 7
+   },
+   "title": "MACHINE",
+   "fields": {
+    "gold": 2,
+    "silver": 2,
+    "color": "yellow"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d027 (1 identical copies); 7 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r3_c3",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 6
+   },
+   "title": "MACHINE",
+   "fields": {
+    "gold": 2,
+    "silver": 3,
+    "color": "yellow"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d028 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r3_c4",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 5
+   },
+   "title": "FACTORY",
+   "fields": {
+    "gold": 3,
+    "silver": 1,
+    "color": "yellow"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d029 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r3_c5",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 4
+   },
+   "title": "DIVERSITY & INCLUSION",
+   "fields": {
+    "gold": 2,
+    "silver": 3,
+    "color": "red"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d030 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r3_c6",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 3
+   },
+   "title": "HUMAN RESOURCES",
+   "fields": {
+    "gold": 3,
+    "silver": 1,
+    "color": "red"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d031 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r3_c7",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 2
+   },
+   "title": "HUMAN RESOURCES",
+   "fields": {
+    "gold": 3,
+    "silver": 2,
+    "color": "red"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d032 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r3_c8",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 1
+   },
+   "title": "HUMAN RESOURCES",
+   "fields": {
+    "gold": 3,
+    "silver": 3,
+    "color": "red"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d033 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r3_c9",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 0
+   },
+   "title": "APPRENTICESHIPS",
+   "fields": {
+    "gold": 4,
+    "silver": 1,
+    "color": "red"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d034 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r4_c0",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 9
+   },
+   "title": "FACTORY",
+   "fields": {
+    "gold": 3,
+    "silver": 2,
+    "color": "yellow"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d035 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r4_c1",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 8
+   },
+   "title": "FACTORY",
+   "fields": {
+    "gold": 3,
+    "silver": 3,
+    "color": "yellow"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d036 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r4_c2",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 7
+   },
+   "title": "WAREHOUSE",
+   "fields": {
+    "gold": 4,
+    "silver": 1,
+    "color": "yellow"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d037 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r4_c3",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 6
+   },
+   "title": "WAREHOUSE",
+   "fields": {
+    "gold": 4,
+    "silver": 2,
+    "color": "yellow"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d038 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r4_c4",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 5
+   },
+   "title": "HEADQUARTERS",
+   "fields": {
+    "gold": 5,
+    "silver": 1,
+    "color": "yellow"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d039 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r4_c5",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 4
+   },
+   "title": "APPRENTICESHIPS",
+   "fields": {
+    "gold": 4,
+    "silver": 2,
+    "color": "red"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d040 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r4_c6",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 3
+   },
+   "title": "COMPANY CAMPUS",
+   "fields": {
+    "gold": 5,
+    "silver": 1,
+    "color": "red"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d041 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r4_c7",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 2
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 2%"
+   },
+   "text": "RFR + 2%",
+   "confidence": "medium",
+   "notes": "design d042 (3 identical copies); 3 independent reads; design overridden: checked at full size: one yellow coin circle beside the RFR band; readers returned zero"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r4_c8",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 1
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 2%"
+   },
+   "text": "RFR + 2%",
+   "confidence": "medium",
+   "notes": "design d042 (3 identical copies); 3 independent reads; design overridden: checked at full size: one yellow coin circle beside the RFR band; readers returned zero"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r4_c9",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 0
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 2%"
+   },
+   "text": "RFR + 2%",
+   "confidence": "medium",
+   "notes": "design d042 (3 identical copies); 3 independent reads; design overridden: checked at full size: one yellow coin circle beside the RFR band; readers returned zero"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r5_c0",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 9
+   },
+   "title": "ACCOUNTS RECIEVABLE",
+   "fields": {
+    "gold": 1,
+    "silver": 1,
+    "color": "blue"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d043 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r5_c1",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 8
+   },
+   "title": "ACCOUNTS RECIEVABLE",
+   "fields": {
+    "gold": 1,
+    "silver": 2,
+    "color": "blue"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d044 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r5_c2",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 7
+   },
+   "title": "ACCOUNTS RECIEVABLE",
+   "fields": {
+    "gold": 1,
+    "silver": 3,
+    "color": "blue"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d045 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r5_c3",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 6
+   },
+   "title": "INVENTORY",
+   "fields": {
+    "gold": 2,
+    "silver": 1,
+    "color": "blue"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d046 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r5_c4",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 5
+   },
+   "title": "INVENTORY",
+   "fields": {
+    "gold": 2,
+    "silver": 2,
+    "color": "blue"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d047 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r5_c5",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 4
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 2%"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d048 (4 identical copies); 3 independent reads; design overridden: checked at full size: one yellow coin circle beside the RFR band; readers returned zero"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r5_c6",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 3
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 2%"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d049 (1 identical copies); 2 independent reads; design overridden: checked at full size: one yellow coin circle beside the RFR band; readers returned zero"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r5_c7",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 2
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 2%"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d048 (4 identical copies); 3 independent reads; design overridden: checked at full size: one yellow coin circle beside the RFR band; readers returned zero"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r5_c8",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 1
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 2%"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d048 (4 identical copies); 3 independent reads; design overridden: checked at full size: one yellow coin circle beside the RFR band; readers returned zero"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r5_c9",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 0
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 2%"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d048 (4 identical copies); 3 independent reads; design overridden: checked at full size: one yellow coin circle beside the RFR band; readers returned zero"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r6_c0",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 9
+   },
+   "title": "INVENTORY",
+   "fields": {
+    "gold": 2,
+    "silver": 3,
+    "color": "blue"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d050 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r6_c1",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 8
+   },
+   "title": "FACTOR & LEASE",
+   "fields": {
+    "gold": 3,
+    "silver": 1,
+    "color": "blue"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d051 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r6_c2",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 7
+   },
+   "title": "FACTOR & LEASE",
+   "fields": {
+    "gold": 3,
+    "silver": 2,
+    "color": "blue"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d052 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r6_c3",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 6
+   },
+   "title": "FACTOR & LEASE",
+   "fields": {
+    "gold": 3,
+    "silver": 3,
+    "color": "blue"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d053 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r6_c4",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 5
+   },
+   "title": "PARTICIPATION",
+   "fields": {
+    "gold": 4,
+    "silver": 1,
+    "color": "blue"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d054 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r6_c5",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 4
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 2%"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d055 (4 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r6_c6",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 3
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 2%"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d056 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r6_c7",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 2
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 2%"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d055 (4 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r6_c8",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 1
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 2%"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d055 (4 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r6_c9",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 0
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 2%"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d055 (4 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r7_c0",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 9
+   },
+   "title": "PARTICIPATION",
+   "fields": {
+    "gold": 4,
+    "silver": 2,
+    "color": "blue"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d057 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r7_c1",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 8
+   },
+   "title": "MERGER",
+   "fields": {
+    "gold": 5,
+    "silver": 1,
+    "color": "blue"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d058 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r7_c2",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 7
+   },
+   "title": "CARBON CERTIFICATE",
+   "fields": {
+    "gold": 1,
+    "silver": 1,
+    "color": "green"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d059 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r7_c3",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 6
+   },
+   "title": "CARBON CERTIFICATE",
+   "fields": {
+    "gold": 1,
+    "silver": 2,
+    "color": "green"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d060 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r7_c4",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 5
+   },
+   "title": "CARBON CERTIFICATE",
+   "fields": {
+    "gold": 1,
+    "silver": 3,
+    "color": "green"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d061 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r7_c5",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 4
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 2%"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d062 (2 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r7_c6",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 3
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 2%"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d063 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r7_c7",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 2
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 2%"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d062 (2 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r7_c8",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 1
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 3,
+    "rate": "+ 2%"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d064 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r7_c9",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 0
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 3,
+    "rate": "+ 2%"
+   },
+   "text": "RFR",
+   "confidence": "high",
+   "notes": "design d065 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r8_c0",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 9
+   },
+   "title": "WATER TREATMENT",
+   "fields": {
+    "gold": 2,
+    "silver": 1,
+    "color": "green"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d066 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r8_c1",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 8
+   },
+   "title": "WATER TREATMENT",
+   "fields": {
+    "gold": 2,
+    "silver": 2,
+    "color": "green"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d067 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r8_c2",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 7
+   },
+   "title": "WATER TREATMENT",
+   "fields": {
+    "gold": 2,
+    "silver": 3,
+    "color": "green"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d068 (1 identical copies); 7 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r8_c3",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 6
+   },
+   "title": "WASTE MANAGEMENT",
+   "fields": {
+    "gold": 3,
+    "silver": 1,
+    "color": "green"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d069 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r8_c4",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 5
+   },
+   "title": "WASTE MANAGEMENT",
+   "fields": {
+    "gold": 3,
+    "silver": 2,
+    "color": "green"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d070 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r8_c5",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 4
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 5,
+    "rate": "+ 2%"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d071 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r8_c6",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 3
+   },
+   "title": "BANK LOAN",
+   "fields": {
+    "gold_coins": 5,
+    "rate": "+ 2%"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d072 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r8_c7",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 2
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d073 (3 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r8_c8",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 1
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d073 (3 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r8_c9",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 0
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d073 (3 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r9_c0",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 9
+   },
+   "title": "WASTE MANAGEMENT",
+   "fields": {
+    "gold": 3,
+    "silver": 3,
+    "color": "green"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d074 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r9_c1",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 8
+   },
+   "title": "CIRCULAR HUB",
+   "fields": {
+    "gold": 4,
+    "silver": 1,
+    "color": "green"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d075 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r9_c2",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 7
+   },
+   "title": "CIRCULAR HUB",
+   "fields": {
+    "gold": 4,
+    "silver": 2,
+    "color": "green"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d076 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r9_c3",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 6
+   },
+   "title": "HEAT POWER PLANT",
+   "fields": {
+    "gold": 5,
+    "silver": 1,
+    "color": "green"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d077 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r9_c4",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 5
+   },
+   "title": "PATENT",
+   "fields": {
+    "gold": 1,
+    "silver": 1,
+    "color": "purple"
+   },
+   "text": "THE PATENT OF / OF JOY / 12'3 / 12'3 / 17'3 / 13'7 / 34",
+   "confidence": "medium",
+   "notes": "design d078 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r9_c5",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 4
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d079 (4 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r9_c6",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 3
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d080 (1 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r9_c7",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 2
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d079 (4 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r9_c8",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 1
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d079 (4 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r9_c9",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 0
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d079 (4 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r10_c0",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 9
+   },
+   "title": "PATENT",
+   "fields": {
+    "gold": 1,
+    "silver": 2,
+    "color": "purple"
+   },
+   "text": "THE PATENT OF FICE OF JOY / 12'3 / 12'3 / 17'3 / 13'7 / 34",
+   "confidence": "medium",
+   "notes": "design d081 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r10_c1",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 8
+   },
+   "title": "PATENT",
+   "fields": {
+    "gold": 1,
+    "silver": 3,
+    "color": "purple"
+   },
+   "text": "THE PATENT OF [unreadable] OF JOY / 12'3 / 12'3 / 17'3 / 13'7 / 34",
+   "confidence": "medium",
+   "notes": "design d082 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r10_c2",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 7
+   },
+   "title": "JOINT VENTURE",
+   "fields": {
+    "gold": 2,
+    "silver": 1,
+    "color": "purple"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d083 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r10_c3",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 6
+   },
+   "title": "JOINT VENTURE",
+   "fields": {
+    "gold": 2,
+    "silver": 2,
+    "color": "purple"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d084 (1 identical copies); 8 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r10_c4",
+   "kind": "asset",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 5
+   },
+   "title": "JOINT VENTURE",
+   "fields": {
+    "gold": 2,
+    "silver": 3,
+    "color": "purple"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d085 (1 identical copies); 7 independent reads; design overridden: readers did not agree on the kind; the full-size card is a coloured building card with a name band and gold and silver circles"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r10_c5",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 4
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d086 (4 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r10_c6",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 3
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d087 (1 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r10_c7",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 2
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d086 (4 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r10_c8",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 1
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d086 (4 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_01#p1_r10_c9",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_01.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 0
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d086 (4 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r0_c0",
+   "kind": "filler",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 9
+   },
+   "title": null,
+   "fields": {},
+   "text": "OUT / OUT / OUT",
+   "confidence": "high",
+   "notes": "design d001 (14 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r0_c1",
+   "kind": "filler",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 8
+   },
+   "title": null,
+   "fields": {},
+   "text": "OUT / OUT / OUT",
+   "confidence": "high",
+   "notes": "design d001 (14 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r0_c2",
+   "kind": "filler",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 7
+   },
+   "title": null,
+   "fields": {},
+   "text": "OUT / OUT / OUT",
+   "confidence": "high",
+   "notes": "design d001 (14 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r0_c3",
+   "kind": "filler",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 6
+   },
+   "title": null,
+   "fields": {},
+   "text": "OUT / OUT / OUT",
+   "confidence": "high",
+   "notes": "design d001 (14 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r0_c4",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 5
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d088 (2 identical copies); 7 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r0_c5",
+   "kind": "filler",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 4
+   },
+   "title": null,
+   "fields": {},
+   "text": "OUT / OUT / OUT",
+   "confidence": "high",
+   "notes": "design d003 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r0_c6",
+   "kind": "filler",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 3
+   },
+   "title": null,
+   "fields": {},
+   "text": "OUT / OUT / OUT",
+   "confidence": "high",
+   "notes": "design d001 (14 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r0_c7",
+   "kind": "filler",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 2
+   },
+   "title": null,
+   "fields": {},
+   "text": "OUT / OUT / OUT",
+   "confidence": "high",
+   "notes": "design d001 (14 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r0_c8",
+   "kind": "filler",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 1
+   },
+   "title": null,
+   "fields": {},
+   "text": "OUT / OUT / OUT",
+   "confidence": "high",
+   "notes": "design d001 (14 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r0_c9",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 0
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d088 (2 identical copies); 7 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r1_c0",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 9
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 3%"
+   },
+   "text": "RFR + 3% / TREASURY NATIONALE",
+   "confidence": "high",
+   "notes": "design d089 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r1_c1",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 8
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d090 (1 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r1_c2",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 7
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 3,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d091 (3 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r1_c3",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 6
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 3,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE / WHO I MONEY IT'S LIKE OUR / TA ORITE THING GIVE US YOUR / MONEY AND WE SPENT IT WELL / THANK YOU. THANK YOU VERY MUCH / FOR YOUR MONEY. I KEEP IT SAVE / MAY PAY YOU BACK IN ME / REALLY THAT'S A PROMISE / CROSS HEART NO BACKSIES / I PA. YOU EVEN MORE / PINK PROMISE FOR REAL",
+   "confidence": "medium",
+   "notes": "design d092 (1 identical copies); 5 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r1_c4",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 5
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 5,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d093 (1 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r1_c5",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 4
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 3%"
+   },
+   "text": "RFR + 3% / TREASURY NATIONALE",
+   "confidence": "high",
+   "notes": "design d089 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r1_c6",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 3
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d094 (1 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r1_c7",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 2
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 3,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d091 (3 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r1_c8",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 1
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 3,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d091 (3 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r1_c9",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 0
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 5,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE / WHO I MONEY IT'S LIKE OUR / TA ORITE THING GIVE US YOUR / MONEY AND WE SPENT IT WELL / THANK YOU THANK YOU VERY MUCH / YOUR MONEYS I KEEP IT SAVE / MAY PAY YOU BACK IN ME / REALLY THAT'S A PROMISE / CRO 3X HART NO BACKSIES / IPA YOU EVEN MORE / PINK PROMISE FOR REAL",
+   "confidence": "medium",
+   "notes": "design d095 (1 identical copies); 4 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r2_c0",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 9
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 5,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d096 (2 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r2_c1",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 8
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 1%"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d097 (5 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r2_c2",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 7
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 1%"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d097 (5 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r2_c3",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 6
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 1%"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d098 (1 identical copies); 3 independent reads; design overridden: checked at full size: one yellow coin circle beside the RFR band; readers returned zero"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r2_c4",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 5
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 1%"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d097 (5 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r2_c5",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 4
+   },
+   "title": "BONDS",
+   "fields": {
+    "gold_coins": 5,
+    "rate": "+ 3%"
+   },
+   "text": "TREASURY NATIONALE",
+   "confidence": "medium",
+   "notes": "design d096 (2 identical copies); 8 independent reads; design overridden: the paper text on this Bonds card is too small and distorted to transcribe; only the heading is legible; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r2_c6",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 3
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 1%"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d099 (1 identical copies); 2 independent reads; design overridden: checked at full size: one yellow coin circle beside the RFR band; readers returned zero"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r2_c7",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 2
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 1%"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d097 (5 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r2_c8",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 1
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 1%"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d100 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r2_c9",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 0
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 1,
+    "rate": "+ 1%"
+   },
+   "text": null,
+   "confidence": "medium",
+   "notes": "design d097 (5 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r3_c0",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 9
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 1%"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d101 (5 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r3_c1",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 8
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 1%"
+   },
+   "text": "",
+   "confidence": "medium",
+   "notes": "design d102 (1 identical copies); 8 independent reads; design overridden: no printed text besides the RFR band, which is recorded in the rate field; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r3_c2",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 7
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 1%"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d101 (5 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r3_c3",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 6
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 1%"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d103 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r3_c4",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 5
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 3,
+    "rate": "+ 1%"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d104 (2 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r3_c5",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 4
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 1%"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d101 (5 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r3_c6",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 3
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 1%"
+   },
+   "text": "",
+   "confidence": "medium",
+   "notes": "design d105 (1 identical copies); 8 independent reads; design overridden: no printed text besides the RFR band, which is recorded in the rate field; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r3_c7",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 2
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 1%"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d101 (5 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r3_c8",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 1
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 2,
+    "rate": "+ 1%"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d101 (5 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r3_c9",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 3,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 3,
+    "back_col": 0
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 3,
+    "rate": "+ 1%"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d104 (2 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r4_c0",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 9
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 3,
+    "rate": "+ 1%"
+   },
+   "text": "RFR + 1% / Trade / Credit",
+   "confidence": "medium",
+   "notes": "design d106 (2 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r4_c1",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 8
+   },
+   "title": "BEAR MARKET",
+   "fields": {
+    "rfr": "+ 2%",
+    "mrp": "+ 4%",
+    "sign_red": "-",
+    "sign_purple": "-",
+    "sign_green": "-",
+    "sign_blue": "-",
+    "sign_yellow": "-"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d107 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r4_c2",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 7
+   },
+   "title": "BEAR MARKET",
+   "fields": {
+    "rfr": "+ 4%",
+    "mrp": "+ 6%",
+    "sign_red": "0",
+    "sign_purple": "-",
+    "sign_green": "-",
+    "sign_blue": "-",
+    "sign_yellow": "0"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d108 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r4_c3",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 6
+   },
+   "title": "BEAR MARKET",
+   "fields": {
+    "rfr": "+ 2%",
+    "mrp": "+ 6%",
+    "sign_red": "-",
+    "sign_purple": "0",
+    "sign_green": "0",
+    "sign_blue": "-",
+    "sign_yellow": "-"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d109 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r4_c4",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 5
+   },
+   "title": "BEAR MARKET",
+   "fields": {
+    "rfr": "+ 3%",
+    "mrp": "+ 6%",
+    "sign_red": "0",
+    "sign_purple": "-",
+    "sign_green": "-",
+    "sign_blue": "-",
+    "sign_yellow": "-"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d110 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r4_c5",
+   "kind": "liability",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 4
+   },
+   "title": "TRADE CREDIT",
+   "fields": {
+    "gold_coins": 3,
+    "rate": "+ 1%"
+   },
+   "text": "RFR + 1% / Trade / Credit",
+   "confidence": "medium",
+   "notes": "design d106 (2 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r4_c6",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 3
+   },
+   "title": "BEAR MARKET",
+   "fields": {
+    "rfr": "+ 2%",
+    "mrp": "+ 4%",
+    "sign_red": "-",
+    "sign_purple": "-",
+    "sign_green": "-",
+    "sign_blue": "-",
+    "sign_yellow": "-"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d111 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r4_c7",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 2
+   },
+   "title": "BEAR MARKET",
+   "fields": {
+    "rfr": "+ 4%",
+    "mrp": "+ 6%",
+    "sign_red": "0",
+    "sign_purple": "-",
+    "sign_green": "-",
+    "sign_blue": "-",
+    "sign_yellow": "0"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d108 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r4_c8",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 1
+   },
+   "title": "BEAR MARKET",
+   "fields": {
+    "rfr": "+ 2%",
+    "mrp": "+ 6%",
+    "sign_red": "-",
+    "sign_purple": "0",
+    "sign_green": "0",
+    "sign_blue": "-",
+    "sign_yellow": "-"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d112 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r4_c9",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 4,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 4,
+    "back_col": 0
+   },
+   "title": "BEAR MARKET",
+   "fields": {
+    "rfr": "+ 3%",
+    "mrp": "+ 6%",
+    "sign_red": "0",
+    "sign_purple": "-",
+    "sign_green": "-",
+    "sign_blue": "-",
+    "sign_yellow": "-"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d110 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r5_c0",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 9
+   },
+   "title": "BEAR MARKET",
+   "fields": {
+    "rfr": "+ 1%",
+    "mrp": "+ 4%",
+    "sign_red": "-",
+    "sign_purple": "-",
+    "sign_green": "0",
+    "sign_blue": "-",
+    "sign_yellow": "-"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d113 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r5_c1",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 8
+   },
+   "title": "BEAR MARKET",
+   "fields": {
+    "rfr": "+ 1%",
+    "mrp": "+ 4%",
+    "sign_red": "0",
+    "sign_purple": "-",
+    "sign_green": "-",
+    "sign_blue": "0",
+    "sign_yellow": "-"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d114 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r5_c2",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 7
+   },
+   "title": "BULL MARKET",
+   "fields": {
+    "rfr": "+ 2%",
+    "mrp": "+ 6%",
+    "sign_red": "+",
+    "sign_purple": "+",
+    "sign_green": "+",
+    "sign_blue": "+",
+    "sign_yellow": "+"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d115 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r5_c3",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 6
+   },
+   "title": "BULL MARKET",
+   "fields": {
+    "rfr": "+ 1%",
+    "mrp": "+ 8%",
+    "sign_red": "+",
+    "sign_purple": "0",
+    "sign_green": "0",
+    "sign_blue": "+",
+    "sign_yellow": "+"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d116 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r5_c4",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 5
+   },
+   "title": "BULL MARKET",
+   "fields": {
+    "rfr": "+ 4%",
+    "mrp": "+ 8%",
+    "sign_red": "+",
+    "sign_purple": "+",
+    "sign_green": "0",
+    "sign_blue": "+",
+    "sign_yellow": "+"
+   },
+   "text": "",
+   "confidence": "medium",
+   "notes": "design d117 (1 identical copies); 8 independent reads; design overridden: no printed text besides the RFR and MRP bands, which are recorded in the rfr and mrp fields; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r5_c5",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 4
+   },
+   "title": "BEAR MARKET",
+   "fields": {
+    "rfr": "+ 1%",
+    "mrp": "+ 4%",
+    "sign_red": "-",
+    "sign_purple": "-",
+    "sign_green": "0",
+    "sign_blue": "-",
+    "sign_yellow": "-"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d113 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r5_c6",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 3
+   },
+   "title": "BEAR MARKET",
+   "fields": {
+    "rfr": "+ 1%",
+    "mrp": "+ 4%",
+    "sign_red": "0",
+    "sign_purple": "-",
+    "sign_green": "-",
+    "sign_blue": "0",
+    "sign_yellow": "-"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d118 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r5_c7",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 2
+   },
+   "title": "BULL MARKET",
+   "fields": {
+    "rfr": "+ 2%",
+    "mrp": "+ 6%",
+    "sign_red": "+",
+    "sign_purple": "+",
+    "sign_green": "+",
+    "sign_blue": "+",
+    "sign_yellow": "+"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d115 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r5_c8",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 1
+   },
+   "title": "BULL MARKET",
+   "fields": {
+    "rfr": "+ 1%",
+    "mrp": "+ 8%",
+    "sign_red": "+",
+    "sign_purple": "0",
+    "sign_green": "0",
+    "sign_blue": "+",
+    "sign_yellow": "+"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d119 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r5_c9",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 5,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 5,
+    "back_col": 0
+   },
+   "title": "BULL MARKET",
+   "fields": {
+    "rfr": "+ 4%",
+    "mrp": "+ 8%",
+    "sign_red": "+",
+    "sign_purple": "+",
+    "sign_green": "0",
+    "sign_blue": "+",
+    "sign_yellow": "+"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d120 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r6_c0",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 9
+   },
+   "title": "BULL MARKET",
+   "fields": {
+    "rfr": "+ 1%",
+    "mrp": "+ 6%",
+    "sign_red": "0",
+    "sign_purple": "+",
+    "sign_green": "+",
+    "sign_blue": "+",
+    "sign_yellow": "0"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d121 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r6_c1",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 8
+   },
+   "title": "BULL MARKET",
+   "fields": {
+    "rfr": "+ 3%",
+    "mrp": "+ 8%",
+    "sign_red": "0",
+    "sign_purple": "+",
+    "sign_green": "+",
+    "sign_blue": "+",
+    "sign_yellow": "+"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d122 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r6_c2",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 7
+   },
+   "title": "BULL MARKET",
+   "fields": {
+    "rfr": "+ 2%",
+    "mrp": "+ 8%",
+    "sign_red": "0",
+    "sign_purple": "+",
+    "sign_green": "+",
+    "sign_blue": "0",
+    "sign_yellow": "+"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d123 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r6_c3",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 6
+   },
+   "title": "STABLE MARKET",
+   "fields": {
+    "rfr": "+ 3%",
+    "mrp": "+ 4%",
+    "sign_red": "0",
+    "sign_purple": "0",
+    "sign_green": "0",
+    "sign_blue": "0",
+    "sign_yellow": "+"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d124 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r6_c4",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 5
+   },
+   "title": "STABLE MARKET",
+   "fields": {
+    "rfr": "+ 1%",
+    "mrp": "+ 4%",
+    "sign_red": "0",
+    "sign_purple": "0",
+    "sign_green": "0",
+    "sign_blue": "+",
+    "sign_yellow": "0"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d125 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r6_c5",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 4
+   },
+   "title": "BULL MARKET",
+   "fields": {
+    "rfr": "+ 1%",
+    "mrp": "+ 6%",
+    "sign_red": "0",
+    "sign_purple": "+",
+    "sign_green": "+",
+    "sign_blue": "+",
+    "sign_yellow": "0"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d121 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r6_c6",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 3
+   },
+   "title": "BULL MARKET",
+   "fields": {
+    "rfr": "+ 3%",
+    "mrp": "+ 8%",
+    "sign_red": "0",
+    "sign_purple": "+",
+    "sign_green": "+",
+    "sign_blue": "+",
+    "sign_yellow": "+"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d126 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r6_c7",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 2
+   },
+   "title": "BULL MARKET",
+   "fields": {
+    "rfr": "+ 2%",
+    "mrp": "+ 8%",
+    "sign_red": "0",
+    "sign_purple": "+",
+    "sign_green": "+",
+    "sign_blue": "0",
+    "sign_yellow": "+"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d123 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r6_c8",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 1
+   },
+   "title": "STABLE MARKET",
+   "fields": {
+    "rfr": "+ 3%",
+    "mrp": "+ 4%",
+    "sign_red": "0",
+    "sign_purple": "0",
+    "sign_green": "0",
+    "sign_blue": "0",
+    "sign_yellow": "+"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d127 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r6_c9",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 6,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 6,
+    "back_col": 0
+   },
+   "title": "STABLE MARKET",
+   "fields": {
+    "rfr": "+ 1%",
+    "mrp": "+ 4%",
+    "sign_red": "0",
+    "sign_purple": "0",
+    "sign_green": "0",
+    "sign_blue": "+",
+    "sign_yellow": "0"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d125 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r7_c0",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 9
+   },
+   "title": "STABLE MARKET",
+   "fields": {
+    "rfr": "+ 4%",
+    "mrp": "+ 4%",
+    "sign_red": "0",
+    "sign_purple": "0",
+    "sign_green": "0",
+    "sign_blue": "0",
+    "sign_yellow": "0"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d128 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r7_c1",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 8
+   },
+   "title": "STABLE MARKET",
+   "fields": {
+    "rfr": "+ 2%",
+    "mrp": "+ 4%",
+    "sign_red": "0",
+    "sign_purple": "+",
+    "sign_green": "0",
+    "sign_blue": "0",
+    "sign_yellow": "0"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d129 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r7_c2",
+   "kind": "market_event",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 7
+   },
+   "title": "Right Wing Populists",
+   "fields": {},
+   "text": "Right wing populists win a landslide victory in the / elections. Radical shifts in policy are announced. / The Regulator needs to skip their turn. / The new policies hurt especially the red and green assets, that lose one gold. Yellow and blue assets / gain one gold.",
+   "confidence": "high",
+   "notes": "design d130 (2 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r7_c3",
+   "kind": "market_event",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 6
+   },
+   "title": "Bookkeeping Schandal",
+   "fields": {},
+   "text": "A major bookkeeping schandal is uncovered and all / firms face stringent scrutiny of / their books. / The CFO will have to skip their turn and all blue / assets lose one gold.",
+   "confidence": "high",
+   "notes": "design d131 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r7_c4",
+   "kind": "market_event",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 5
+   },
+   "title": "General Purpose Technology",
+   "fields": {},
+   "text": "Digitization makes all inovation more productive. / The head of R&D can purchase two assets this round and all purple assets gain one gold.",
+   "confidence": "high",
+   "notes": "design d132 (2 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r7_c5",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 4
+   },
+   "title": "STABLE MARKET",
+   "fields": {
+    "rfr": "+ 4%",
+    "mrp": "+ 4%",
+    "sign_red": "0",
+    "sign_purple": "0",
+    "sign_green": "0",
+    "sign_blue": "0",
+    "sign_yellow": "0"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d128 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r7_c6",
+   "kind": "market_condition",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 3
+   },
+   "title": "STABLE MARKET",
+   "fields": {
+    "rfr": "+ 2%",
+    "mrp": "+ 4%",
+    "sign_red": "0",
+    "sign_purple": "+",
+    "sign_green": "0",
+    "sign_blue": "0",
+    "sign_yellow": "0"
+   },
+   "text": null,
+   "confidence": "high",
+   "notes": "design d133 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r7_c7",
+   "kind": "market_event",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 2
+   },
+   "title": "Right Wing Populists",
+   "fields": {},
+   "text": "Right wing populists win a landslide victory in the / elections. Radical shifts in policy are announced. / The Regulator needs to skip their turn. / The new policies hurt especially the red and green assets, that lose one gold. Yellow and blue assets / gain one gold.",
+   "confidence": "high",
+   "notes": "design d130 (2 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r7_c8",
+   "kind": "market_event",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 1
+   },
+   "title": "Bookkeeping Schandal",
+   "fields": {},
+   "text": "A major bookkeeping schandal is uncovered and all / firms face stringent scrutiny of / their books. / The CFO will have to skip their turn and all blue / assets lose one gold.",
+   "confidence": "high",
+   "notes": "design d134 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r7_c9",
+   "kind": "market_event",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 7,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 7,
+    "back_col": 0
+   },
+   "title": "General Purpose Technology",
+   "fields": {},
+   "text": "Digitization makes all inovation more productive. / The head of R&D can purchase two assets this round and all purple assets gain one gold.",
+   "confidence": "high",
+   "notes": "design d132 (2 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r8_c0",
+   "kind": "market_event",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 9
+   },
+   "title": "Russia invades Ukraine",
+   "fields": {},
+   "text": "Energy and raw material prices soar and cost-push inflation reduces profitability. / The CEO can only purchase one asset this round and the value of all yellow assets falls by one gold.",
+   "confidence": "high",
+   "notes": "design d135 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r8_c1",
+   "kind": "market_event",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 8
+   },
+   "title": "China invades Taiwan",
+   "fields": {},
+   "text": "Chips and electronic hardware as well as rare earth metals are no longer available in the West. / The head of R&D has to skip this turn and all purple assets lose one gold.",
+   "confidence": "high",
+   "notes": "design d136 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r8_c2",
+   "kind": "market_event",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 7
+   },
+   "title": "US invades Iran",
+   "fields": {},
+   "text": "Demand in the US war industry rises and prices, global interest rates and risk premia soar. / All firms must add 2% or 200 basispoints to the cost of debt at the end of the game. The value of yellow and green assets rises by one gold.",
+   "confidence": "high",
+   "notes": "design d137 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r8_c3",
+   "kind": "market_event",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 6
+   },
+   "title": "Global Pandemic",
+   "fields": {},
+   "text": "A pandemic rages across the globe. The lockdowns, / illness and death disrupt all business and / production. The Stakeholder has to skip their turn. / Yellow, green and blue assets lose one gold. / Firms that invested in the social capital of the firm / (have red assets), can limit their losses with one / gold per red asset.",
+   "confidence": "high",
+   "notes": "design d138 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r8_c4",
+   "kind": "market_event",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 5
+   },
+   "title": "Socialist Revolution",
+   "fields": {},
+   "text": "Socialists win in a landslide victory in the elections. Radical shifts in policy are announced. / The Regulator needs to skip their turn. The new policies hurt especially the yellow and blue assets, that lose one gold. Red and green assets gain one gold.",
+   "confidence": "high",
+   "notes": "design d139 (2 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r8_c5",
+   "kind": "market_event",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 4
+   },
+   "title": "Russia invades Ukraine",
+   "fields": {},
+   "text": "Energy and raw material prices soar and cost-push inflation reduces profitability. / The CEO can only purchase one asset this round and the value of all yellow assets falls by one gold.",
+   "confidence": "high",
+   "notes": "design d135 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r8_c6",
+   "kind": "market_event",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 3
+   },
+   "title": "China invades Taiwan",
+   "fields": {},
+   "text": "Chips and electronic hardware as well as rare earth metals are no longer available in the West. / The head of R&D has to skip this turn and all purple assets lose one gold.",
+   "confidence": "high",
+   "notes": "design d140 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r8_c7",
+   "kind": "market_event",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 2
+   },
+   "title": "US invades Iran",
+   "fields": {},
+   "text": "Demand in the US war industry rises and prices, global interest rates and risk premia soar. / All firms must add 2% or 200 basispoints to the cost of debt at the end of the game. The value of yellow and green assets rises by one gold.",
+   "confidence": "high",
+   "notes": "design d137 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r8_c8",
+   "kind": "market_event",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 1
+   },
+   "title": "Global Pandemic",
+   "fields": {},
+   "text": "A pandemic rages across the globe. The lockdowns, illness and death disrupt all business and production. The Stakeholder has to skip their turn. Yellow, green and blue assets lose one gold. Firms that invested in the social capital of the firm (have red assets), can limit their losses with one gold per red asset.",
+   "confidence": "high",
+   "notes": "design d141 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r8_c9",
+   "kind": "market_event",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 8,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 8,
+    "back_col": 0
+   },
+   "title": "Socialist Revolution",
+   "fields": {},
+   "text": "Socialists win in a landslide victory in the elections. Radical shifts in policy are announced. / The Regulator needs to skip their turn. The new policies hurt especially the yellow and blue assets, that lose one gold. Red and green assets gain one gold.",
+   "confidence": "high",
+   "notes": "design d139 (2 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r9_c0",
+   "kind": "market_event",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 9
+   },
+   "title": "Global Treaty on Climate Change",
+   "fields": {},
+   "text": "Negotiations have succeeded and all UN-member / states have agreed on a global treaty to fight / climate change. / The CSO has to skip their turn to formulate the / corporate alignment strategy. / All green assets gain one gold.",
+   "confidence": "high",
+   "notes": "design d142 (2 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r9_c1",
+   "kind": "overview",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 8
+   },
+   "title": null,
+   "fields": {},
+   "text": "1. SHAREHOLDER / Fire a character. / Not the Banker or Regulator. / 2. BANKER / Terminate credit to character. / Not the Shareholder or Regulator. / 3. REGULATOR / Swap cards with deck or player. / 4. CEO / Buy up to three assets. / 5. CFO / Issue up to three liabilities. / 6. CSO / Buy up to two red/green assets. / 7. HEAD of R&D / Draw six cards and keep four. / 8. STAKEHOLDER / Force player to divest. / Not CSO or red and green assets.",
+   "confidence": "high",
+   "notes": "design d143 (8 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r9_c2",
+   "kind": "overview",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 7
+   },
+   "title": null,
+   "fields": {},
+   "text": "1. SHAREHOLDER / Fire a character. / Not the Banker or Regulator. / 2. BANKER / Terminate credit to character. / Not the Shareholder or Regulator. / 3. REGULATOR / Swap cards with deck or player. / 4. CEO / Buy up to three assets. / 5. CFO / Issue up to three liabilities. / 6. CSO / Buy up to two red/green assets. / 7. HEAD of R&D / Draw six cards and keep four. / 8. STAKEHOLDER / Force player to divest. / Not CSO or red and green assets.",
+   "confidence": "high",
+   "notes": "design d143 (8 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r9_c3",
+   "kind": "overview",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 6
+   },
+   "title": null,
+   "fields": {},
+   "text": "1. SHAREHOLDER / Fire a character. / Not the Banker or Regulator. / 2. BANKER / Terminate credit to character. / Not the Shareholder or Regulator. / 3. REGULATOR / Swap cards with deck or player. / 4. CEO / Buy up to three assets. / 5. CFO / Issue up to three liabilities. / 6. CSO / Buy up to two red/green assets. / 7. HEAD of R&D / Draw six cards and keep four. / 8. STAKEHOLDER / Force player to divest. / Not CSO or red and green assets.",
+   "confidence": "medium",
+   "notes": "design d144 (1 identical copies); 8 independent reads; design overridden: transcribed from the full-size card; the readers saw only parts of the list; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r9_c4",
+   "kind": "overview",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 5
+   },
+   "title": null,
+   "fields": {},
+   "text": "1. SHAREHOLDER / Fire a character. / Not the Banker or Regulator. / 2. BANKER / Terminate credit to character. / Not the Shareholder or Regulator. / 3. REGULATOR / Swap cards with deck or player. / 4. CEO / Buy up to three assets. / 5. CFO / Issue up to three liabilities. / 6. CSO / Buy up to two red/green assets. / 7. HEAD of R&D / Draw six cards and keep four. / 8. STAKEHOLDER / Force player to divest. / Not CSO or red and green assets.",
+   "confidence": "high",
+   "notes": "design d143 (8 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r9_c5",
+   "kind": "market_event",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 4
+   },
+   "title": "Global Treaty on Climate Change",
+   "fields": {},
+   "text": "Negotiations have succeeded and all UN-member / states have agreed on a global treaty to fight / climate change. / The CSO has to skip their turn to formulate the / corporate alignment strategy. / All green assets gain one gold.",
+   "confidence": "high",
+   "notes": "design d142 (2 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r9_c6",
+   "kind": "overview",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 3
+   },
+   "title": null,
+   "fields": {},
+   "text": "1. SHAREHOLDER / Fire a character. / Not the Banker or Regulator. / 2. BANKER / Terminate credit to character. / Not the Shareholder or Regulator. / 3. REGULATOR / Swap cards with deck or player. / 4. CEO / Buy up to three assets. / 5. CFO / Issue up to three liabilities. / 6. CSO / Buy up to two red/green assets. / 7. HEAD of R&D / Draw six cards and keep four. / 8. STAKEHOLDER / Force player to divest. / Not CSO or red and green assets.",
+   "confidence": "medium",
+   "notes": "design d145 (2 identical copies); 8 independent reads; design overridden: transcribed from the full-size card; the readers saw only parts of the list; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r9_c7",
+   "kind": "overview",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 2
+   },
+   "title": null,
+   "fields": {},
+   "text": "1. SHAREHOLDER / Fire a character. / Not the Banker or Regulator. / 2. BANKER / Terminate credit to character. / Not the Shareholder or Regulator. / 3. REGULATOR / Swap cards with deck or player. / 4. CEO / Buy up to three assets. / 5. CFO / Issue up to three liabilities. / 6. CSO / Buy up to two red/green assets. / 7. HEAD of R&D / Draw six cards and keep four. / 8. STAKEHOLDER / Force player to divest. / Not CSO or red and green assets.",
+   "confidence": "high",
+   "notes": "design d143 (8 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r9_c8",
+   "kind": "overview",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 1
+   },
+   "title": null,
+   "fields": {},
+   "text": "1. SHAREHOLDER / Fire a character. / Not the Banker or Regulator. / 5. CFO / Issue up to three liabilities. / 2. BANKER / Terminate credit to character. / Not the Shareholder or Regulator. / 6. CSO / Buy up to two red/green assets. / 3. REGULATOR / Swap cards with deck or player. / 7. HEAD of R&D / Draw six cards and keep four. / 4. CEO / Buy up to three assets. / 8. STAKEHOLDER / Force player to divest. / Not CSO or red and green assets.",
+   "confidence": "high",
+   "notes": "design d146 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r9_c9",
+   "kind": "overview",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 9,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 9,
+    "back_col": 0
+   },
+   "title": null,
+   "fields": {},
+   "text": "1. SHAREHOLDER / Fire a character. / Not the Banker or Regulator. / 2. BANKER / Terminate credit to character. / Not the Shareholder or Regulator. / 3. REGULATOR / Swap cards with deck or player. / 4. CEO / Buy up to three assets. / 5. CFO / Issue up to three liabilities. / 6. CSO / Buy up to two red/green assets. / 7. HEAD of R&D / Draw six cards and keep four. / 8. STAKEHOLDER / Force player to divest. / Not CSO or red and green assets.",
+   "confidence": "medium",
+   "notes": "design d147 (1 identical copies); 8 independent reads; design overridden: transcribed from the full-size card; the readers saw only parts of the list; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r10_c0",
+   "kind": "overview",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 9
+   },
+   "title": null,
+   "fields": {},
+   "text": "1. SHAREHOLDER / Fire a character. / Not the Banker or Regulator. / 2. BANKER / Terminate credit to character. / Not the Shareholder or Regulator. / 3. REGULATOR / Swap cards with deck or player. / 4. CEO / Buy up to three assets. / 5. CFO / Issue up to three liabilities. / 6. CSO / Buy up to two red/green assets. / 7. HEAD of R&D / Draw six cards and keep four. / 8. STAKEHOLDER / Force player to divest. / Not CSO or red and green assets.",
+   "confidence": "high",
+   "notes": "design d148 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r10_c1",
+   "kind": "overview",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 8
+   },
+   "title": null,
+   "fields": {},
+   "text": "1. SHAREHOLDER / Fire a character. / Not the Banker or Regulator. / 2. BANKER / Terminate credit to character. / Not the Shareholder or Regulator. / 3. REGULATOR / Swap cards with deck or player. / 4. CEO / Buy up to three assets. / 5. CFO / Issue up to three liabilities. / 6. CSO / Buy up to two red/green assets. / 7. HEAD of R&D / Draw six cards and keep four. / 8. STAKEHOLDER / Force player to divest. / Not CSO or red and green assets.",
+   "confidence": "high",
+   "notes": "design d143 (8 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r10_c2",
+   "kind": "overview",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 2,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 7
+   },
+   "title": null,
+   "fields": {},
+   "text": "1. SHAREHOLDER / Fire a character. / Not the Banker or Regulator. / 2. BANKER / Terminate credit to character. / Not the Shareholder or Regulator. / 3. REGULATOR / Swap cards with deck or player. / 4. CEO / Buy up to three assets. / 5. CFO / Issue up to three liabilities. / 6. CSO / Buy up to two red/green assets. / 7. HEAD of R&D / Draw six cards and keep four. / 8. STAKEHOLDER / Force player to divest. / Not CSO or red and green assets.",
+   "confidence": "high",
+   "notes": "design d143 (8 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r10_c3",
+   "kind": "credit_card",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 3,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 6
+   },
+   "title": "Maastricht University",
+   "fields": {},
+   "text": "School of Business and Economics / Maastricht Immersive Learning Lab / Authors: / Mark Sanders / Prescott Morley / Kimon Ivanov",
+   "confidence": "medium",
+   "notes": "design d149 (2 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r10_c4",
+   "kind": "credit_card",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 4,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 5
+   },
+   "title": null,
+   "fields": {},
+   "text": "Graphic Design & illustration / Ursine Visual / Ursinevisual@gmail.com",
+   "confidence": "medium",
+   "notes": "design d150 (2 identical copies); 8 independent reads; design overridden: transcribed from the full-size card; the readers added names that are not printed on this card; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r10_c5",
+   "kind": "overview",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 5,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 4
+   },
+   "title": null,
+   "fields": {},
+   "text": "1. SHAREHOLDER / Fire a character. / Not the Banker or Regulator. / 2. BANKER / Terminate credit to character. / Not the Shareholder or Regulator. / 3. REGULATOR / Swap cards with deck or player. / 4. CEO / Buy up to three assets. / 5. CFO / Issue up to three liabilities. / 6. CSO / Buy up to two red/green assets. / 7. HEAD of R&D / Draw six cards and keep four. / 8. STAKEHOLDER / Force player to divest. / Not CSO or red and green assets.",
+   "confidence": "high",
+   "notes": "design d143 (8 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r10_c6",
+   "kind": "overview",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 6,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 3
+   },
+   "title": null,
+   "fields": {},
+   "text": "1. SHAREHOLDER / Fire a character. / Not the Banker or Regulator. / 2. BANKER / Terminate credit to character. / Not the Shareholder or Regulator. / 3. REGULATOR / Swap cards with deck or player. / 4. CEO / Buy up to three assets. / 5. CFO / Issue up to three liabilities. / 6. CSO / Buy up to two red/green assets. / 7. HEAD of R&D / Draw six cards and keep four. / 8. STAKEHOLDER / Force player to divest. / Not CSO or red and green assets.",
+   "confidence": "medium",
+   "notes": "design d145 (2 identical copies); 8 independent reads; design overridden: transcribed from the full-size card; the readers saw only parts of the list; text: reads differed; closest-to-consensus read kept"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r10_c7",
+   "kind": "overview",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 7,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 2
+   },
+   "title": null,
+   "fields": {},
+   "text": "1. SHAREHOLDER / Fire a character. / Not the Banker or Regulator. / 2. BANKER / Terminate credit to character. / Not the Shareholder or Regulator. / 3. REGULATOR / Swap cards with deck or player. / 4. CEO / Buy up to three assets. / 5. CFO / Issue up to three liabilities. / 6. CSO / Buy up to two red/green assets. / 7. HEAD of R&D / Draw six cards and keep four. / 8. STAKEHOLDER / Force player to divest. / Not CSO or red and green assets.",
+   "confidence": "high",
+   "notes": "design d143 (8 identical copies); 2 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r10_c8",
+   "kind": "credit_card",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 8,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 1
+   },
+   "title": "Maastricht University",
+   "fields": {},
+   "text": "School of Business and Economics / Maastricht Immersive Learning Lab / Authors: / Mark Sanders / Prescott Morley / Kimon Ivanov",
+   "confidence": "medium",
+   "notes": "design d149 (2 identical copies); 3 independent reads"
+  },
+  {
+   "id": "Proef_Kaartspel_Bottom_Line_Kaarten_02#p1_r10_c9",
+   "kind": "credit_card",
+   "source": {
+    "file": "Proef_Kaartspel_Bottom_Line_Kaarten_02.pdf",
+    "page": 1,
+    "row": 10,
+    "col": 9,
+    "back_page": 2,
+    "back_row": 10,
+    "back_col": 0
+   },
+   "title": null,
+   "fields": {},
+   "text": "Graphic Design & illustration / Ursine Visual / Ursinevisual@gmail.com",
+   "confidence": "medium",
+   "notes": "design d150 (2 identical copies); 8 independent reads; design overridden: transcribed from the full-size card; the readers added names that are not printed on this card; text: reads differed; closest-to-consensus read kept"
+  }
+ ],
+ "not_in_files": [
+  "1 Card Stand for the Chairman",
+  "30 x Cash tokens",
+  "40 x Marker Tokens (7 sets of 5 + 5 pieces)",
+  "7 A5 balance sheets",
+  "End of Game Score Sheet Pad"
+ ],
+ "extraction_notes": [
+  "Both Kaarten PDFs are laid out identically. Market conditions, market events and overview cards each appear in both files, so they are found twice (32, 18 and 14 against 16, 9 and 7 in the rules). Recorded as found, not removed.",
+  "Fillers share their back design with the asset, liability and chairman cards; the mixed back groups are recorded in back_kinds.",
+  "Bond paper text is recorded only as its heading; the rest is illegible in the print.",
+  "Bank loan and trade credit counts on the sheets do not match the rules: 20 bank loans and 20 trade credit and 27 bonds were found, against 20, 10 and 20 in the rules. The printed cards show these titles and rates, so the difference is in the files, not in the reading. Recorded as found.",
+  "Each of 150 unique designs (pixel-identical fronts grouped) was read by independent single-component model calls until every value had a majority; 87 designs were unanimous, 62 were resolved by hand.",
+  "Model cost of all reads: $1.0783."
+ ]
+}

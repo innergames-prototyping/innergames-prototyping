@@ -1,0 +1,111 @@
+{
+  "schema_version": "0.6",
+  "game_id": "<purpose>/<engine_version>/<player_count>p/<seed>  (D8: <purpose>/<engine_version>/<arm_id>/<seed>)",
+  "seed": null,
+  "engine_version": "v1",
+  "purpose": "<D4_logged|D4_batch|D5|D7_rerun|D8_baseline|D8_arm|test|debug>",
+  "player_count": null,
+  "arm_id": "<D8 only: B0|S<n>|R-I<n>[a-z]; null otherwise>",
+  "arm_kind": "<D8 only: strategy|reading; null otherwise>",
+  "focal_seat": "<D8 strategy arms: the seat playing the strategy; null otherwise>",
+  "time": {
+    "play_min": {
+      "low": null,
+      "typical": null,
+      "high": null,
+      "sampled": null
+    },
+    "session_min": {
+      "low": null,
+      "typical": null,
+      "high": null,
+      "sampled": null
+    },
+    "total_rounds": null,
+    "total_turns": null,
+    "round_min_typical": {
+      "min": null,
+      "mean": null,
+      "median": null,
+      "max": null
+    },
+    "turn_min_typical": {
+      "min": null,
+      "mean": null,
+      "median": null,
+      "max": null
+    }
+  },
+  "actions": {
+    "total_actions": null,
+    "per_round": {
+      "min": null,
+      "mean": null,
+      "median": null,
+      "max": null
+    },
+    "per_turn": {
+      "min": null,
+      "mean": null,
+      "median": null,
+      "max": null
+    }
+  },
+  "outcome": {
+    "end_condition": "<round_limit|deck_exhausted|goal_reached|all_players_out|elimination|safety_cap|other>",
+    "ended_on_round": null,
+    "winner_seats": [],
+    "tie": null,
+    "winning_score": null,
+    "players_with_zero_score": null,
+    "players_reaching_zero_lives": null
+  },
+  "players": [
+    {
+      "seat": 1,
+      "role": "<string|null>",
+      "score": null,
+      "score_breakdown": [
+        {
+          "component": "<vocabulary name>",
+          "points": null
+        }
+      ],
+      "turns": {
+        "total": null,
+        "zero_move": null,
+        "idle": null,
+        "skipped": null,
+        "no_legal_move": null
+      },
+      "stats": [
+        {
+          "label": "<family:params>",
+          "status": "<ok|na|nm|ni>",
+          "value": null
+        }
+      ]
+    }
+  ],
+  "game_stats": [
+    {
+      "label": "<family:params>",
+      "status": "<ok|na|nm|ni>",
+      "value": null
+    }
+  ],
+  "unmatched": [
+    {
+      "label": "<own name>",
+      "value": null,
+      "unit": "<string>",
+      "level": "<G|P|R|T|E|agg>",
+      "definition": "<one sentence>"
+    }
+  ],
+  "audit": {
+    "illegal_actions": null,
+    "bound_violations": null
+  },
+  "events_file": "<events_D0x.jsonl.zip holding this game's events, or null if not logged>"
+}
