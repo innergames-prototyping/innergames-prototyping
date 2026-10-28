@@ -78,17 +78,21 @@ def command(workdir: Path) -> list[str]:
     ]
 
 
-def start(pdfs: dict[str, bytes]) -> Job:
-    job_id = uuid.uuid4().hex[:12]
-    workdir = JOBS / job_id
+def prepare(pdfs: dict[str, bytes]) -> Path:
+    workdir = JOBS / uuid.uuid4().hex[:12]
     workdir.mkdir(parents=True)
     for name, data in pdfs.items():
         (workdir / name).write_bytes(data)
     (workdir / SKILL_LINK).parent.mkdir(parents=True)
     (workdir / SKILL_LINK).symlink_to(SKILL)
-    job = Job(job_id, workdir, sorted(pdfs))
+    return workdir
+
+
+def start(pdfs: dict[str, bytes]) -> Job:
+    workdir = prepare(pdfs)
+    job = Job(workdir.name, workdir, sorted(pdfs))
     job.task = asyncio.create_task(run(job))
-    jobs[job_id] = job
+    jobs[job.id] = job
     return job
 
 

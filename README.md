@@ -27,3 +27,13 @@ cd frontend && npm install && npm run dev
 ```
 
 Open http://localhost:5173 and drop the PDFs on the page. Each extraction works in its own folder under `backend/jobs/`, with the session log in `claude.jsonl` and the results in `results/`.
+
+## Run the whole pipeline
+
+`backend/app/pipeline.py` runs the extraction on a folder of PDFs and feeds its `rules.txt` and `components.json` into the v5 simulation in `analysis-pipeline/v5` as `01_rules.txt` and `01_components.json`. The simulation runs headless on Claude Opus with high effort, with no skills, MCP servers or CLAUDE.md, and writes its files to `out/`. `check_outputs.py` then checks them. From `backend/`, with the virtual environment active:
+
+```sh
+python -m app.pipeline <folder with the PDFs>
+```
+
+The job folder under `backend/jobs/` holds the extraction as above, and the simulation in `simulation/`: its session log in `claude.jsonl`, its files in `out/` and the check in `check.json`. The simulation plays several thousand games and can take hours.
