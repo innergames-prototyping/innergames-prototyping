@@ -8,6 +8,7 @@ import json
 import shutil
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 from . import extraction
@@ -52,19 +53,21 @@ def simulation_command() -> list[str]:
     ]
 
 
-def run_claude(command: list[str], workdir: Path) -> dict:
+def run_claude(step: str, command: list[str], workdir: Path) -> dict:
+    start = time.monotonic()
     with (
         (workdir / "claude.jsonl").open("wb") as log,
         (workdir / "claude.err").open("wb") as err,
     ):
         subprocess.run(command, cwd=workdir, stdout=log, stderr=err, check=True)
     lines = (workdir / "claude.jsonl").read_text().splitlines()
-    return next(e for e in map(json.loads, reversed(lines)) if e.get("type") == "result")
-
-
-def report(step: str, result: dict) -> None:
-    minutes = result.get("duration_ms", 0) / 60000
-    print(f"{step}: {minutes:.0f} min, ${result.get('total_cost_usd', 0):.2f}", flush=True)
+    result = next(e for e in map(json.loads, reversed(lines)) if e.get("type") == "result")
+    # extract.py starts its own reader sessions and records their cost under work/
+    reads = workdir.glob("work/**/reads/**/*.json")
+    cost = result["total_cost_usd"] + sum(json.loads(r.read_text())["cost_usd"] for r in reads)
+    minutes = (time.monotonic() - start) / 60
+    print(f"{step}: {minutes:.0f} min, ${cost:.2f}", flush=True)
+    return result
 
 
 def main(pdf_folder: Path) -> int:
@@ -72,7 +75,7 @@ def main(pdf_folder: Path) -> int:
     job = extraction.prepare(pdfs)
     print(f"job folder: {job}", flush=True)
 
-    report("extraction", run_claude(extraction.command(job), job))
+    run_claude("extraction", extraction.command(job), job)
     missing = [name for name in UPSTREAM if not (job / "results" / name).is_file()]
     if missing:
         print(f"extraction wrote no {', '.join(missing)}")
@@ -84,8 +87,7 @@ def main(pdf_folder: Path) -> int:
         shutil.copy(f, simulation)
     for name, upstream in UPSTREAM.items():
         shutil.copy(job / "results" / name, simulation / upstream)
-    result = run_claude(simulation_command(), simulation)
-    report("simulation", result)
+    result = run_claude("simulation", simulation_command(), simulation)
 
     runlog = [line for line in result.get("result", "").splitlines() if line.startswith("RUNLOG:")]
     check = [sys.executable, V5 / "operator" / "check_outputs.py", simulation / "out"]
