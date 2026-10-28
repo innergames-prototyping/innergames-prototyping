@@ -5,6 +5,7 @@ Usage, from backend/ with the virtual environment active: python -m app.pipeline
 """
 
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -53,13 +54,13 @@ def simulation_command() -> list[str]:
     ]
 
 
-def run_claude(step: str, command: list[str], workdir: Path) -> dict:
+def run_claude(step: str, command: list[str], workdir: Path, env: dict | None = None) -> dict:
     start = time.monotonic()
     with (
         (workdir / "claude.jsonl").open("wb") as log,
         (workdir / "claude.err").open("wb") as err,
     ):
-        subprocess.run(command, cwd=workdir, stdout=log, stderr=err, check=True)
+        subprocess.run(command, cwd=workdir, env=env, stdout=log, stderr=err, check=True)
     lines = (workdir / "claude.jsonl").read_text().splitlines()
     result = next(e for e in map(json.loads, reversed(lines)) if e.get("type") == "result")
     # extract.py starts its own reader sessions and records their cost under work/
@@ -87,7 +88,10 @@ def main(pdf_folder: Path) -> int:
         shutil.copy(f, simulation)
     for name, upstream in UPSTREAM.items():
         shutil.copy(job / "results" / name, simulation / upstream)
-    result = run_claude("simulation", simulation_command(), simulation)
+    # An engine imported from out/ leaves a __pycache__ folder there, which the contract forbids,
+    # and the session isn't allowed to delete it.
+    env = os.environ | {"PYTHONDONTWRITEBYTECODE": "1"}
+    result = run_claude("simulation", simulation_command(), simulation, env)
 
     runlog = [line for line in result.get("result", "").splitlines() if line.startswith("RUNLOG:")]
     check = [sys.executable, V5 / "operator" / "check_outputs.py", simulation / "out"]
