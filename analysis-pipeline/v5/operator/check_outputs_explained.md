@@ -3,9 +3,9 @@ Project Pipeline / InnerGames. Validator version 1.3 (2026-10-26), for output co
 (`00b_output_contract.md` in `tokens\v5\system\`) and brief v5.
 
 **What changed in v1.3:**
-- **M1c (new)** checks `run.d1_source` (`extraction` or `raw`) and that it fits `upstream_files`.
-- **M1b** now allows an empty `game_material_files` on the extraction path, and rejects any `00`
-  or `01` file listed as game material.
+- **M1c (new)** checks that `run.upstream_files` names the two `01` files. The raw path, and with
+  it `d1_source`, `game_material_files` and check M1b, was removed when the extraction step was
+  wired in front of the simulation.
 - **M7** now accepts the upper-case ids in `readings` and `strategies` (`I3`, `R-I3a`, `S1`), as
   the contract's §4.2 rule 5 allows. Run11 failed this check because contract v2.1 contradicted
   itself here.
@@ -93,8 +93,7 @@ each section, then run the check again.
 | ID | Checks |
 |---|---|
 | M1 (WARN) | No `run_id` or `condition` field |
-| **M1c** | `run.d1_source` is `extraction` or `raw`. On `extraction`, `upstream_files` lists the `01` files; on `raw`, it is empty |
-| M1b | `run.game_material_files` lists the game material, with no `00` or `01` file among them. Empty is allowed only on the extraction path |
+| **M1c** | `run.upstream_files` lists exactly `01_rules.txt` and `01_components.json` |
 | M2 | Every ledger entry has exactly the 13 fixed keys |
 | M3 | Ledger values use the fixed strings |
 | M4 | `totals` = the ledger sums |

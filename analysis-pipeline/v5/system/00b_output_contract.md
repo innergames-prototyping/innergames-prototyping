@@ -21,7 +21,7 @@ below, with exactly these names (upper/lower case included), and no other output
 | 2 | `headline.json` | JSON | the key aggregate results, exactly as in `00e_template_headline.json` (§5) |
 | 3 | `summary.json` | JSON | all aggregates, as in `00f_template_summary.json`; D8 results go in `strategies`, one entry per arm, with `id` = the arm_id |
 | 4 | `run_manifest.json` | JSON | as in `00g_template_run_manifest.json`, including the `files` list (§6) |
-| 5 | `D01_rules_dossier.md` | Markdown | D1. On the extraction path, its components table comes from `01_components.json` |
+| 5 | `D01_rules_dossier.md` | Markdown | D1. Its components table comes from `01_components.json` |
 | 6 | `D01_board_layout.json` | JSON | the board read from the material, or `null` when the material has no layout |
 | 7 | `D02_engine_v<n>.py` | Python | one file per engine version from v1 up that is listed in the manifest (`D02_engine_v1.py`, `D02_engine_v2.py`, …). Each file is complete and runs on its own. Development builds (`v0`) are not delivered |
 | 8 | `D02_run.py` | Python | re-runs any ledger batch from the command line, e.g. `python D02_run.py --engine v2 --purpose D5 --players 3 --seed-from 500001 --seed-to 501000` |
@@ -96,7 +96,6 @@ below, with exactly these names (upper/lower case included), and no other output
 | `end_condition` | `round_limit`, `deck_exhausted`, `goal_reached`, `all_players_out`, `elimination`, `safety_cap`, `other` |
 | `level` | `G`, `P`, `R`, `T`, `E`, `agg` |
 | `verdict` (headline) | `short` (median below target − tolerance), `on_target`, `long` (median above target + tolerance) |
-| `d1_source` (manifest) | `extraction` (built from the `01` files), `raw` (built from the game material) |
 | `game_id` | `<purpose>/<engine_version>/<player_count>p/<seed>`; for D8: `<purpose>/<engine_version>/<arm_id>/<seed>` |
 
 ### 4.2 Names of game things
@@ -105,8 +104,8 @@ This covers vocabulary entries, roles, statistic parameters, event types and rea
 2. **Take the name from the rulebook, word by word, in the same order:** "Monster Rush" →
    `monster_rush`. Never reorder, abbreviate or invent a name. If the rulebook uses more than one
    name for the same thing, use the name in its component list. If the thing is not in the
-   component list, use the first name the rules text gives it. On the extraction path, the
-   component list is `01_components.json`.
+   component list, use the first name the rules text gives it. The component list is
+   `01_components.json`.
 3. One name per thing. Declare every name once in `run_manifest.json → vocabulary`, with a
    one-line description.
 4. Use only these vocabulary categories: `roles`, `abilities`, `resources`, `sources`, `causes`,
@@ -134,7 +133,7 @@ batch appears in the per-game file it names.
 This is the file the results screen reads first. Fill every key in `00e_template_headline.json`,
 keep the key names and order, and add no keys. Game-specific names (roles, event types) appear
 only as values and follow §4.2.
-- `rulebook_file`: the rulebook's file name; on the extraction path, `01_rules.txt`.
+- `rulebook_file`: `01_rules.txt`.
 - `playtime` and `outcome`: one entry per player count, computed from the D5 games.
 - Percentiles use linear interpolation between order statistics (numpy's default). Shares are
   0–1.

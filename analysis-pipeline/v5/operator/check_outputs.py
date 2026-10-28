@@ -72,7 +72,7 @@ SNAKE_RE = re.compile(r"^[a-z][a-z0-9]*(_[a-z0-9]+)*$")
 # contract §4.2 rule 5: ids keep their case in these two categories
 ID_KEYS = {"readings": re.compile(r"^(I[1-9][0-9]*|R-I[1-9][0-9]*[a-z]?)$"),
            "strategies": re.compile(r"^S[1-9][0-9]*$")}
-D1_SOURCES = {"extraction", "raw"}
+UPSTREAM_FILES = ["01_components.json", "01_rules.txt"]
 ARCHIVE_EXT = (".tar", ".tar.gz", ".tgz", ".gz", ".xz", ".7z", ".rar", ".bz2", ".zst")
 BROWSER_DUP_RE = re.compile(r"^(?P<stem>.+?) ?\((?P<n>\d+)\)(?P<ext>(\.[A-Za-z0-9]+)+)$")
 HEADLINE_KEYS = ["schema", "game", "rulebook_file", "player_counts", "targets", "headline_clock",
@@ -317,27 +317,12 @@ def check_manifest(man, R, files, engines):
     else:
         R.ok(S, "M1", "no run_id/condition fields")
 
-    src = run.get("d1_source")
-    gm = run.get("game_material_files")
     up = run.get("upstream_files")
-    names_ok = lambda xs: isinstance(xs, list) and all(isinstance(x, str) and x for x in xs)
-    if src not in D1_SOURCES:
-        R.fail(S, "M1c", f"run.d1_source is {src!r}; want 'extraction' or 'raw'",
-               "The brief asks the run to record which path it took.")
-    elif src == "extraction" and not (names_ok(up) and up and all(x.startswith("01") for x in up)):
-        R.fail(S, "M1c", f"d1_source is 'extraction' but run.upstream_files is {up!r}; want the 01 file names")
-    elif src == "raw" and up:
-        R.fail(S, "M1c", f"d1_source is 'raw' but run.upstream_files lists {up}")
+    if not isinstance(up, list) or sorted(up) != UPSTREAM_FILES:
+        R.fail(S, "M1c", f"run.upstream_files is {up!r}; want {UPSTREAM_FILES}",
+               "The brief asks the run to record the names of the two 01 files.")
     else:
-        R.ok(S, "M1c", f"run.d1_source = {src}" + (f", upstream files {up}" if up else ""))
-    if not names_ok(gm) or (src != "extraction" and not gm):
-        R.fail(S, "M1b", "run.game_material_files missing or empty",
-               "The brief asks the run to record the exact name of every game-material file "
-               "(it may be empty only on the extraction path).")
-    elif any(x.startswith(("00", "01")) for x in gm):
-        R.fail(S, "M1b", f"game_material_files includes our files (names starting with 00 or 01): {gm}")
-    else:
-        R.ok(S, "M1b", f"run.game_material_files lists {len(gm)} file(s)")
+        R.ok(S, "M1c", f"run.upstream_files = {up}")
 
     ledger = man.get("simulation_ledger")
     if not isinstance(ledger, list) or not ledger:

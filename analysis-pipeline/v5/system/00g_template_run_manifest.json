@@ -2,13 +2,9 @@
   "schema_version": "0.7",
   "run": {
     "game": "<title as printed on the rulebook>",
-    "d1_source": "<extraction|raw>",
-    "rulebook_file": "<exact file name of the rulebook; 01_rules.txt on the extraction path>",
+    "rulebook_file": "01_rules.txt",
     "upstream_files": [
-      "<exact file name of every attached 01 file; empty on the raw path>"
-    ],
-    "game_material_files": [
-      "<exact file name of every game-material file; may be empty on the extraction path>"
+      "<exact file name of every attached 01 file>"
     ]
   },
   "config": {

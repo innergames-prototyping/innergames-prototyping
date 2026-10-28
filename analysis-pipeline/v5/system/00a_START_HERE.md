@@ -3,7 +3,7 @@ Brief v5. This file is your complete instruction. There is no other message: eve
 is in the attached files.
 
 ## How to use the attached files
-Three kinds of file can be attached.
+Two kinds of file are attached, and nothing else.
 
 **Instruction files.** Their names start with `00`. There are always exactly these eight:
 
@@ -18,31 +18,18 @@ Three kinds of file can be attached.
 | `00g_template_run_manifest.json` | template for `run_manifest.json` |
 | `00h_template_per_game.json` | template for one per-game record |
 
-**Upstream extraction files.** Their names start with `01`. When present, an earlier stage has
-already extracted the game material, and these files replace the raw rulebook:
+**Upstream extraction files.** Their names start with `01`. An earlier stage has already
+extracted the game from the designer's files into these two, and they are your only game material:
 
 | File | What it is |
 |---|---|
-| `01_rules.txt` | the full rules text of the game |
-| `01_components.json` | the component inventory: every component kind with its count, and every component with its fields |
+| `01_rules.txt` | the full rules text of the game. Treat it as the rulebook |
+| `01_components.json` | the component inventory: every component kind with the fields its pieces carry, and each different piece once with how many there are. Treat it as the authoritative component counts: do not recount components |
 
-**Game material.** This is every other attached file, whatever it is called and however many
-there are: a rulebook, photographs or other material from the designer. When upstream files are
-attached there may be no game material at all.
+Build D1 from these two files, as described under D1 below. List both in D1 by their exact file
+names, with what they contain, and record the names in `run_manifest.json → run → upstream_files`.
 
-**Which path you are on:**
-- **Extraction path:** `01_rules.txt` is attached. Treat it as the rulebook and
-  `01_components.json` as the authoritative component counts: do not recount components. Build D1
-  from these files, as described under D1 below. Read any game material as well.
-- **Raw path:** no `01` file is attached. Read every game-material file before starting D1 and
-  build D1 from it.
-
-On either path, list every attached file other than the `00` files in D1 by its exact file name,
-with what it contains, and record the names in `run_manifest.json → run` (`upstream_files`,
-`game_material_files`, `d1_source`).
-
-**Reading order:** this file first, then the `01` files if any, then all game material, then `00b`
-to `00h` in order.
+**Reading order:** this file first, then the `01` files, then `00b` to `00h` in order.
 
 The `00` and `01` prefixes belong to our files only. Your output files keep the names given in
 `00b_output_contract.md`.
@@ -64,7 +51,7 @@ how fair and balanced it is, where the rules are unclear or can be exploited, an
 to play.
 This analysis is run once. Nobody will correct it or run it again, so it must be complete and
 correct as delivered.
-Material: the attached upstream extraction or game material (see above).
+Material: the attached upstream extraction files (see above).
 Target playtime, play only: 30 minutes at 2 players, 45 minutes at 3 players, 60 minutes at 4
 players, tolerance ±20%.
 Player counts to cover: 2-4.
@@ -74,12 +61,11 @@ Produce a quantitative analysis of this game by building and running a simulatio
 
 ## REQUIRED DELIVERABLES (all of them, in this order)
 - **D1.** A rules dossier: components with counts, setup, turn structure, every subsystem, every
-  card or event type with its count, and the map/board layout if the material shows one. List
+  card or event type with its count, and the map/board layout if the material describes one. List
   separately, numbered I1..In, every point where the rules are ambiguous and you had to choose a
   reading to make them executable. Do not critique the game in D1.
-  On the extraction path, take the components table from `01_components.json` (kinds, counts and
-  fields as given) and write the rest of the dossier from `01_rules.txt`; the interpretation list
-  is required on both paths.
+  Take the components table from `01_components.json` (kinds, counts and fields as given) and
+  write the rest of the dossier from `01_rules.txt`.
 - **D2.** A Python rules engine implementing the dossier, with a seeded random number generator,
   per-player and per-game statistics, and an event log.
 - **D3.** A playtime model: an explicit table of per-action durations in seconds (low / typical /
@@ -115,8 +101,8 @@ Produce a quantitative analysis of this game by building and running a simulatio
 - **R3.** Use exactly the sample sizes given in D4, D5, D7 and D8. Additional simulations (tests,
   checks, debugging) are allowed, but every batch must be listed in the ledger (R6).
 - **R4.** Verify the component counts in the dossier against the rulebook's component list and
-  against what the rules text requires, and report any mismatch. On the extraction path, check the
-  counts in `01_components.json` against what `01_rules.txt` requires.
+  against what the rules text requires, and report any mismatch: check the counts in
+  `01_components.json` against what `01_rules.txt` requires.
 - **R5.** Keep the final report under 1,200 words. Put detail in the files you write.
 - **R6.** Write every output file exactly as specified in `00b_output_contract.md`: the file names,
   formats, vocabulary and simulation ledger. Follow `00c_reporting_standard.md` and
