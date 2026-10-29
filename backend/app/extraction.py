@@ -49,7 +49,8 @@ def system_prompt(workdir: Path) -> str:
         f"directory ({workdir}), following the instructions below. Run the script as "
         f"{SKILL_LINK}/extract.py <command> from the working directory; components.schema.json is "
         f"in {SKILL_LINK}. The machine is NixOS: run other tools through nix-shell -p <package> "
-        '--run "<command>". Don\'t delete files.\n\n' + "\n".join(lines[body_start:])
+        '--run "<command>". Don\'t delete files. The instructions below are all of SKILL.md, so '
+        "don't read that file.\n\n" + "\n".join(lines[body_start:])
     )
 
 
