@@ -962,7 +962,7 @@ def build_resolved(work, cfg):
         vals["orientation"] = orientation(reads)
         ok, majority, _ = vote([r["output"]["kind"] for r in reads])
         vals["read_kind"] = json.loads(majority) if ok else None
-        vals["mismatch"] = [r["output"].get("mismatch", "") for r in reads if r["output"]["kind"] == vals["kind"]]
+        vals["mismatch"] = [r["output"].get("mismatch", "") for r in reads if r["output"]["kind"] == vals.get("kind")]
         overridden = design in overrides
         if overridden:
             apply_override(vals, overrides[design].get("set", {}))
