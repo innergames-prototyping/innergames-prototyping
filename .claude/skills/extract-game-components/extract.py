@@ -586,6 +586,9 @@ def cmd_preview(a):
     return uncovered
 
 
+SHIFT_POOL = ThreadPoolExecutor(os.cpu_count())
+
+
 def similar(a, b, shift=3, tol=0.001, block=12, block_tol=0.05):
     """Pixel comparison of two RGB arrays, allowing a small misalignment. Identical only if few
     pixels differ overall AND no small block differs much: a single changed symbol (a pip, a sign) is
@@ -595,15 +598,26 @@ def similar(a, b, shift=3, tol=0.001, block=12, block_tol=0.05):
         return False, 1.0
     h, w = min(a.shape[0], b.shape[0]) - 2 * shift, min(a.shape[1], b.shape[1]) - 2 * shift
     ref = a[shift:shift + h, shift:shift + w]
-    best = None
-    for dy in range(2 * shift + 1):
-        for dx in range(2 * shift + 1):
-            d = np.abs(ref - b[dy:dy + h, dx:dx + w]).max(-1) > 80
-            if best is None or d.mean() < best.mean():
-                best = d
+    diffs = SHIFT_POOL.map(lambda s: np.abs(ref - b[s[0]:s[0] + h, s[1]:s[1] + w]).max(-1) > 80,
+                           [(dy, dx) for dy in range(2 * shift + 1) for dx in range(2 * shift + 1)])
+    best = min(diffs, key=lambda d: d.mean())
     hb, wb = h // block * block, w // block * block
     worst_block = best[:hb, :wb].reshape(hb // block, block, wb // block, block).mean((1, 3)).max()
     return best.mean() <= tol and worst_block <= block_tol, float(best.mean())
+
+
+def differs_small(a, b, shift=1, frac=0.01):
+    """Cheap first test on 1/8-size images: True only when the items clearly differ. Identical prints
+    differ in no pixel at this size; items that differ only in a small symbol look identical here and
+    are left to `similar`."""
+    if abs(a.shape[0] - b.shape[0]) > 2 * shift or abs(a.shape[1] - b.shape[1]) > 2 * shift:
+        return True
+    h, w = min(a.shape[0], b.shape[0]) - 2 * shift, min(a.shape[1], b.shape[1]) - 2 * shift
+    if h < 1 or w < 1:
+        return False
+    ref = a[shift:shift + h, shift:shift + w]
+    return min((np.abs(ref - b[dy:dy + h, dx:dx + w]).max(-1) > 80).mean()
+               for dy in range(2 * shift + 1) for dx in range(2 * shift + 1)) > frac
 
 
 def cluster(paths, **tol):
@@ -611,16 +625,21 @@ def cluster(paths, **tol):
     for k, p in paths.items():
         im = Image.open(p).convert("RGB")
         imgs[k] = (np.asarray(im.resize((im.width // 2, im.height // 2))).astype(np.int16),
-                   np.asarray(im.resize((16, 16))).astype(np.int16))
+                   np.asarray(im.resize((16, 16))).astype(np.int16),
+                   np.asarray(im.resize((max(1, im.width // 8), max(1, im.height // 8)))).astype(np.int16))
     groups = []
-    for k, (arr, sig) in imgs.items():
-        for g in groups:
-            rarr, rsig = imgs[g[0]]
-            if np.abs(sig - rsig).mean() < 25 and similar(rarr, arr, **tol)[0]:
-                g.append(k)
-                break
-        else:
-            groups.append([k])
+    # numpy releases the GIL, so threads compare against several groups at once; the first matching
+    # group in order still wins, as in a sequential search.
+    with ThreadPoolExecutor(os.cpu_count()) as pool:
+        for k, (arr, sig, small) in imgs.items():
+            cands = [g for g in groups if np.abs(sig - imgs[g[0]][1]).mean() < 25
+                     and not differs_small(imgs[g[0]][2], small)]
+            hits = pool.map(lambda g: similar(imgs[g[0]][0], arr, **tol)[0], cands)
+            match = next((g for g, hit in zip(cands, hits) if hit), None)
+            if match:
+                match.append(k)
+            else:
+                groups.append([k])
     return groups
 
 
