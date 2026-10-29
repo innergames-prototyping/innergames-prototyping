@@ -1669,15 +1669,18 @@ def validate(doc, schema="components.schema.json"):
 
 
 def total_cost(work):
-    paths = list((work / "reads").glob("*/*.json")) + list((work / "rules" / "reads").glob("*.json"))
+    paths = (list((work / "reads").glob("*/*.json")) + list((work / "orient").glob("*/*.json"))
+             + list((work / "rules" / "reads").glob("*.json")))
     return sum(load_json(p).get("cost_usd", 0) for p in paths)
 
 
 def cmd_cost(a):
     work = Path(a.work)
     reads = [load_json(p) for p in (work / "reads").glob("*/*.json")]
+    orient = [load_json(p) for p in (work / "orient").glob("*/*.json")]
     rules = [load_json(p) for p in (work / "rules" / "reads").glob("*.read*.json")]
     proofs = [load_json(p) for p in (work / "rules" / "reads").glob("*.proof*.json")]
+    print(f"orientation reads: {len(orient)} calls, ${sum(r['cost_usd'] for r in orient):.4f}")
     print(f"component reads: {len(reads)} calls, ${sum(r['cost_usd'] for r in reads):.4f}")
     print(f"rules reads: {len(rules)} calls, ${sum(r['cost_usd'] for r in rules):.4f}")
     print(f"proofreading reads: {len(proofs)} calls, ${sum(r['cost_usd'] for r in proofs):.4f}")
