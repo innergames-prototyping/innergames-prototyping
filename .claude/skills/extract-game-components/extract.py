@@ -55,6 +55,13 @@ PREVIEW_SIDE = 1400
 
 DIRECTIONS = ["upright", "bottom to top", "top to bottom", "upside down", "no text"]
 TURN = {"bottom to top": 90, "top to bottom": 270, "upside down": 180}  # clockwise turn that makes it upright
+ORIENTATION_NEXT = (
+    "Designs read sideways were read only once. Check one crop per ORIENTATION line. If it is really not "
+    "upright, fix `rotate` / `rotate_items` and run `crop && group`. Positions turn with the item (a strip "
+    "on the left of a sideways card runs along the top of the upright one), so then open one turned crop of "
+    "each kind named and rewrite every position in that kind's description and fields for the turned crop. "
+    "Then run `read`; reads of unchanged crops are kept. If a crop is upright, record "
+    "`{\"set\": {\"orientation\": \"upright\"}, \"reason\": \"...\"}` for its design in `overrides` and run `read` again.")
 
 SYSTEM = (
     "You transcribe printed tabletop-game material exactly as printed. You report only what you "
@@ -795,16 +802,21 @@ def orientation_report(work, designs):
     """Sideways items per page and direction, as r<row>c<col>, or r<row> when the whole row is.
     Items from image files are listed by name."""
     items = {i["key"]: i for i in load_json(work / "items.json")}
-    flagged, named = defaultdict(set), defaultdict(list)
+    flagged, named, kinds = defaultdict(set), defaultdict(list), defaultdict(set)
     for v in designs.values():
         if v.get("orientation") in TURN:
+            read_as = [v["kind"]] if v.get("kind") else v.get("votes", {}).get("kind", [])
             for k in v["members"]:
                 if "row" in items[k]:
-                    flagged[(items[k]["file"], items[k]["page"], v["orientation"])].add((items[k]["row"], items[k]["col"]))
+                    where = (items[k]["file"], items[k]["page"], v["orientation"])
+                    flagged[where].add((items[k]["row"], items[k]["col"]))
                 else:
-                    named[v["orientation"]].append(items[k]["label"])
+                    where = v["orientation"]
+                    named[where].append(items[k]["label"])
+                kinds[where].update(read_as)
     lines = [f"ORIENTATION item files: readers see the text running {d} on {len(names)} items: {' '.join(sorted(names))}. "
-             f"Turn them a further {TURN[d]} degrees clockwise (`rotate_items`)." for d, names in sorted(named.items())]
+             f"Turn them a further {TURN[d]} degrees clockwise (`rotate_items`). Read as: {', '.join(sorted(kinds[d]))}."
+             for d, names in sorted(named.items())]
     for (file, page, d), cells in sorted(flagged.items()):
         row_len = Counter(i["row"] for i in items.values() if i["file"] == file and i["page"] == page)
         labels = []
@@ -812,7 +824,8 @@ def orientation_report(work, designs):
             cols = sorted(c for r, c in cells if r == row)
             labels += [f"r{row}"] if len(cols) == row_len[row] else [f"r{row}c{c}" for c in cols]
         lines.append(f"ORIENTATION {file} page {page}: readers see the text running {d} on {len(cells)} items: "
-                     f"{' '.join(labels)}. Turn them a further {TURN[d]} degrees clockwise (`rotate` / `rotate_items`).")
+                     f"{' '.join(labels)}. Turn them a further {TURN[d]} degrees clockwise (`rotate` / `rotate_items`). "
+                     f"Read as: {', '.join(sorted(kinds[(file, page, d)]))}.")
     return lines
 
 
@@ -887,10 +900,7 @@ def cmd_read(a):
         rules_report(a, work, cfg)
     sideways = orientation_report(work, build_resolved(work, cfg)[1])
     if sideways:
-        print(*sideways, sep="\n")
-        print("Designs read sideways were read only once. Check one crop per line above; if it is really not "
-              "upright, fix the rotation and run `crop && group && read` again (reads of unchanged crops "
-              "are kept). If it is upright, record that with an `orientation` override and run `read` again.")
+        print(*sideways, ORIENTATION_NEXT, sep="\n")
         return
     cmd_check(a)
 
@@ -1046,8 +1056,14 @@ def cmd_check(a):
     for d in report["description"]:
         print(f"DESCRIPTION kind {d['kind']}: {d['mismatch']} of {d['reads']} reads say its description doesn't match "
               f"the image, e.g. " + " | ".join(repr(m) for m in d["examples"]))
+    if report["description"]:
+        print("Readers take values from the wrong place when a description doesn't match, often all in the same "
+              "way, so voting can't catch it. Rewrite each flagged description where they say, checking one crop, "
+              "and run `read`: it reads that kind again.")
     for line in report["orientation"]:
         print(line)
+    if report["orientation"]:
+        print(ORIENTATION_NEXT)
     for c in report["checks"]:
         print(f"CHECK {c}")
     print(f"total cost so far: ${total_cost(work):.4f}; details in {work / 'check.json'}")

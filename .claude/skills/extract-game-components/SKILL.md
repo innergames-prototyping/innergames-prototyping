@@ -170,16 +170,10 @@ rules region in one queue, many at a time, and prints the component and rules fl
 not read: they are not in the files.
 
 Each design is read once first, and each reader reports which way the text runs. A design read
-sideways or upside down is not read further, and `read` ends with **ORIENTATION** lines: per page,
-the items (`r<row>c<col>`, or `r<row>` for a whole row) and how far to turn them. Confirm on one crop
-per line and fix `rotate` / `rotate_items`. Run `extract.py crop && extract.py group`, open one turned
-crop of each kind involved, rewrite every position in those kinds' descriptions for the turned crop,
-and run `extract.py read`. Only changed crops are read again. If a crop really is upright, record
-`{"set": {"orientation": "upright"}, "reason": "..."}` for that design in `overrides`. Every other
-design is read a second time (another copy where one exists) and gets more reads, up to 5, wherever
-something has no majority; then `read` runs `check`. A read counts only while the kind its reader
-chose is described as it is now: after you change a kind's name, description or fields, `read` reads
-again every design read as that kind, and every design a reader called `other`.
+sideways or upside down is not read further, and `read` ends with **ORIENTATION** lines that say which
+items to turn and what to do next. Every other design is read a second time (another copy where one
+exists) and gets more reads, up to 5, wherever something has no majority; then `read` runs `check`.
+Changing a kind's name, description or fields makes `read` read that kind again.
 
 Each rules region is also transcribed by Tesseract (OCR). A region whose first read has exactly
 Tesseract's words is done; any other is read until every word has a majority and proofread in
@@ -197,20 +191,15 @@ Component flags, from `check` (also printed at the end of `read`):
   `"d042": {"set": {"fields.gold": 3}, "reason": "counted 3 filled circles at full size"}`. Keys are
   `kind`, `title`, `text`, `fields.<name>`. Use an item key (`work/items/<key>`) instead of a design
   id when only one copy differs. Override `kind` only for a design or two that readers misjudge, and
-  then also set every field of that kind that stays in CONFLICT. When readers call many designs of
-  one kind `other` or another kind, `check` says so: the description doesn't match those items, so
-  rewrite it and run `read` again instead of overriding. If the image doesn't settle a value either,
-  leave it; `assemble --force` marks it `low` confidence, but refuses a design with no value for any
-  field of its kind, since readers didn't read it as that kind. Never guess, and never set a value to agree with the rules or a count check: an
-  override records only what the image shows.
+  then also set its fields that stay in CONFLICT. If the image doesn't settle a value either, leave
+  it; `assemble --force` marks it `low` confidence. Never guess, and never set a value to agree with
+  the rules or a count check: an override records only what the image shows.
 - **TEXT UNCERTAIN**: text spans readers disagree on, often illegible decorative print. Set the text
   from the image, or drop the illegible part, with the reason.
 - **SPELLING**: a reader saw a misspelled word that the voted title or text has corrected. This is
   usually a real typo; if the image shows it, override `title` or `text` as printed.
-- **DESCRIPTION**: most reads of a kind say its description doesn't match the image, and quote what
-  doesn't. Readers then take values from the wrong place, often all in the same way, so voting can't
-  catch it. Rewrite the description where they say, checking one crop, and run `extract.py read`,
-  which reads that kind again.
+- **DESCRIPTION**: most reads of a kind say its description doesn't match the image. `check` quotes
+  them and says what to do.
 - **ORIENTATION**: items still read sideways. `assemble` refuses while any are left.
 - **CHECK**: a failed consistency check. These catch what voting can't, because every reader can
   make the same mistake. *Back groups*: identical backs usually mean one kind; if a mix is real,
