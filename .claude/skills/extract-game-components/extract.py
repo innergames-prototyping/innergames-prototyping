@@ -625,7 +625,8 @@ def reader_schema(cfg):
     kinds = cfg["kinds"]
     return {
         "type": "object", "additionalProperties": False,
-        "required": ["observations", "text_direction", "kind", "title", "fields", "text", "misspelled", "unreadable"],
+        "required": ["observations", "text_direction", "kind", "title", "fields", "mismatch", "text", "misspelled",
+                     "unreadable"],
         "properties": {
             "observations": {"type": "string"},
             "text_direction": {"enum": DIRECTIONS},
@@ -639,6 +640,7 @@ def reader_schema(cfg):
                     "properties": {f["name"]: field_schema(f) for f in k.get("fields", [])}} for k in kinds}},
             "text": {"type": ["string", "null"]},
             "misspelled": {"type": "array", "items": {"type": "string"}},
+            "mismatch": {"type": "string"},
             "unreadable": {"type": "string"},
         },
     }
@@ -665,6 +667,9 @@ def reader_prompt(cfg, has_back):
         "- kind: which kind this is, judged only from what is printed.",
         "- fields: fill only the object for that kind, using your observations; set every other kind's "
         "object to null. Use null for a value that is not printed or cannot be read.",
+        "- mismatch: anything in the description of the kind you chose, or of its fields, that does not match "
+        "image 1 as you see it, for example a strip described on the left that is printed along the top, or "
+        "symbols that are not where a field says they are; empty string if it all matches.",
         "- title: the printed name on the front (image 1), exactly as printed, letter by letter, including spelling mistakes and "
         "typos (a later step looks for these, so a corrected word is an error); capitals and punctuation "
         "as printed; null if none.",
@@ -752,16 +757,25 @@ def image_id(work, key):
     return h.hexdigest()[:12]
 
 
-def read_index(work):
-    """Reads per item, keeping only reads of the item's current crop: re-cropping, rotating or
-    regrouping never reuses a read of a different image."""
-    ids, index = {}, defaultdict(list)
+def kind_hashes(cfg):
+    """What readers are told about each kind. `other` depends on every kind's description."""
+    h = {k["id"]: hashlib.sha1(json.dumps([k.get(x) for x in ("name", "description", "fields")]).encode()).hexdigest()[:12]
+         for k in cfg["kinds"]}
+    h["other"] = hashlib.sha1(json.dumps(h, sort_keys=True).encode()).hexdigest()[:12]
+    return h
+
+
+def read_index(work, cfg):
+    """Reads per item, keeping only reads of the item's current crop, made while the kind the reader
+    chose was described as it is now: re-cropping, rotating, regrouping or rewriting a kind never
+    reuses a read made under other conditions."""
+    ids, index, hashes = {}, defaultdict(list), kind_hashes(cfg)
     for p in sorted((work / "reads").glob("*/*.json")):
         r = load_json(p)
         key = r["item"]
         if key not in ids:
             ids[key] = image_id(work, key) if (work / "items" / key).exists() else None
-        if r.get("image") == ids[key]:
+        if r.get("image") == ids[key] and r.get("kind_def", hashes.get(r["output"]["kind"])) == hashes.get(r["output"]["kind"]):
             index[key].append(r)
     return index
 
@@ -809,7 +823,7 @@ def component_reads(a, work, cfg, spent):
     groups = load_json(work / "groups.json")
     schema = reader_schema(cfg)
     overrides = cfg.get("overrides", {})
-    index = read_index(work)
+    index = read_index(work, cfg)
     reads = {d: design_reads(index, ms) for d, ms in groups["designs"].items() if not a.designs or d in a.designs}
     nxt = {d: len(list((work / "reads" / d).glob("*.json"))) for d in reads}
     busy, failed = Counter(), Counter()
@@ -821,7 +835,8 @@ def component_reads(a, work, cfg, spent):
             d = work / "items" / key
             imgs = [Image.open(d / "front.png")] + ([Image.open(d / "back.png")] if (d / "back.png").exists() else [])
             out, cost = ask(imgs, reader_prompt(cfg, len(imgs) == 2), schema, a.model)
-            r = {"item": key, "image": image_id(work, key), "model": a.model, "output": out, "cost_usd": cost}
+            r = {"item": key, "image": image_id(work, key), "kind_def": kind_hashes(cfg).get(out["kind"]),
+                 "model": a.model, "output": out, "cost_usd": cost}
             save_json(work / "reads" / design / f"{n:02d}.json", r)
             return r
         return run
@@ -837,7 +852,8 @@ def component_reads(a, work, cfg, spent):
 
     def more(design):
         rs = reads[design]
-        upright = overrides.get(design, {}).get("set", {}).get("orientation") == "upright"
+        ov = overrides.get(design, {}).get("set", {})
+        upright = ov.get("orientation") == "upright"
         if busy[design] or failed[design] >= 2 or len(rs) >= a.max_reads or (orientation(rs) and not upright):
             return []
         if not rs:
@@ -845,7 +861,7 @@ def component_reads(a, work, cfg, spent):
         elif len(rs) < a.reads:
             need = a.reads - len(rs)
         else:
-            _, unsettled, text_ok = resolve(cfg, rs)
+            _, unsettled, text_ok = resolve(cfg, rs, ov.get("kind"))
             need = 1 if unsettled or not text_ok else 0
         out = []
         for _ in range(need):
@@ -890,7 +906,7 @@ def apply_override(vals, ov):
 def build_resolved(work, cfg):
     groups = load_json(work / "groups.json")
     overrides = cfg.get("overrides", {})
-    index = read_index(work)
+    index = read_index(work, cfg)
     designs = {}
     for design, members in groups["designs"].items():
         reads = design_reads(index, members)
@@ -902,6 +918,9 @@ def build_resolved(work, cfg):
             not unsettled and len({json.dumps(r["output"]["fields"], sort_keys=True) for r in reads}) == 1
             and len({r["output"]["kind"] for r in reads}) == 1)
         vals["orientation"] = orientation(reads)
+        ok, majority, _ = vote([r["output"]["kind"] for r in reads])
+        vals["read_kind"] = json.loads(majority) if ok else None
+        vals["mismatch"] = [r["output"].get("mismatch", "") for r in reads if r["output"]["kind"] == vals["kind"]]
         overridden = design in overrides
         if overridden:
             apply_override(vals, overrides[design].get("set", {}))
@@ -953,7 +972,7 @@ def cmd_check(a):
             apply_override(v, overrides[key].get("set", {}))
         return v
 
-    report = {"conflicts": [], "text_uncertain": [], "spelling": [], "checks": [],
+    report = {"conflicts": [], "text_uncertain": [], "spelling": [], "description": [], "checks": [],
               "orientation": orientation_report(work, designs)}
     for design, v in designs.items():
         img = str(work / "items" / v["members"][0] / "front.png")
@@ -964,6 +983,21 @@ def cmd_check(a):
             report["text_uncertain"].append({"design": design, "image": img, "spans": v["votes"].get("text", [])})
         for f in v.get("spelling", []):
             report["spelling"].append({"design": design, "image": img} | f)
+
+    against, mismatch = defaultdict(list), defaultdict(list)
+    for design, v in designs.items():
+        if v.get("overridden") and v.get("read_kind") not in (None, v.get("kind")):
+            against[v["kind"]].append(design)
+        mismatch[v.get("kind")] += v.get("mismatch", [])
+    for k, said in sorted(mismatch.items(), key=lambda x: str(x[0])):
+        noted = [m for m in said if m.strip(" \"'.").lower() not in ("", "none")]
+        if k not in (None, "other") and len(noted) * 2 > len(said):
+            report["description"].append({"kind": k, "reads": len(said), "mismatch": len(noted), "examples": noted[:3]})
+    for k, ds in sorted(against.items()):
+        report["checks"].append(
+            f"kind {k} is set by override on {len(ds)} designs whose reads mostly chose another kind "
+            f"({' '.join(ds[:8])}{' ...' if len(ds) > 8 else ''}): readers don't recognise it from its description. "
+            "Rewrite the description for the crop as readers see it and run `read` again, rather than overriding")
 
     back_kinds = defaultdict(Counter)
     for key in items:
@@ -1009,6 +1043,9 @@ def cmd_check(a):
             print(f"    kept: {u['kept']!r}  alternatives: {u['alternatives']!r}")
     for f in report["spelling"]:
         print(f"SPELLING {f['design']}: a reader saw {f['printed']!r} printed; the title/text has {f['transcribed']!r} image={f['image']}")
+    for d in report["description"]:
+        print(f"DESCRIPTION kind {d['kind']}: {d['mismatch']} of {d['reads']} reads say its description doesn't match "
+              f"the image, e.g. " + " | ".join(repr(m) for m in d["examples"]))
     for line in report["orientation"]:
         print(line)
     for c in report["checks"]:
@@ -1331,6 +1368,12 @@ def cmd_assemble(a):
     write_review(work, cfg)
 
     groups, designs = build_resolved(work, cfg)
+    declared = {k["id"]: {f"fields.{f['name']}" for f in k.get("fields", [])} for k in cfg["kinds"]}
+    blank = [d for d, v in designs.items() if declared.get(v.get("kind")) and declared[v["kind"]] <= set(v["unsettled"])]
+    if blank:
+        sys.exit(f"designs {blank} have no value for any field of their kind, so readers didn't read them as that kind. "
+                 "Rewrite the kind's description for the crop as readers see it and run `read` again; --force doesn't "
+                 "cover these. If the image really shows no legible value, set each field to null by override with the reason.")
     open_conflicts = [d for d, v in designs.items() if v["unsettled"] or v.get("orientation") in TURN]
     if open_conflicts and not a.force:
         sys.exit(f"unresolved or sideways designs {open_conflicts}; resolve them (see `check`), or pass --force to mark them low confidence")
