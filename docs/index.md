@@ -13,4 +13,5 @@ Documentation for the InnerGames Prototyping project.
 
 - [Collaboration Agreement](./team/CollaborationAgreement.md)
 - [Meeting Notes](./team/INNERGAMES-Meeting-Notes.md)
+- [Client Meeting 29 Oct 2026](./team/Client-Meeting-2026-10-29.md)
 - [Retrospective Board](./team/RetrospectiveBoard.md)
