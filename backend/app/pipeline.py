@@ -14,7 +14,7 @@ from pathlib import Path
 
 from . import extraction
 
-V5 = extraction.REPO / "analysis-pipeline" / "v5"
+ANALYSIS = extraction.REPO / "analysis-pipeline"
 UPSTREAM = {"rules.txt": "01_rules.txt", "components.json": "01_components.json"}
 # The v5 brief is written for the Claude app, where the files are attached and sent back with a
 # delivery tool.
@@ -84,7 +84,7 @@ def main(pdf_folder: Path) -> int:
 
     simulation = job / "simulation"
     simulation.mkdir()
-    for f in sorted((V5 / "system").glob("00*")):
+    for f in sorted((ANALYSIS / "system").glob("00*")):
         shutil.copy(f, simulation)
     for name, upstream in UPSTREAM.items():
         shutil.copy(job / "results" / name, simulation / upstream)
@@ -94,7 +94,7 @@ def main(pdf_folder: Path) -> int:
     result = run_claude("simulation", simulation_command(), simulation, env)
 
     runlog = [line for line in result.get("result", "").splitlines() if line.startswith("RUNLOG:")]
-    check = [sys.executable, V5 / "operator" / "check_outputs.py", simulation / "out"]
+    check = [sys.executable, ANALYSIS / "operator" / "check_outputs.py", simulation / "out"]
     check += ["--json", simulation / "check.json"]
     if runlog:
         check += ["--runlog", runlog[-1]]
