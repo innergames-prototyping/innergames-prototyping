@@ -933,6 +933,21 @@ def orientation_report(work, designs):
     return lines
 
 
+def noted(mismatch):
+    return (mismatch or "").strip(" \"'.").lower() not in ("", "none")
+
+
+def mismatched_kinds(reads):
+    """Kinds that most of their reads say are described wrongly, once at least four reads chose them."""
+    c = defaultdict(lambda: [0, 0])
+    for rs in reads.values():
+        for r in rs:
+            k = r["output"]["kind"]
+            c[k][0] += noted(r["output"].get("mismatch"))
+            c[k][1] += 1
+    return {k for k, (n, t) in c.items() if k != "other" and t >= 4 and n * 2 > t}
+
+
 def component_reads(a, work, cfg, spent):
     """Queue entries that read every design until every value has a majority. A design gets one
     read first; if it is read sideways it is not read further, so the bulk of its reading waits
@@ -973,6 +988,8 @@ def component_reads(a, work, cfg, spent):
         upright = ov.get("orientation") == "upright"
         if busy[design] or failed[design] >= 2 or len(rs) >= a.max_reads or (orientation(rs) and not upright):
             return []
+        if rs and not ov.get("kind") and Counter(r["output"]["kind"] for r in rs).most_common(1)[0][0] in mismatched_kinds(reads):
+            return []
         if not rs:
             need = 1
         elif len(rs) < a.reads:
@@ -1000,6 +1017,11 @@ def cmd_read(a):
     print(f"reading with {a.jobs} parallel readers", flush=True)
     run_queue(queue, a.jobs)
     print(f"spent ${sum(spent):.4f} on reads this run")
+    index = read_index(work, cfg)
+    stopped = mismatched_kinds({d: design_reads(index, ms) for d, ms in load_json(work / "groups.json")["designs"].items()})
+    if stopped:
+        print(f"Reading stopped early for {', '.join(sorted(stopped))}: most of their reads say the description "
+              "doesn't match the image (see DESCRIPTION below).")
     if do_rules:
         rules_report(a, work, cfg)
     sideways = orientation_report(work, build_resolved(work, cfg)[1])
@@ -1034,7 +1056,7 @@ def build_resolved(work, cfg):
         vals["orientation"] = orientation(reads)
         ok, majority, _ = vote([r["output"]["kind"] for r in reads])
         vals["read_kind"] = json.loads(majority) if ok else None
-        vals["mismatch"] = [r["output"].get("mismatch", "") for r in reads if r["output"]["kind"] == vals.get("kind")]
+        vals["mismatch"] = [(r["output"]["kind"], r["output"].get("mismatch", "")) for r in reads]
         overridden = design in overrides
         if overridden:
             apply_override(vals, overrides[design].get("set", {}))
@@ -1102,11 +1124,12 @@ def cmd_check(a):
     for design, v in designs.items():
         if v.get("overridden") and v.get("read_kind") not in (None, v.get("kind")):
             against[v["kind"]].append(design)
-        mismatch[v.get("kind")] += v.get("mismatch", [])
+        for k, m in v.get("mismatch", []):
+            mismatch[k].append(m)
     for k, said in sorted(mismatch.items(), key=lambda x: str(x[0])):
-        noted = [m for m in said if m.strip(" \"'.").lower() not in ("", "none")]
-        if k not in (None, "other") and len(noted) * 2 > len(said):
-            report["description"].append({"kind": k, "reads": len(said), "mismatch": len(noted), "examples": noted[:3]})
+        noted_ = [m for m in said if noted(m)]
+        if k not in (None, "other") and len(noted_) * 2 > len(said):
+            report["description"].append({"kind": k, "reads": len(said), "mismatch": len(noted_), "examples": noted_[:3]})
     for k, ds in sorted(against.items()):
         report["checks"].append(
             f"kind {k} is set by override on {len(ds)} designs whose reads mostly chose another kind "

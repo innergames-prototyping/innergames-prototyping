@@ -170,11 +170,11 @@ Then run `extract.py read` with a 10-minute timeout on the call. It reads every 
 rules region in one queue, many at a time, and prints the component and rules flags. `rules_items` are
 not read: they are not in the files.
 
-Each design is read once first, and each reader reports which way the text runs. A design read
-sideways or upside down is not read further, and `read` ends with **ORIENTATION** lines that say which
-items to turn and what to do next. Every other design is read a second time (another copy where one
-exists) and gets more reads, up to 5, wherever something has no majority; then `read` runs `check`.
-Changing a kind's name, description or fields makes `read` read that kind again.
+Each design is read once first. A design still read sideways is not read further, and neither is a
+kind whose reads mostly say its description doesn't match the image; `read` says what to do next.
+Every other design is read a second time (another copy where one exists) and gets more reads, up to
+5, wherever something has no majority; then `read` runs `check`. Changing a kind's name, description
+or fields makes `read` read that kind again.
 
 Each rules region is also transcribed by Tesseract (OCR). A region whose first read has exactly
 Tesseract's words is done; any other is read until every word has a majority and proofread in
