@@ -10,6 +10,7 @@ independent `claude -p` calls (Haiku by default) that each see one component or 
                                     or take items that come as one image file each
     extract.py lines <page>         cut lines and gutters on a page, for a `grid` layout
     extract.py group                group pixel-identical fronts (designs) and near-identical backs
+    extract.py orient               read which way each design's text runs, and list what to turn
     extract.py read                 read every design until every value has a majority, and every
                                     rules region as `rules` does, in one queue; designs read sideways
                                     are not read further
@@ -830,6 +831,76 @@ def orientation(reads):
     return d if n * 2 > len(reads) else None
 
 
+def read_as_text(kinds):
+    return f" Read as: {', '.join(sorted(kinds))}." if kinds else ""
+
+
+ORIENT_PROMPT = ("Image 1 is one printed game component. Which way does its main printed text (title, labels) run "
+                 "in the image as you see it: 'upright', 'bottom to top' (lines run upwards), 'top to bottom' (lines "
+                 "run downwards), 'upside down', or 'no text'?")
+ORIENT_SCHEMA = {"type": "object", "additionalProperties": False, "required": ["text_direction"],
+                 "properties": {"text_direction": {"enum": DIRECTIONS}}}
+
+
+def cmd_orient(a):
+    """Two cheap reads per design, front only, asking only which way the text runs; a third where they
+    differ. Reads are kept per crop image, so after turning items only the changed crops are read."""
+    work = Path(a.work)
+    groups = load_json(work / "groups.json")
+    reads, spent = defaultdict(list), []
+    for p in sorted((work / "orient").glob("*/*.json")):
+        r = load_json(p)
+        if (work / "items" / r["item"]).exists() and r["image"] == image_id(work, r["item"]):
+            reads[r["item"]].append(r)
+    design_reads = {d: [r for k in ms for r in reads[k]] for d, ms in groups["designs"].items()}
+    nxt = {d: len(list((work / "orient").glob(f"{d}/*.json"))) for d in groups["designs"]}
+
+    def task(design, n):
+        def run():
+            members = groups["designs"][design]
+            key = members[n % len(members)]
+            out, cost = ask([Image.open(work / "items" / key / "front.png")], ORIENT_PROMPT, ORIENT_SCHEMA, a.model)
+            r = {"item": key, "image": image_id(work, key), "model": a.model, "output": out, "cost_usd": cost}
+            save_json(work / "orient" / design / f"{n:02d}.json", r)
+            return r
+        return run
+
+    def more(design):
+        rs = design_reads[design]
+        ok = vote([r["output"]["text_direction"] for r in rs])[0]
+        if (len(rs) >= 2 and ok) or len(rs) >= 3:
+            return []
+        nxt[design] += 1
+        return [(task(design, nxt[design] - 1), lambda r, d=design: done(d, r))]
+
+    def done(design, r):
+        if r is None:
+            return []
+        design_reads[design].append(r)
+        spent.append(r["cost_usd"])
+        return more(design)
+
+    run_queue([e for d in groups["designs"] for e in more(d)], a.jobs)
+    designs, unsure = {}, []
+    for d, rs in design_reads.items():
+        ok, v, _ = vote([r["output"]["text_direction"] for r in rs])
+        if not ok:
+            unsure.append(f"{d} ({', '.join(r['output']['text_direction'] for r in rs)})")
+        designs[d] = {"members": groups["designs"][d], "orientation": json.loads(v) if ok else None}
+    print(f"spent ${sum(spent):.4f} on orientation reads this run")
+    lines = orientation_report(work, designs)
+    print(*lines, sep="\n")
+    if unsure:
+        print("UNSURE: readers disagree on which way the text runs on " + "; ".join(unsure)
+              + ". Open one crop of each and turn it with `rotate_items` if it isn't upright.")
+    if lines or unsure:
+        print("Turn the items, then run `crop && group && orient` again until no ORIENTATION lines are left; only "
+              "changed crops are read again. Write `kinds` only after that, from the upright contact sheets and crops: "
+              "every position in a description is a position on the upright item.")
+    else:
+        print("All designs read upright. Write `kinds` from the upright contact sheets and crops.")
+
+
 def orientation_report(work, designs):
     """Sideways items per page and direction, as r<row>c<col>, or r<row> when the whole row is.
     Items from image files are listed by name."""
@@ -838,6 +909,7 @@ def orientation_report(work, designs):
     for v in designs.values():
         if v.get("orientation") in TURN:
             read_as = [v["kind"]] if v.get("kind") else v.get("votes", {}).get("kind", [])
+            read_as = [k for k in read_as if k]
             for k in v["members"]:
                 if "row" in items[k]:
                     where = (items[k]["file"], items[k]["page"], v["orientation"])
@@ -847,7 +919,7 @@ def orientation_report(work, designs):
                     named[where].append(items[k]["label"])
                 kinds[where].update(read_as)
     lines = [f"ORIENTATION item files: readers see the text running {d} on {len(names)} items: {' '.join(sorted(names))}. "
-             f"Turn them a further {TURN[d]} degrees clockwise (`rotate_items`). Read as: {', '.join(sorted(kinds[d]))}."
+             f"Turn them a further {TURN[d]} degrees clockwise (`rotate_items`)." + read_as_text(kinds[d])
              for d, names in sorted(named.items())]
     for (file, page, d), cells in sorted(flagged.items()):
         row_len = Counter(i["row"] for i in items.values() if i["file"] == file and i["page"] == page)
@@ -856,8 +928,8 @@ def orientation_report(work, designs):
             cols = sorted(c for r, c in cells if r == row)
             labels += [f"r{row}"] if len(cols) == row_len[row] else [f"r{row}c{c}" for c in cols]
         lines.append(f"ORIENTATION {file} page {page}: readers see the text running {d} on {len(cells)} items: "
-                     f"{' '.join(labels)}. Turn them a further {TURN[d]} degrees clockwise (`rotate` / `rotate_items`). "
-                     f"Read as: {', '.join(sorted(kinds[(file, page, d)]))}.")
+                     f"{' '.join(labels)}. Turn them a further {TURN[d]} degrees clockwise (`rotate` / `rotate_items`)."
+                     + read_as_text(kinds[(file, page, d)]))
     return lines
 
 
@@ -1605,6 +1677,9 @@ def main():
     s.add_argument("file", nargs="?")
     s.add_argument("out", nargs="?", default="results/components.json")
     sub.add_parser("group")
+    s = sub.add_parser("orient")
+    s.add_argument("--model", default="haiku")
+    s.add_argument("--jobs", type=int, default=12)
     for name in ("read", "check", "rules", "assemble", "cost"):
         s = sub.add_parser(name)
         s.add_argument("--model", default="haiku")

@@ -60,8 +60,10 @@ in image-exported PDFs; use it at most as a cross-check.
 
 Write `work/config.json` with everything except `kinds` and `rules_items`: `game`, `sources`, `layouts`
 (one per component page) and `rules_regions`. Run `extract.py crop && extract.py group && extract.py
-preview` (only `preview` when there are no component pages), then open in one turn every output listed
-below. Fix and re-run until all are right.
+orient && extract.py preview` (only `preview` when there are no component pages), then open in one
+turn every output listed below. Fix and re-run until all are right. `orient` reads cheaply which way
+each design's text runs and prints **ORIENTATION** lines for items to turn; it reads only changed
+crops again.
 
 **Items.** The default `segment` method finds every separate object on a page, drops thin lines (cut
 lines, crop marks), and cuts each item out with its own shape. `row` follows vertical position
@@ -119,8 +121,9 @@ what to do with it.
 
 ## Round 3: Kinds and reading
 
-From the design contact sheets, and full-size crops (`work/items/<key>/front.png`) of the two or
-three designs that differ most within each kind, write `kinds`. One crop per kind misses values that
+Only once `orient` prints no ORIENTATION lines, write `kinds` from the design contact sheets, and
+full-size crops (`work/items/<key>/front.png`) of the two or
+three designs that differ most within each kind. One crop per kind misses values that
 only some designs print, or print in another place.
 
 - `fields` are the values printed on the item, especially those encoded as symbols: `integer` for
