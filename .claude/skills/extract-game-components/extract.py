@@ -62,6 +62,32 @@ ORIENTATION_NEXT = (
     "each kind named and rewrite every position in that kind's description and fields for the turned crop. "
     "Then run `read`; reads of unchanged crops are kept. If a crop is upright, record "
     "`{\"set\": {\"orientation\": \"upright\"}, \"reason\": \"...\"}` for its design in `overrides` and run `read` again.")
+ONLY_THE_IMAGE = ("Decide only from the image: never guess, and never set a value to agree with the rules or a count "
+                  "check. If the image doesn't settle it, leave it.")
+HELP = {
+    "conflict": "CONFLICT is a value without a majority. Record what the image shows in `overrides`: "
+                "`\"d042\": {\"set\": {\"fields.gold\": 3}, \"reason\": \"counted 3 filled circles at full size\"}`. "
+                "Keys are `kind`, `title`, `text`, `fields.<name>`; use an item key (`work/items/<key>`) instead of a "
+                "design id when only one copy differs. Override `kind` only for a design or two that readers misjudge, "
+                "and then also set its fields that stay in CONFLICT. " + ONLY_THE_IMAGE +
+                " `assemble --force` marks what is left `low` confidence.",
+    "text": "TEXT UNCERTAIN is text readers disagree on, often illegible decorative print. Set the text from the image "
+            "with a `text` override, or drop the illegible part, with the reason.",
+    "spelling": "SPELLING is a misspelled word a reader saw that the voted title or text has corrected. It is usually a "
+                "real typo: if the image shows it, override `title` or `text` as printed.",
+    "back": "Identical backs usually mean one kind. If the mix is real, record it in `back_kinds` "
+            "(`{\"b02\": [\"kind_a\", \"kind_b\"]}`).",
+    "count": "On a count mismatch, the total is the files' items plus `rules_items`. Re-check the designs involved at "
+             "full size and fix only what the image shows. If the files really differ from the rules, leave it and say "
+             "so in `extraction_notes`. A mismatch caused by `rules_items` is fixed there, not by overrides.",
+    "no_majority": "NO MAJORITY includes passages only some readers transcribed: readers drop text far more often than "
+                   "they invent it, so check the image before accepting the shorter version. Fix rules text with "
+                   "`rules_fixes` (`{\"find\": \"...\", \"replace\": \"...\"}`, applied to the assembled text), with "
+                   "`find` long enough to match only the intended place.",
+    "rules_spelling": "SPELLING here is a misspelled word proofreaders saw that the transcription has corrected: usually "
+                      "a real typo, almost always when Tesseract also reads it as printed. Open the region image and "
+                      "restore it with `rules_fixes` if the image shows it; never dismiss one without looking.",
+}
 
 SYSTEM = (
     "You transcribe printed tabletop-game material exactly as printed. You report only what you "
@@ -552,7 +578,10 @@ def cmd_preview(a):
         print(f"UNCOVERED {stem} page {page}: text outside every region, in red on regions_{stem}_p{page}.png: "
               + "; ".join(f"u{n} {box} ({count} letters)" for n, (box, count) in enumerate(blocks)))
     if uncovered:
-        print("Cover each UNCOVERED block with a rules region, or list it in `rules_excluded` with the reason.")
+        print("Cover each UNCOVERED block with a rules region, or list it in `rules_excluded` with the reason (leave "
+              "out `box` to exclude a whole page, such as a cover). `assemble` refuses while any are left.")
+    print("This check misses page numbers, very short lines, and light text on dark or coloured bands: check the "
+          "previews for headings yourself. No line of text may be cut by a region edge.")
     return uncovered
 
 
@@ -611,6 +640,9 @@ def cmd_group(a):
     bsheet = contact_sheet([(f"{b} x{len(g)}", Image.open(work / "items" / g[0] / "back.png")) for b, g in out["backs"].items()],
                            work / "contact" / "backs.png") if out["backs"] else None
     print(f"{len(items)} items -> {len(designs)} designs, {len(backs)} back groups")
+    if any(re.fullmatch(r"d\d{3}", k) for k in cfg.get("overrides", {})):
+        print("Designs are numbered afresh on every `group`: check that each override keyed by a design id (dNNN) "
+              "still points at the design it was written for.")
     print("design contact sheets:", *map(str, sheets))
     print("back contact sheet:", bsheet)
 
@@ -983,7 +1015,7 @@ def cmd_check(a):
         return v
 
     report = {"conflicts": [], "text_uncertain": [], "spelling": [], "description": [], "checks": [],
-              "orientation": orientation_report(work, designs)}
+              "back_checks": [], "count_checks": [], "orientation": orientation_report(work, designs)}
     for design, v in designs.items():
         img = str(work / "items" / v["members"][0] / "front.png")
         if v["unsettled"]:
@@ -1016,27 +1048,27 @@ def cmd_check(a):
     allowed = cfg.get("back_kinds", {})
     for b, c in back_kinds.items():
         if b in allowed and set(c) - set(allowed[b]):
-            report["checks"].append(f"back group {b} allows {allowed[b]} but has {dict(c)}")
+            report["back_checks"].append(f"back group {b} allows {allowed[b]} but has {dict(c)}")
         elif b not in allowed and len(c) > 1:
-            report["checks"].append(f"back group {b} (identical backs) holds several kinds: {dict(c)}")
+            report["back_checks"].append(f"back group {b} (identical backs) holds several kinds: {dict(c)}")
 
     cands = [item_vals(k) for k in items] + expand_rules_items(cfg)
     kind_count = Counter(v.get("kind") for v in cands)
     for k in cfg["kinds"]:
         if k.get("count_in_rules") is not None and k["count_in_rules"] != kind_count[k["id"]]:
-            report["checks"].append(f"kind {k['id']}: rules say {k['count_in_rules']}, found {kind_count[k['id']]} (files plus rules_items)")
+            report["count_checks"].append(f"kind {k['id']}: rules say {k['count_in_rules']}, found {kind_count[k['id']]} (files plus rules_items)")
     for e in cfg.get("expect", []):
         sel = [v for v in cands if v.get("kind") == e["kind"]
                and all((v["fields"].get(f) if f != "title" else v.get("title")) == val
                        for f, val in e.get("where", {}).items())]
         label = f"expect {e['kind']} {e.get('where', {})}"
         if "count" in e and e["count"] != len(sel):
-            report["checks"].append(f"{label}: expected {e['count']} items, found {len(sel)}")
+            report["count_checks"].append(f"{label}: expected {e['count']} items, found {len(sel)}")
         for f, dist in e.get("distribution", {}).items():
             got = Counter(str(v["fields"].get(f)) for v in sel)
             want = {str(k): n for k, n in dist.items()}
             if dict(got) != want:
-                report["checks"].append(f"{label}: {f} expected {want}, found {dict(got)}")
+                report["count_checks"].append(f"{label}: {f} expected {want}, found {dict(got)}")
 
     save_json(work / "check.json", report)
     n = len(designs)
@@ -1047,12 +1079,18 @@ def cmd_check(a):
         print(f"items per back group and kind: " + "; ".join(f"{b}: {dict(c)}" for b, c in sorted(back_kinds.items())))
     for c in report["conflicts"]:
         print(f"CONFLICT {c['design']} {c['unsettled']} votes={json.dumps(c['votes'], ensure_ascii=False)} image={c['image']}")
+    if report["conflicts"]:
+        print(HELP["conflict"])
     for t in report["text_uncertain"]:
         print(f"TEXT UNCERTAIN {t['design']} image={t['image']}")
         for u in t["spans"][:5]:
             print(f"    kept: {u['kept']!r}  alternatives: {u['alternatives']!r}")
+    if report["text_uncertain"]:
+        print(HELP["text"])
     for f in report["spelling"]:
         print(f"SPELLING {f['design']}: a reader saw {f['printed']!r} printed; the title/text has {f['transcribed']!r} image={f['image']}")
+    if report["spelling"]:
+        print(HELP["spelling"])
     for d in report["description"]:
         print(f"DESCRIPTION kind {d['kind']}: {d['mismatch']} of {d['reads']} reads say its description doesn't match "
               f"the image, e.g. " + " | ".join(repr(m) for m in d["examples"]))
@@ -1066,6 +1104,14 @@ def cmd_check(a):
         print(ORIENTATION_NEXT)
     for c in report["checks"]:
         print(f"CHECK {c}")
+    for c in report["back_checks"]:
+        print(f"CHECK {c}")
+    if report["back_checks"]:
+        print(HELP["back"])
+    for c in report["count_checks"]:
+        print(f"CHECK {c}")
+    if report["count_checks"]:
+        print(HELP["count"])
     print(f"total cost so far: ${total_cost(work):.4f}; details in {work / 'check.json'}")
 
 
@@ -1344,6 +1390,10 @@ def rules_report(a, work, cfg):
         for f in c["spelling"]:
             print(f"    SPELLING: proofreaders saw {f['printed']!r} ({f['context']!r}); transcription has {f['transcribed']!r}"
                   + ("; Tesseract also reads it as printed" if f["tesseract_agrees"] else ""))
+    if any(c["unresolved"] for c in conflicts):
+        print(HELP["no_majority"])
+    if any(c["spelling"] for c in conflicts):
+        print(HELP["rules_spelling"])
     print(f"details in {work / 'rules_conflicts.json'}; total cost so far: ${total_cost(work):.4f}")
     cmd_preview(a)
 

@@ -88,7 +88,7 @@ Fix problems through the layout:
 
 **Designs.** `group` puts pixel-identical fronts into one design; any small local difference keeps
 them apart. Check `work/contact/designs_*.png` and `work/contact/backs.png`. Extra designs are
-harmless. Re-running `group` renumbers designs, so finish it before writing overrides.
+harmless.
 
 **Rules regions.** What belongs in `rules.txt`:
 
@@ -112,12 +112,9 @@ leaflet, several pages printed on one sheet), finish each panel before the next,
 panels are meant to be read, and keep numbered or counted-down sections in their printed order. Give a
 region of sideways or upside-down text `rotate` (degrees clockwise that make it upright): readers,
 Tesseract and proofreaders then all see it upright. Don't ask readers to turn it in a `note`; they
-read turned text, but silently correct its typos. In `work/preview/regions_*.png`, no line of text may
-be cut by a region edge. `preview` also prints **UNCOVERED** blocks: printed text outside every
-region, drawn in red as `u0`, `u1`, .... For each, either cover it with a region or add it to
-`rules_excluded` with the reason; leave out `box` to exclude a whole page, such as a cover. It misses
-page numbers, very short lines, and light text on dark or coloured bands, so check the previews for
-headings yourself. `assemble` refuses while blocks are uncovered.
+read turned text, but silently correct its typos. `preview` draws the regions on
+`work/preview/regions_*.png`, flags printed text outside every region as **UNCOVERED**, and says
+what to do with it.
 
 ## Round 3: Kinds and reading
 
@@ -182,44 +179,16 @@ enlarged halves for misspellings. Reads are cached per region definition, so aft
 
 ## Round 4: Resolve
 
-Open every flagged crop and region image in one turn, record all decisions in one config edit, and
-run `extract.py check && extract.py assemble && extract.py cost`. Repeat only if something is left.
+`check` (also run at the end of `read`) and `rules` print every flag with what to do about it:
+component flags (CONFLICT, TEXT UNCERTAIN, SPELLING, DESCRIPTION, ORIENTATION, CHECK) and rules
+flags (NO MAJORITY, SPELLING; region images in `work/rules/region_NN.png`). CHECK lines catch what
+voting can't, because every reader can make the same mistake. Open every flagged crop and region
+image in one turn, record all decisions in one config edit, and run `extract.py check && extract.py
+assemble && extract.py cost`. Repeat only if something is left.
 
-Component flags, from `check` (also printed at the end of `read`):
-
-- **CONFLICT**: a value without a majority. Decide from the image and record it in `overrides`:
-  `"d042": {"set": {"fields.gold": 3}, "reason": "counted 3 filled circles at full size"}`. Keys are
-  `kind`, `title`, `text`, `fields.<name>`. Use an item key (`work/items/<key>`) instead of a design
-  id when only one copy differs. Override `kind` only for a design or two that readers misjudge, and
-  then also set its fields that stay in CONFLICT. If the image doesn't settle a value either, leave
-  it; `assemble --force` marks it `low` confidence. Never guess, and never set a value to agree with
-  the rules or a count check: an override records only what the image shows.
-- **TEXT UNCERTAIN**: text spans readers disagree on, often illegible decorative print. Set the text
-  from the image, or drop the illegible part, with the reason.
-- **SPELLING**: a reader saw a misspelled word that the voted title or text has corrected. This is
-  usually a real typo; if the image shows it, override `title` or `text` as printed.
-- **DESCRIPTION**: most reads of a kind say its description doesn't match the image. `check` quotes
-  them and says what to do.
-- **ORIENTATION**: items still read sideways. `assemble` refuses while any are left.
-- **CHECK**: a failed consistency check. These catch what voting can't, because every reader can
-  make the same mistake. *Back groups*: identical backs usually mean one kind; if a mix is real,
-  record it in `back_kinds` (`{"b02": ["kind_a", "kind_b"]}`). *Counts*: on a mismatch with
-  `count_in_rules` or `expect`, the total is the files' items plus `rules_items`. Re-check the involved
-  designs at full size and fix only what the image shows. If the files really differ from the rules,
-  leave it and say so in `extraction_notes`. Mismatches caused by `rules_items` are fixed in the
-  config, not by overrides.
-
-Rules flags, from `read` or `rules` (region images in `work/rules/region_NN.png`):
-
-- **NO MAJORITY**: spans the readers disagree on, with the alternatives. This includes passages only
-  some readers transcribed: readers drop text far more often than they invent it, so check the image
-  before accepting the shorter version.
-- **SPELLING**: proofreaders saw a misspelled word that the transcription has corrected. Usually a
-  real typo, and almost always when Tesseract also reads it as printed. Open the region image and
-  restore it if the image shows it; never dismiss one without looking.
-
-Fix rules text with `rules_fixes` (`{"find": "...", "replace": "..."}`, applied to the assembled
-text); make `find` long enough to match only the intended place.
+Decide every flag from the image alone. An override or rules fix records only what the image shows:
+never guess, and never set a value to agree with the rules or a count check. If the image doesn't
+settle it, leave it and say so in your reply.
 
 ## Round 5: Reply
 
