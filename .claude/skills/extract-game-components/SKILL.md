@@ -100,8 +100,9 @@ harmless.
   of the rules. Transcribe its numbered steps as a numbered list, with their instructions, labels and
   formulas; leave out the values written into its boxes."
 - Not page furniture: page numbers, and headers, footers and credit blocks repeated on pages.
-  Credits go in `game.credits`. A one-off paragraph about the game, such as who made it and why, or
-  where to send feedback, is rules text, even when it names the authors.
+  Credits go in `game.credits`, and so do copyright, trademark and customer-support notices. A one-off
+  paragraph about the game's design, such as why it was made or what it simplifies, is rules text,
+  even when it names the authors or asks for feedback.
 - Not text on a component (a card, a reference card, a tile) on a component sheet: that is the
   component's `text`. Text printed on a component sheet outside every component, such as an
   assembly note, is rules text.
