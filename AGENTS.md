@@ -13,6 +13,22 @@
 - `context/specs/<story>/`: the spec, plan and tasks for one feature. Read only the spec of the task you work on.
 - `docs/` is written for people. You may read it for background. When it differs from `context/`, `context/` wins.
 
+## Workflow
+
+- Work from the spec of the task. The full route is in `docs/DevelopmentWorkflow.md`.
+- Do one task at a time. Run its check and tick it in the spec before you start the next task.
+- If the code must differ from the spec, update the spec in the same branch.
+
+## Leave to a person
+
+Stop and ask before you:
+
+- add a new dependency;
+- change a module boundary;
+- change a schema or data format;
+- make a new architecture decision or work around an `accepted` ADR;
+- guess at an unclear requirement.
+
 ## Commits
 
 - Use [Conventional Commits](https://www.conventionalcommits.org): `<type>(<optional scope>): <description>`.
