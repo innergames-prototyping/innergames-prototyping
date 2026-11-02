@@ -12,6 +12,7 @@
 - Each ADR has a version for people in `docs/decisions/` with the same file name. Change both in the same pull request. The version in `context/` is the source for the rule.
 - `context/specs/<story>/`: the spec, plan and tasks for one feature. Read only the spec of the task you work on.
 - `docs/` is written for people. You may read it for background. When it differs from `context/`, `context/` wins.
+- `docs/CodeGuidelines.md`: the rules for code. Follow them when you write or review code.
 
 ## Commits
 
