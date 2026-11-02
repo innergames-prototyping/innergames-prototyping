@@ -4,7 +4,7 @@ Date: 2 Nov 2026
 
 ## Introduction
 
-This document records the rules for code in this repository. The goal is that code from different team members reads the same, and that a review is about the design and not about style.
+These are the rules for code in this repository. Code from different team members should read the same, so a review can be about the design instead of the style.
 
 The backend and the simulation are Python. The frontend is TypeScript. Rules that are the same for both languages are written once.
 
@@ -16,10 +16,7 @@ The formatter, the linter and the type checker are not chosen yet (#111). The to
 
 ## How to read the rules
 
-Each rule has a check:
-
-- **tool (after #111)**: a tool will check it once #111 is done. Until then, the reviewer checks it.
-- **review**: the reviewer checks it in the pull request.
+The Check column says who checks a rule. `review` means the reviewer checks it in the pull request. `tool (after #111)` means a tool will check it once #111 is done (until then the reviewer does).
 
 Rules that an ADR already sets are not repeated here. Read the ADR for the area you change (`docs/decisions/`).
 
