@@ -196,18 +196,28 @@ def page_background(arr):
 
 def trim(img, bg=(255, 255, 255), min_frac=0.01):
     """Crop to the connected ink regions that are not small, which drops cut marks, dashes and
-    thin lines in the margins. Returns None for an empty cell."""
+    thin lines in the margins. Regions close to each other count together, so the letters of a
+    card printed in plain text are kept; long thin or sparse marks (lines, brackets, crop marks)
+    don't join a group. Returns None for an empty cell."""
     ink = ink_mask(np.asarray(img.convert("RGB")), np.array(bg, np.int16))
     if ink.mean() < min_frac:
         return None
     labels, _ = ndimage.label(ink, structure=np.ones((3, 3)))
     sizes = np.bincount(labels.ravel())
-    boxes = [s for n, s in enumerate(ndimage.find_objects(labels), 1) if sizes[n] >= 0.005 * ink.size]
-    if not boxes:
+    min_size, side = 0.005 * ink.size, min(ink.shape)
+    line = np.zeros(len(sizes), bool)
+    for n, (ys, xs) in enumerate(ndimage.find_objects(labels), 1):
+        h, w = ys.stop - ys.start, xs.stop - xs.start
+        line[n] = max(h, w) >= 0.1 * side and (min(h, w) <= 0.01 * side or sizes[n] < 0.25 * h * w)
+    near = ink & ~line[labels]
+    r = max(1, round(0.015 * side))
+    groups, _ = ndimage.label(ndimage.maximum_filter(near, size=2 * r + 1))
+    group_sizes = np.bincount(groups[near], minlength=groups.max() + 1)
+    kept = (sizes[labels] >= min_size) & ink | near & (group_sizes[groups] >= min_size)
+    if not kept.any():
         return None
-    y0, y1 = min(b[0].start for b in boxes), max(b[0].stop for b in boxes)
-    x0, x1 = min(b[1].start for b in boxes), max(b[1].stop for b in boxes)
-    return img.crop((x0, y0, x1, y1))
+    ys, xs = np.flatnonzero(kept.any(1)), np.flatnonzero(kept.any(0))
+    return img.crop((xs[0], ys[0], xs[-1] + 1, ys[-1] + 1))
 
 
 def rotate(img, deg):
