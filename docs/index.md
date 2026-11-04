@@ -15,4 +15,5 @@ Documentation for the InnerGames Prototyping project.
 - [Meeting Notes](./team/INNERGAMES-Meeting-Notes.md)
 - [Client Meeting 15 Oct 2026](./team/Client-Meeting-2026-10-15.md)
 - [Client Meeting 29 Oct 2026](./team/Client-Meeting-2026-10-29.md)
+- [Client Meeting 4 Nov 2026](./team/Client-Meeting-2026-11-04.md)
 - [Retrospective Board](./team/RetrospectiveBoard.md)
