@@ -1246,6 +1246,10 @@ printed, in reading order: headings, paragraphs, list items, tables and captions
 - Copy every word exactly as printed, letter by letter, including spelling mistakes, typos and odd grammar.
   A later step looks for these, so a corrected word is an error. Never fix, modernise or translate anything.
 - Copy every symbol exactly: + - – — × = % / ( ) and the like. Do not drop or add any.
+- Coloured dots or pips set in a line of text, which score or count something, are text: write each
+  one where it stands as ● with its colour in brackets, e.g. ●(green) ●(red), one per dot, in printed
+  order. Name colours with the closest of: red, orange, yellow, green, blue, purple, pink, brown,
+  black, white, grey. List bullets are not such dots: start the list item with '- '.
 - Write each picture (pictured cards, tokens, boards, sheets, diagrams, icons, logos, QR codes) as just
   [image], and do not transcribe text printed inside it.
 - Leave out page numbers, headers and footers, and empty boxes or lines meant for writing in.
@@ -1310,6 +1314,12 @@ def detokenize(toks):
 def words_only(toks):
     """Tokens without layout and [image]-style markers, which readers place inconsistently."""
     return tuple(t for t in toks if t not in ("\n", "[", "]") and not re.fullmatch(r"\[[^\]]*\]", t))
+
+
+def space_dots(text):
+    """Readers glue score dots to each other and to the word before them in different ways, which
+    would split the word vote; one dot is one word."""
+    return re.sub(r"(●\([a-z]+\))(?=[●\w])", r"\1 ", re.sub(r"(\S)(?=●\()", r"\1 ", text))
 
 
 def merge_reads(texts):
@@ -1408,7 +1418,7 @@ def rules_reads(a, work, cfg, spent):
         def run():
             prompt = RULES_PROMPT + (f"\n\nNote for this region: {regions[i]['note']}" if regions[i].get("note") else "")
             text, cost = ask([enlarge(crops[i])], prompt, None, a.model)
-            text = html.unescape(text)
+            text = space_dots(html.unescape(text))
             save_json(rdir / "reads" / f"{keys[i]}.read{n}.json", {"text": text, "cost_usd": cost, "model": a.model})
             spent.append(cost)
             return text
