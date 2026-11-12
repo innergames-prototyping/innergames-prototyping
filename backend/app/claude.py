@@ -1,6 +1,6 @@
 """Options for every Claude Agent SDK session the app starts.
 
-ADR 0013: a session uses only what the app gives it. It loads nothing from the user's own Claude
+A session uses only what the app gives it. It loads nothing from the user's own Claude
 Code setup: no CLAUDE.md, settings, skills, hooks, memory or MCP servers, and no built-in tools.
 """
 

@@ -1,8 +1,8 @@
 """Reader calls: one tool-less model call that sees a few images and one prompt.
 
 The steps read every component and rules region with many independent reader calls and vote over
-the answers. `ClaudeReader` makes the calls through the Claude Agent SDK, isolated as ADR 0013
-says. Tests use `RecordedReader` instead (ADR 0012).
+the answers. `ClaudeReader` makes the calls through the Claude Agent SDK, isolated as
+`app/claude.py` describes. Tests use `RecordedReader` instead, so they never call a model.
 """
 
 import asyncio

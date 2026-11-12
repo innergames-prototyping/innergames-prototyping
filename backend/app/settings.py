@@ -7,7 +7,7 @@
 | `INNERGAMES_READER_MODEL`    | `haiku`         | Model of the tool-less reader calls           |
 | `INNERGAMES_PARALLEL_READS`  | `12`            | Reader calls that run at the same time        |
 
-How the app reaches Claude (ADR 0013): with `ANTHROPIC_API_KEY` set, Claude Code uses that key.
+How the app reaches Claude: with `ANTHROPIC_API_KEY` set, Claude Code uses that key.
 Without it, Claude Code uses the login of the local Claude Code installation.
 """
 
