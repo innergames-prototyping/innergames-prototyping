@@ -1,0 +1,33 @@
+[project]
+name = "innergames-backend"
+version = "0.1.0"
+description = "Local backend that turns board game prototype PDFs into a game model."
+requires-python = ">=3.13"
+dependencies = [
+    "claude-agent-sdk>=0.2.180",
+    "fastapi>=0.162.5",
+    "numpy>=2.5.4",
+    "pillow>=13.0.0",
+    "pydantic>=2.14.3",
+    "pypdfium2>=5.15.2",
+    "python-multipart>=0.0.33",
+    "scipy>=1.18.1",
+    "uvicorn>=0.54.0",
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.2.0",
+    "ruff>=0.17.4",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
