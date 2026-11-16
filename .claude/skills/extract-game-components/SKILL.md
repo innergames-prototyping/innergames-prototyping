@@ -92,6 +92,11 @@ Fix problems through the layout:
 - Text running in several directions on one item, such as round a ring-shaped board: cut it with
   `boxes` into parts whose text runs one way, each with its labels whole. A part whose text all runs
   one way is levelled; one that mixes directions is left as it is.
+- Cards with their own text on both sides (no back shared by the deck): pair them with `back_page`
+  like any other back, and take the side with the card's name or number as the front. A back that
+  no other design shares is read too, into the item's `back`.
+- A component more than about 3,000 px across, such as a board, is also read in tiles at full
+  resolution, so its labels are legible.
 
 **Designs.** `group` puts pixel-identical fronts into one design; any small local difference keeps
 them apart. Check `work/contact/designs_*.png` and `work/contact/backs.png`. Extra designs are

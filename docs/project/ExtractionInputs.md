@@ -14,7 +14,7 @@ Conversion is deterministic Python; the model only decides what each piece is an
 
 | Input | Conversion |
 |---|---|
-| PDF | Unchanged: page images and text layer through poppler |
+| PDF | Unchanged: page images through pypdfium2, text layer through poppler |
 | docx | Unzip: text in order from `word/document.xml` (including tables and text boxes), images from `word/media/`. No LibreOffice; old `.doc` is refused |
 | txt / md | Used as is |
 | PNG / JPG / WebP | Each file is a one-page document |

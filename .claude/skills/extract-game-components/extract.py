@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i python3 -p "python3.withPackages(p: [p.pillow p.numpy p.scipy p.jsonschema])" poppler-utils tesseract
+#!nix-shell -i python3 -p "python3.withPackages(p: [p.pillow p.numpy p.scipy p.jsonschema p.pypdfium2])" poppler-utils tesseract
 """Extract a tabletop game's rules text and components from its PDFs.
 
 Layout, cropping, de-duplication, voting and checks are done here in code. Reading is done by
@@ -35,23 +35,26 @@ import hashlib
 import html
 import io
 import json
+import math
 import os
 import re
 import shutil
 import subprocess
 import sys
-import tempfile
+import threading
 import time
 from collections import Counter, defaultdict, deque
 from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from pathlib import Path
 
 import numpy as np
+import pypdfium2 as pdfium
 from scipy import ndimage
 from PIL import Image, ImageDraw
 
 SKILL_DIR = Path(__file__).resolve().parent
 MAX_SIDE = 1568  # the API downsizes larger images anyway
+TILE_SIDE = 2000  # a component more than twice MAX_SIDE is also read in tiles of about this size
 PREVIEW_SIDE = 1400
 
 DIRECTIONS = ["upright", "bottom to top", "top to bottom", "upside down", "no text"]
@@ -73,7 +76,8 @@ HELP = {
                 "and then also set its fields that stay in CONFLICT. " + ONLY_THE_IMAGE +
                 " `assemble --force` marks what is left `low` confidence.",
     "text": "TEXT UNCERTAIN is text readers disagree on, often illegible decorative print. Set the text from the image "
-            "with a `text` override, or drop the illegible part, with the reason.",
+            "with a `text` override (`back` for text on a component's own back), or drop the illegible part, "
+            "with the reason.",
     "spelling": "SPELLING is a misspelled word a reader saw that the voted title or text has corrected. It is usually a "
                 "real typo: if the image shows it, override `title` or `text` as printed.",
     "back": "Identical backs usually mean one kind. If the mix is real, record it in `back_kinds` "
@@ -109,12 +113,57 @@ def save_json(path, obj):
     Path(path).write_text(json.dumps(obj, indent=1, ensure_ascii=False))
 
 
+PDFIUM_LOCK = threading.Lock()
+
+
+def render_page(pdf, page, dpi, box=None):
+    """Page `page` (from 1) of `pdf` at `dpi`, or only the part inside `box` ([x0, y0, x1, y1] as
+    fractions of the page, from the top left). pdfium isn't thread-safe, so one call at a time."""
+    with PDFIUM_LOCK:
+        doc = pdfium.PdfDocument(str(pdf))
+        try:
+            pg = doc[page - 1]
+            w, h = pg.get_size()
+            if pg.get_rotation() in (90, 270):
+                w, h = h, w
+            crop = (0, 0, 0, 0) if box is None else (box[0] * w, (1 - box[3]) * h, (1 - box[2]) * w, box[1] * h)
+            return pg.render(scale=dpi / 72, crop=crop).to_pil().convert("RGB")
+        finally:
+            doc.close()
+
+
+def pdf_pages(pdf):
+    """Number of pages and the first page's size in points."""
+    with PDFIUM_LOCK:
+        doc = pdfium.PdfDocument(str(pdf))
+        try:
+            return len(doc), doc[0].get_size()
+        finally:
+            doc.close()
+
+
 def page_path(work, stem, page):
     return work / "pages" / f"{stem}_p{page}.png"
 
 
 def item_key(stem, page, row, col):
     return f"{stem}_p{page}_r{row:02d}_c{col:02d}"
+
+
+def tiles(img, overlap=0.08):
+    """A large component cut into a grid of tiles of about TILE_SIDE px that overlap, so small print
+    survives the API's downsizing. Returns (rows, cols, tiles row by row), or (0, 0, []) when the
+    image isn't large enough to need it."""
+    w, h = img.size
+    if max(w, h) <= 2 * MAX_SIDE:
+        return 0, 0, []
+    rows, cols = math.ceil(h / TILE_SIDE), math.ceil(w / TILE_SIDE)
+    tw, th = w / cols, h / rows
+    mx, my = tw * overlap, th * overlap
+    out = [img.crop((int(max(0, c * tw - mx)), int(max(0, r * th - my)),
+                     int(min(w, (c + 1) * tw + mx)), int(min(h, (r + 1) * th + my))))
+           for r in range(rows) for c in range(cols)]
+    return rows, cols, out
 
 
 def png_b64(img):
@@ -282,17 +331,15 @@ def cmd_render(a):
     work = Path(a.work)
     for pdf in a.pdfs:
         pdf = Path(pdf)
-        info = subprocess.run(["pdfinfo", str(pdf)], capture_output=True, text=True).stdout
-        pages = int(re.search(r"Pages:\s+(\d+)", info).group(1))
-        size = re.search(r"Page size:\s+(.*)", info).group(1)
+        pages, (pw, ph) = pdf_pages(pdf)
+        size = f"{pw:g} x {ph:g} pts"
         (work / "pages").mkdir(parents=True, exist_ok=True)
         (work / "preview").mkdir(parents=True, exist_ok=True)
         (work / "text").mkdir(parents=True, exist_ok=True)
         for n in range(1, pages + 1):
             out = page_path(work, pdf.stem, n)
-            subprocess.run(["pdftoppm", "-r", str(a.dpi), "-f", str(n), "-l", str(n), "-png", "-singlefile",
-                            str(pdf), str(out.with_suffix(""))], check=True)
-            im = Image.open(out)
+            im = render_page(pdf, n, a.dpi)
+            im.save(out)
             small = im.copy()
             small.thumbnail((PREVIEW_SIDE, PREVIEW_SIDE))
             small.save(work / "preview" / out.name)
@@ -725,9 +772,9 @@ def field_schema(f):
     return {"type": ["string", "null"]}
 
 
-def reader_schema(cfg):
+def reader_schema(cfg, own_back=False):
     kinds = cfg["kinds"]
-    return {
+    schema = {
         "type": "object", "additionalProperties": False,
         "required": ["observations", "text_direction", "kind", "title", "fields", "mismatch", "text", "misspelled",
                      "unreadable"],
@@ -748,11 +795,26 @@ def reader_schema(cfg):
             "unreadable": {"type": "string"},
         },
     }
+    if own_back:
+        schema["required"].append("back_text")
+        schema["properties"]["back_text"] = {"type": ["string", "null"]}
+    return schema
 
 
-def reader_prompt(cfg, has_back):
-    lines = ["Image 1 is the front of ONE physical game component" + (", image 2 is its back." if has_back else "."),
-             "", "Possible kinds of component:"]
+def reader_prompt(cfg, has_back, own_back=False, grid=(0, 0)):
+    lines = ["Image 1 is the front of ONE physical game component" + (", image 2 is its back." if has_back else ".")]
+    if grid[0]:
+        first = 3 if has_back else 2
+        lines.append(f"The front is large, so image 1 is scaled down. Images {first} to {first + grid[0] * grid[1] - 1} "
+                     f"are the same front cut into {grid[0]} rows of {grid[1]} tiles at higher resolution, row by row "
+                     "from the top left, overlapping a little at the edges. Read the print from the tiles, and "
+                     "transcribe each piece of text once even where two tiles show it. On a large component such as a "
+                     "board, the names and labels printed on it (spaces, areas, slots, tracks, pictured pieces) are "
+                     "its content, not decoration: transcribe every one, tile by tile in that order.")
+    if own_back:
+        lines.append("This back is printed for this component alone, not shared with other components, so its text "
+                     "is part of the component.")
+    lines += ["", "Possible kinds of component:"]
     for k in cfg["kinds"]:
         lines.append(f"- kind `{k['id']}` ({k['name']}): {k.get('description', '')}")
         for f in k.get("fields", []):
@@ -784,7 +846,13 @@ def reader_prompt(cfg, has_back):
         "- misspelled: every word in the title or text that is printed with a spelling mistake or typo, "
         "copied exactly as printed; [] if none.",
         "- unreadable: anything you could not read, and why; empty string if none.",
-    ] + (["Image 2 only helps recognise the kind: take no title or text from the back."] if has_back else [])
+    ]
+    if own_back:
+        lines += ["- back_text: all printed text on the back (image 2), verbatim and letter by letter in the same way "
+                  "as text, lines joined with ' / ', including a name printed on the back; null if the back has no "
+                  "text. Words misspelled on the back go in misspelled too."]
+    elif has_back:
+        lines += ["Image 2 only helps recognise the kind: take no title or text from the back."]
     return "\n".join(lines)
 
 
@@ -802,11 +870,18 @@ def vote(values, key=lambda v: json.dumps(v, sort_keys=True)):
 def clean(out):
     """Undo reader quirks: HTML entities (&amp;) and the word null instead of a JSON null."""
     out = dict(out)
-    for k in ("title", "text"):
+    for k in ("title", "text", "back_text"):
         if isinstance(out.get(k), str):
             v = html.unescape(out[k]).strip()
             out[k] = None if v.lower() in ("", "null", "none") else v
     return out
+
+
+def placed_elsewhere(spans, text):
+    """Disputed passages whose every word is in the voted text anyway: readers listed the same
+    labels in another order. On a component that isn't a disagreement about what is printed."""
+    have = set(text.split())
+    return [s for s in spans if any(w not in have for alt in s["alternatives"] for w in alt.split() if w != "/")]
 
 
 def resolve(cfg, reads, kind=None):
@@ -844,11 +919,20 @@ def resolve(cfg, reads, kind=None):
     ok, unresolved = True, []
     if any(texts):
         text, unresolved = merge_reads([t or "" for t in texts])
+        unresolved = placed_elsewhere(unresolved, text)
         vals["text"], ok = text.strip() or None, not unresolved
         if unresolved:
             votes["text"] = unresolved
     else:
         vals["text"] = None
+    backs = [o.get("back_text") for o in same if "back_text" in o]
+    vals["back"] = None
+    if any(backs):
+        back, back_unresolved = merge_reads([b or "" for b in backs])
+        back_unresolved = placed_elsewhere(back_unresolved, back)
+        vals["back"] = back.strip() or None
+        if back_unresolved:
+            votes["back"], ok = back_unresolved, False
     vals["votes"] = votes
     return vals, unsettled, ok
 
@@ -869,14 +953,31 @@ def kind_hashes(cfg):
     return h
 
 
+def own_backs(groups):
+    """Designs whose backs no other design shares. A back shared across designs is the deck's back
+    (its kind or a logo); a back of one design alone carries the component's own information."""
+    item_design = {k: d for d, ms in groups["designs"].items() for k in ms}
+    with_back, shared = set(), set()
+    for ms in groups.get("backs", {}).values():
+        ds = {item_design.get(k) for k in ms} - {None}
+        with_back |= ds
+        if len(ds) > 1:
+            shared |= ds
+    return with_back - shared
+
+
 def read_index(work, cfg):
     """Reads per item, keeping only reads of the item's current crop, made while the kind the reader
     chose was described as it is now: re-cropping, rotating, regrouping or rewriting a kind never
     reuses a read made under other conditions."""
     ids, index, hashes = {}, defaultdict(list), kind_hashes(cfg)
+    groups = load_json(work / "groups.json", {"designs": {}})
+    own = {k for d in own_backs(groups) for k in groups["designs"][d]}
     for p in sorted((work / "reads").glob("*/*.json")):
         r = load_json(p)
         key = r["item"]
+        if key in own and "back_text" not in r["output"]:
+            continue  # read before its back counted as part of it
         if key not in ids:
             ids[key] = image_id(work, key) if (work / "items" / key).exists() else None
         if r.get("image") == ids[key] and r.get("kind_def", hashes.get(r["output"]["kind"])) == hashes.get(r["output"]["kind"]):
@@ -1017,7 +1118,7 @@ def component_reads(a, work, cfg, spent):
     read first; if it is read sideways it is not read further, so the bulk of its reading waits
     until it is turned."""
     groups = load_json(work / "groups.json")
-    schema = reader_schema(cfg)
+    own = own_backs(groups)
     overrides = cfg.get("overrides", {})
     index = read_index(work, cfg)
     reads = {d: design_reads(index, ms) for d, ms in groups["designs"].items() if not a.designs or d in a.designs}
@@ -1029,8 +1130,12 @@ def component_reads(a, work, cfg, spent):
             members = groups["designs"][design]
             key = members[n % len(members)]
             d = work / "items" / key
-            imgs = [Image.open(d / "front.png")] + ([Image.open(d / "back.png")] if (d / "back.png").exists() else [])
-            out, cost = ask(imgs, reader_prompt(cfg, len(imgs) == 2), schema, a.model)
+            front = Image.open(d / "front.png")
+            imgs = [front] + ([Image.open(d / "back.png")] if (d / "back.png").exists() else [])
+            own_back = len(imgs) == 2 and design in own
+            rows, cols, parts = tiles(front)
+            out, cost = ask(imgs + parts, reader_prompt(cfg, len(imgs) == 2, own_back, (rows, cols)),
+                            reader_schema(cfg, own_back), a.model)
             r = {"item": key, "image": image_id(work, key), "kind_def": kind_hashes(cfg).get(out["kind"]),
                  "model": a.model, "output": out, "cost_usd": cost}
             save_json(work / "reads" / design / f"{n:02d}.json", r)
@@ -1126,7 +1231,7 @@ def build_resolved(work, cfg):
             apply_override(vals, overrides[design].get("set", {}))
             unsettled = [u for u in unsettled if u not in overrides[design].get("set", {})]
         proofs = [{"printed": w, "context": ""} for r in reads for w in r["output"].get("misspelled") or []]
-        vals["spelling"] = spelling_flags(f"{vals.get('title') or ''}\n{vals.get('text') or ''}", proofs)
+        vals["spelling"] = spelling_flags(f"{vals.get('title') or ''}\n{vals.get('text') or ''}\n{vals.get('back') or ''}", proofs)
         designs[design] = vals | {"members": members, "reads": len(reads), "unsettled": unsettled,
                                   "text_settled": text_ok, "unanimous": unanimous, "overridden": overridden}
     return groups, designs
@@ -1180,7 +1285,8 @@ def cmd_check(a):
             report["conflicts"].append({"design": design, "image": img, "unsettled": v["unsettled"],
                                         "votes": v.get("votes", {}), "members": v["members"]})
         elif not v.get("text_settled", True) and not v.get("overridden"):
-            report["text_uncertain"].append({"design": design, "image": img, "spans": v["votes"].get("text", [])})
+            report["text_uncertain"].append({"design": design, "image": img,
+                                             "spans": v["votes"].get("text", []) + v["votes"].get("back", [])})
         for f in v.get("spelling", []):
             report["spelling"].append({"design": design, "image": img} | f)
 
@@ -1388,15 +1494,16 @@ def merge_reads(texts):
     return detokenize(out), unresolved[::-1]
 
 
-def ocr_region(r):
-    """Tesseract's transcription of a rules region, from the page rendered at 400 dpi and
+def ocr_region(work, r):
+    """Tesseract's transcription of a rules region, rendered on its own at 400 dpi and
     thresholded (its best setting in tests). Free, and wrong in different places than the model
     readers: it keeps typos but garbles pictured forms and text between pictures."""
-    with tempfile.TemporaryDirectory() as tmp:
-        subprocess.run(["pdftoppm", "-r", "400", "-f", str(r["page"]), "-l", str(r["page"]), "-png",
-                        "-singlefile", r["file"], f"{tmp}/page"], capture_output=True, check=True)
-        page = Image.open(f"{tmp}/page.png").convert("L")
-    crop = rotate(page.crop(region_box(r["box"], page.size)), r.get("rotate", 0)).point(lambda v: 255 if v > 160 else 0)
+    box = r["box"]
+    if max(box) > 1:
+        w, h = Image.open(page_path(work, Path(r["file"]).stem, r["page"])).size
+        box = [box[0] / w, box[1] / h, box[2] / w, box[3] / h]
+    crop = render_page(r["file"], r["page"], 400, box).convert("L")
+    crop = rotate(crop, r.get("rotate", 0)).point(lambda v: 255 if v > 160 else 0)
     buf = io.BytesIO()
     crop.save(buf, "PNG")
     return subprocess.run(["tesseract", "-", "-", "-l", "eng", "--psm", "3"], input=buf.getvalue(),
@@ -1462,7 +1569,7 @@ def rules_reads(a, work, cfg, spent):
     def ocr_task(i):
         def run():
             try:
-                text = ocr_region(regions[i])
+                text = ocr_region(work, regions[i])
             except (subprocess.CalledProcessError, OSError) as e:
                 print(f"OCR of region {i} failed: {e}", file=sys.stderr)
                 text = ""
@@ -1644,7 +1751,8 @@ def cmd_assemble(a):
         out_items.append({
             "id": item_id, "kind": kind, "source": src,
             "title": v.get("title"), "fields": {f["name"]: v["fields"].get(f["name"]) for f in kinds.get(kind, {}).get("fields", [])},
-            "text": v.get("text"), "from_rules": False, "confidence": conf, "notes": "; ".join(notes)})
+            "text": v.get("text"), "back": v.get("back"), "from_rules": False, "confidence": conf,
+            "notes": "; ".join(notes)})
     out_items += expand_rules_items(cfg)
     count = Counter(i["kind"] for i in out_items)
     kind_list = [{"id": k["id"], "name": k["name"], "fields": k.get("fields", []), "count_found": count[k["id"]],
