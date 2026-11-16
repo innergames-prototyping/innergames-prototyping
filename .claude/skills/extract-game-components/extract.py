@@ -224,6 +224,39 @@ def rotate(img, deg):
     return img.rotate(-deg, expand=True) if deg % 360 else img
 
 
+def line_sharpness(mask, deg):
+    m = np.asarray(mask.rotate(deg, expand=True), np.float32)
+    return float(sum(np.sum(np.diff(m.sum(axis)) ** 2) for axis in (0, 1)))
+
+
+def text_tilt(img, side=300):
+    """Degrees counterclockwise, within 45 of level, that the image's lines of text run at: the turn
+    at which rows or columns of thin strokes (letters, not the edges of coloured areas) are sharpest. 0 when no
+    angle stands out, as on a crop with text in several directions."""
+    g = img.convert("L")
+    g.thumbnail((side, side))
+    a = np.asarray(g, np.float32)
+    k = max(5, min(a.shape) // 40)
+    strokes = np.maximum(ndimage.white_tophat(a, size=k), ndimage.black_tophat(a, size=k)) > 40
+    if strokes.mean() < 0.005:
+        return 0.0
+    mask = Image.fromarray(strokes.astype(np.uint8) * 255)
+    coarse = {d: line_sharpness(mask, d) for d in range(-45, 46)}
+    best = max(coarse, key=coarse.get)
+    fine = {d: line_sharpness(mask, d) for d in np.arange(max(best - 1, -45), min(best + 1, 45) + 0.01, 0.25)}
+    best = max(fine, key=fine.get)
+    # Tilted labels score at least 1.8 times their score at 0; on upright cards no angle beats 0.
+    return -float(best) if abs(best) >= 1 and fine[best] >= 1.5 * coarse[0] else 0.0
+
+
+def level(img):
+    tilt = text_tilt(img)
+    if not tilt:
+        return img, 0.0
+    bg = tuple(int(v) for v in page_background(np.asarray(img.convert("RGB"))))
+    return img.convert("RGB").rotate(-tilt, expand=True, resample=Image.BICUBIC, fillcolor=bg), tilt
+
+
 def contact_sheet(entries, out, width=1600, thumb=150):
     """entries: [(label, image)]. Thumbnails in a grid, each labelled underneath."""
     per_row = max(1, width // (thumb + 10))
@@ -420,14 +453,14 @@ def crop_files(work, L, n):
         key = re.sub(r"[^\w.-]", "_", name)
         d = work / "items" / key
         d.mkdir(parents=True)
-        front = rotate(Image.open(path).convert("RGB"), deg)
+        front, tilt = level(rotate(Image.open(path).convert("RGB"), deg))
         front.save(d / "front.png")
         if L.get("backs"):
             if Path(bpre + name + bpost).exists():
-                rotate(Image.open(bpre + name + bpost).convert("RGB"), deg).save(d / "back.png")
+                level(rotate(Image.open(bpre + name + bpost).convert("RGB"), deg))[0].save(d / "back.png")
             else:
                 no_back.append(name)
-        entries.append({"key": key, "label": name, "file": str(path), "page": 1, "rotate": deg})
+        entries.append({"key": key, "label": name, "file": str(path), "page": 1, "rotate": deg, "level": tilt})
         thumbs.append((name, front))
     sheets = [contact_sheet(thumbs[i:i + 100], work / "contact" / f"files{n}_{i // 100 + 1}.png") for i in range(0, len(thumbs), 100)]
     print(f"{L['fronts']}: {len(entries)} items\n    contact sheets: {' '.join(map(str, sheets))}")
@@ -466,8 +499,10 @@ def cmd_crop(a):
             key = item_key(stem, L["page"], r, c)
             d = work / "items" / key
             d.mkdir(parents=True)
-            rotate(cell, deg).save(d / "front.png")
-            entry = {"key": key, "file": L["file"], "page": L["page"], "row": r, "col": c, "rotate": deg, "box": box}
+            upright, tilt = level(rotate(cell, deg))
+            upright.save(d / "front.png")
+            entry = {"key": key, "file": L["file"], "page": L["page"], "row": r, "col": c, "rotate": deg, "level": tilt,
+                     "box": box}
             if back is not None:
                 # The back of an item sits at the mirrored position, with a mirrored outline.
                 W, H = back.size
@@ -479,10 +514,10 @@ def cmd_crop(a):
                     bbox, bm, br, bc = box, mask, r, c
                 bcell = cut(back, bbox, bm)
                 if bcell is not None:
-                    rotate(bcell, deg).save(d / "back.png")
+                    level(rotate(bcell, deg))[0].save(d / "back.png")
                     entry |= {"back_page": L["back_page"], "back_row": br, "back_col": bc}
             manifest.append(entry)
-            thumbs.append((f"r{r}c{c}", rotate(cell, deg)))
+            thumbs.append((f"r{r}c{c}", upright))
             draw.rectangle([box[0] * f, box[1] * f, box[2] * f, box[3] * f], outline="red", width=2)
             draw.text((box[0] * f + 4, box[1] * f + 3), f"r{r}c{c}", fill="red")
         ov = work / "preview" / f"items_{stem}_p{L['page']}.png"
