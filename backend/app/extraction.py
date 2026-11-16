@@ -1,11 +1,15 @@
 """Runs the extract-game-components skill on a set of PDFs with a Haiku Claude Code session.
 
-Port of the run.sh used for the extraction tests: no user customisations, no MCP servers, only the
-tools the extraction needs, and the skill as the whole system prompt.
+Port of the run.sh used for the extraction tests: no user customisations or user settings, no MCP
+servers, only the tools the extraction needs, and the skill as the whole system prompt. Each job
+gets a read-only copy of the skill and no file tools in .claude, so a session can't patch its
+script.
 """
 
 import asyncio
+import filecmp
 import json
+import shutil
 import time
 import uuid
 from dataclasses import dataclass, field
@@ -13,9 +17,9 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
 SKILL = REPO / ".claude" / "skills" / "extract-game-components"
-# The job folder links the skill at this relative path, as the test runs had it: with the absolute
-# path the model starts aliasing it, and the aliased command no longer matches the allowed tool
-# rule.
+# The job folder has its copy of the skill at this relative path, as the test runs had it: with the
+# absolute path the model starts aliasing it, and the aliased command no longer matches the allowed
+# tool rule.
 SKILL_LINK = ".claude/skills/extract-game-components"
 JOBS = REPO / "backend" / "jobs"
 RESULT_FILES = ("rules.txt", "components.json")
@@ -32,6 +36,7 @@ class Job:
     activity: str = "Starting"
     result: str | None = None
     cost_usd: float | None = None
+    skill_changed: list[str] = field(default_factory=list)
     task: asyncio.Task | None = None
 
     def results(self) -> list[str]:
@@ -49,8 +54,10 @@ def system_prompt(workdir: Path) -> str:
         f"directory ({workdir}), following the instructions below. Run the script as "
         f"{SKILL_LINK}/extract.py <command> from the working directory; components.schema.json is "
         f"in {SKILL_LINK}. The machine is NixOS: run other tools through nix-shell -p <package> "
-        '--run "<command>". Don\'t delete files. The instructions below are all of SKILL.md, so '
-        "don't read that file.\n\n" + "\n".join(lines[body_start:])
+        "--run \"<command>\". Don't delete files. Don't change the files in "
+        f"{SKILL_LINK}: if the script fails, say where in your final reply instead of patching it. "
+        "The instructions below are all of SKILL.md, so don't read that file.\n\n"
+        + "\n".join(lines[body_start:])
     )
 
 
@@ -60,6 +67,9 @@ def command(workdir: Path) -> list[str]:
         "-p",
         "Extract the PDFs in this folder.",
         "--safe-mode",
+        # User settings would add their extra working directories to the session.
+        "--setting-sources",
+        "project,local",
         "--strict-mcp-config",
         "--no-chrome",
         "--model",
@@ -71,6 +81,9 @@ def command(workdir: Path) -> list[str]:
         "--allowedTools",
         f"Bash({SKILL_LINK}/extract.py *)",
         "Bash(nix-shell -p *)",
+        # Edit rules cover every file tool.
+        "--disallowedTools",
+        "Edit(.claude/**)",
         "--system-prompt",
         system_prompt(workdir),
         "--output-format",
@@ -84,9 +97,25 @@ def prepare(pdfs: dict[str, bytes]) -> Path:
     workdir.mkdir(parents=True)
     for name, data in pdfs.items():
         (workdir / name).write_bytes(data)
-    (workdir / SKILL_LINK).parent.mkdir(parents=True)
-    (workdir / SKILL_LINK).symlink_to(SKILL)
+    skill = workdir / SKILL_LINK
+    shutil.copytree(SKILL, skill, ignore=shutil.ignore_patterns("__pycache__"))
+    for p in [skill, *skill.rglob("*")]:
+        p.chmod(p.stat().st_mode & ~0o222)
     return workdir
+
+
+def skill_changes(workdir: Path) -> list[str]:
+    """Files of the job's copy of the skill that differ from the repo's: a session that made its
+    copy writable again and patched it."""
+
+    def walk(cmp: filecmp.dircmp, prefix: str = "") -> list[str]:
+        names = cmp.left_only + cmp.right_only + cmp.diff_files + cmp.funny_files
+        out = [prefix + n for n in names]
+        for name, sub in cmp.subdirs.items():
+            out += walk(sub, f"{prefix}{name}/")
+        return out
+
+    return sorted(walk(filecmp.dircmp(SKILL, workdir / SKILL_LINK, ignore=["__pycache__"])))
 
 
 def start(pdfs: dict[str, bytes]) -> Job:
@@ -109,6 +138,7 @@ def describe(tool: dict) -> str | None:
 async def run(job: Job) -> None:
     try:
         returncode = await run_claude(job)
+        job.skill_changed = skill_changes(job.dir)
     except (OSError, ValueError) as e:
         job.state, job.activity = "failed", f"Failed: {e!r}"
     else:

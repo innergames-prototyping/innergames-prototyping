@@ -77,6 +77,8 @@ def main(pdf_folder: Path) -> int:
     print(f"job folder: {job}", flush=True)
 
     run_claude("extraction", extraction.command(job), job)
+    if changed := extraction.skill_changes(job):
+        print(f"the extraction changed its copy of the skill: {', '.join(changed)}")
     missing = [name for name in UPSTREAM if not (job / "results" / name).is_file()]
     if missing:
         print(f"extraction wrote no {', '.join(missing)}")

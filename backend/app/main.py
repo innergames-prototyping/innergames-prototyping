@@ -19,6 +19,7 @@ def summary(job: extraction.Job) -> dict:
         "results": job.results() if job.state != "running" else [],
         "result": job.result,
         "cost_usd": job.cost_usd,
+        "skill_changed": job.skill_changed,
     }
 
 
