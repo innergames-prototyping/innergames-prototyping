@@ -1,8 +1,8 @@
 """runfolder.py: find the run folder and the files in it, so no command needs a path.
 
-Layout this assumes (the v5.1 folder sits next to the runs folder):
+Layout this assumes (the kit folder, e.g. v5.2, sits next to the runs folder):
     tokens/
-      v5.1/tools/<this file>
+      v5.2/tools/<this file>
       runs/Run14_LD/...      <- one folder per run, downloads straight into it
 
 Shared by after_run.py, playtime_recompute.py and import_sqlite.py. Standard library only.
@@ -12,7 +12,7 @@ import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-KIT = os.path.dirname(HERE)                                   # the v5.1 folder
+KIT = os.path.dirname(HERE)                                   # the kit folder (v5.2)
 CHECK_DIR = "_check"                                          # what after_run.py writes, inside the run folder
 # files in a run folder that are ours, not the run's: never copied into _check/out
 OPERATOR_FILES = re.compile(r"^(RUN_ID.*\.jsonl|.*transcript.*\.jsonl|usage.*\.csv|01_timings.*\.json|01_focus.*\.json"
@@ -26,7 +26,7 @@ def runs_dir(override=None):
     for cand in (os.path.join(KIT, "..", "runs"), os.path.join(KIT, "..", "..", "runs"), os.path.join(KIT, "runs")):
         if os.path.isdir(cand):
             return os.path.abspath(cand)
-    sys.exit(f"No 'runs' folder found next to {KIT}. Pass --runs <folder> once, or move the v5.1 folder next to 'runs'.")
+    sys.exit(f"No 'runs' folder found next to {KIT}. Pass --runs <folder> once, or move the kit folder next to 'runs'.")
 
 
 def newest_file_time(folder):
@@ -68,6 +68,11 @@ def transcript(run):
     if not pick:
         return None
     return os.path.join(run, max(pick, key=lambda n: os.path.getmtime(os.path.join(run, n))))
+
+
+def own_folders(run):
+    """Subfolders of a run folder other than _check: the operator's own files (guides, notes), never checked."""
+    return sorted(d for d in os.listdir(run) if d != CHECK_DIR and os.path.isdir(os.path.join(run, d)))
 
 
 def check_out(run):

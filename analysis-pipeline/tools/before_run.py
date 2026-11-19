@@ -1,6 +1,6 @@
 """before_run.py: check the upload set before a run is started. Changes nothing.
 
-    python tools/before_run.py                    # every game folder in v5.1/games
+    python tools/before_run.py                    # every game folder in the kit's games folder
     python tools/before_run.py lethal_dungeon     # one game (name or part of it)
 
 Checks:
@@ -50,7 +50,7 @@ def check_system(problems):
         p = os.path.join(SYSTEM, n)
         h = sha(p)
         if h != want[n]["sha256"]:
-            problems.append(f"system/: {n} differs from the v5.1 kit (sha256 {h[:12]}, want {want[n]['sha256'][:12]})")
+            problems.append(f"system/: {n} differs from the kit (sha256 {h[:12]}, want {want[n]['sha256'][:12]})")
         rows.append((n, os.path.getsize(p), h[:12]))
     return rows
 
@@ -116,7 +116,8 @@ def main(argv=None):
     games = sorted(d for d in os.listdir(GAMES) if os.path.isdir(os.path.join(GAMES, d)))
     if a.game:
         games = [d for d in games if a.game.lower() in d.lower()] or sys.exit(f"no game folder matches '{a.game}'")
-    print(f"v5.1 kit: {KIT}\n")
+    kit = json.load(open(os.path.join(HERE, "kit_hashes.json"), encoding="utf-8")).get("kit", "?")
+    print(f"Kit {kit}: {KIT}\n")
     print("system/ (upload all 8):")
     for n, b, h in sys_rows:
         print(f"  {n:34s} {b:>9,} B  {h}")

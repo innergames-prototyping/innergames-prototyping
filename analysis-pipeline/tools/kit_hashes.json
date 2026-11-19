@@ -1,5 +1,5 @@
 {
-  "kit": "v5.1",
+  "kit": "v5.2",
   "system": {
     "00a_START_HERE.md": {
       "bytes": 9667,
@@ -33,5 +33,6 @@
       "bytes": 2683,
       "sha256": "bab86335bc4ced9a90082e96dff43ad11e5ac12b01630db508714234ea43e423"
     }
-  }
+  },
+  "note": "system/ is byte-identical to kit v5.1: v5.2 changes tools, operator procedure and documentation only"
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """check_outputs.py: check one run's output folder against output contract v2.3 (00b_output_contract.md).
 
-Project Pipeline / InnerGames, 2026-10-24; v1.3 2026-10-26 (brief v5); v1.4 2026-11-19 (brief v5.1). Standard library only (Python 3.8+). Read-only:
+Project Pipeline / InnerGames, 2026-10-24; v1.3 2026-10-26 (brief v5); v1.4 2026-11-19 (brief v5.1); v1.4.1 2026-11-19 (kit v5.2, F3 hint only). Standard library only (Python 3.8+). Read-only:
 it never changes, moves or creates anything in the folder it checks.
 
     py check_outputs.py "E:\\...\\runs\\Run11_Single\\out"
@@ -26,7 +26,7 @@ import zipfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import timings as T  # noqa: E402  (shared with playtime_recompute.py)
 
-VERSION = "1.4 (contract v2.3, brief v5.1)"
+VERSION = "1.4.1 (contract v2.3, brief v5.1)"
 
 # ---------------------------------------------------------------- contract constants
 FIXED_FILES = [
@@ -195,7 +195,7 @@ def check_files(folder, R):
             hint = "Unexpected zip. Only the nine .jsonl.zip data files are allowed; bundles are not."
         elif f.lower().endswith((".pdf", ".docx", ".pptx", ".png", ".jpg", ".html")):
             hint = ("Not a run output (the contract allows no PDF, Office, image or HTML files). If you added it "
-                    "yourself, e.g. a client README, keep it outside out\\.")
+                    "yourself, e.g. a guide or notes, keep it in a subfolder of the run folder such as mine (after_run.py skips subfolders).")
         elif f.lower().endswith(ARCHIVE_EXT):
             hint = "Archive type not allowed by the contract (only single-file .jsonl.zip)."
         R.fail(S, "F3", f"extra file: '{f}'", hint)

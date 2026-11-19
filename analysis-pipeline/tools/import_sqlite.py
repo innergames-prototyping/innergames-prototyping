@@ -103,7 +103,7 @@ def main(argv=None):
     ap.add_argument("--db", help="database file (default: pipeline.sqlite in the runs folder)")
     ap.add_argument("--events", action="store_true", help="also import the event logs")
     ap.add_argument("--force", action="store_true", help="import even if the validator did not pass")
-    ap.add_argument("--runs", help="the folder holding the run folders (default: ../runs next to the v5.1 folder)")
+    ap.add_argument("--runs", help="the folder holding the run folders (default: ../runs next to the kit folder)")
     a = ap.parse_args(argv)
 
     run = RF.find_run(a.run, a.runs)

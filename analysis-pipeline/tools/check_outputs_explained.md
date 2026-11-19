@@ -1,21 +1,26 @@
 # check_outputs.py: what it does and how to use it
-Project Pipeline / InnerGames. Validator version 1.4 (2026-11-19), for output contract v2.3
-(`00b_output_contract.md` in `v5.1\system\`) and brief v5.1.
+Project Pipeline / InnerGames. Validator version 1.4.1 (2026-11-19; 1.4 plus a clearer F3 hint), for output contract v2.3
+(`00b_output_contract.md` in the kit's `system\` folder) and brief v5.1. Kit v5.2 uses the same
+instruction files as v5.1, byte for byte.
 
-**You normally don't run it yourself:** `AFTER_RUN.bat` (or `tools\after_run.py`) runs it for
+**What changed in v1.4.1:** only the F3 hint. A file of yours in the run folder (a guide, notes)
+belongs in a subfolder such as `mine\`, which `after_run.py` skips.
+
+**You normally don't run it yourself:** AFTER_RUN (`AFTER_RUN.bat`, `sh AFTER_RUN.sh` or `python3 kit.py after`) runs it for
 you on a clean copy of the newest run, with the RUNLOG filled in. This page explains what it
 checks and how to run it by hand if you need to.
 
 **What changed in v1.4:**
 - **F2** now requires 26 fixed files: `D03_duration_table.json` and `D11_data_needed.md` are new.
-  **F3** names PDFs and Office files as extras (Run13 delivered a `README.pdf`).
+  **F3** names PDFs and Office files as extras (Run13's folder held a `README.pdf` guide saved there after the run).
 - **M1c** also checks `run.user_input_files` (the optional `01_timings.json`, `01_focus.json`).
 - **M1b** fails when RUN-END or RESEND was uploaded as game material, or when game material
   arrived inside a zip or a folder (both happened in Run13).
 - **P1** allows repeated test ids in `per_game_other` only (Run12 re-ran test seeds), and checks
   `outcome.mode` on every record, with `team_result` for cooperative games.
-- **P2** still compares the ledger with the records; Run13's 801 test games without records now
-  fail here for the right reason.
+- **P2** still compares the ledger with the records. Run13's 801 re-run test games had no records
+  of their own because v2.2 also demanded unique ids; v5.1 allows the repeats, so P2 and P1 no longer
+  contradict each other.
 - **S1 / H7:** one D8 baseline **per engine version**; arms are paired by seed *and* engine version
   (Run12 ran arms on two versions).
 - **H1b:** `schema` must be `headline_v2`. **H4** handles cooperative and no-winner games.
@@ -46,25 +51,23 @@ It does **not** mean the analysis is correct. That stays your grading job (§7).
 - Nothing else. The script uses only Python's built-in modules.
 
 ## 3. Setting it up (once)
-Nothing to set up beyond the v5.1 folder layout: `tokens\v5.1\` next to `tokens\runs\`, one
+Nothing to set up beyond the kit folder layout: `tokens\v5.2\` next to `tokens\runs\`, one
 folder per run in `runs\`, every download straight into it. `after_run.py` builds the clean
 `_check\out\` copy the validator needs, so you never sort files by hand.
 
 ## 4. Running it
-**Normal use:** double-click `AFTER_RUN.bat` in the v5.1 folder. It finds the newest run folder,
-undoes browser renames, finds the RUNLOG in `RUN_ID.jsonl`, runs this validator and writes
-`_check\check.txt`, `_check\check.json` and `_check\AFTER_RUN.md`.
-To check a different run, drag its folder onto `AFTER_RUN.bat`.
+**Normal use:** run AFTER_RUN: double-click `AFTER_RUN.bat` on Windows, `sh AFTER_RUN.sh` on
+macOS/Linux, or `python3 kit.py after` anywhere (`py kit.py after` on Windows). It finds the
+newest run folder, undoes browser renames, finds the RUNLOG in `RUN_ID.jsonl`, runs this validator
+and writes `_check/check.txt`, `_check/check.json` and `_check/AFTER_RUN.md`.
+To check a different run, add its number: `python3 kit.py after 13`.
 
-**By hand** (PowerShell opened in the v5.1 folder: in File Explorer, click the address bar, type
-`powershell`, Enter):
-
-| What you want | Command |
+| What you want | Command (Windows: `py` instead of `python3`) |
 |---|---|
-| Check the newest run, the normal way | `py tools\after_run.py` |
-| Check run 14 (by number or part of its name) | `py tools\after_run.py 14` |
-| Quick check, skipping the large event logs | `py tools\after_run.py --skip-events` |
-| The validator alone on any folder | `py tools\check_outputs.py <folder>` (add `--runlog "<line>"`, `--json <file outside the folder>`, `--skip-events`) |
+| Check the newest run, the normal way | `python3 kit.py after` |
+| Check run 14 (by number or part of its name) | `python3 kit.py after 14` |
+| Quick check, skipping the large event logs | `python3 kit.py after --skip-events` |
+| The validator alone on any folder | `python3 tools/check_outputs.py <folder>` (add `--runlog "<line>"`, `--json <file outside the folder>`, `--skip-events`) |
 
 **Run time:** the fake run (6,621 records, 271,136 events) takes about 2 s; Run13 (14,249
 records, events included) takes under a minute [C].
@@ -198,14 +201,14 @@ tolerances are rounding only (minutes ±0.011, shares ±0.0025, points ±0.011, 
   with the expected ID; one allowed case (repeated test ids in `per_game_other`) passes.
 - **Real runs:** Run12's v1.3 failures from instrument ambiguity (duplicate test ids, dual
   baselines, vocabulary category) are gone. Run12 and Run13 fail only on the new v2.3 items, and
-  Run13 also on its real problems (missing engine files, README.pdf, RUN-END uploaded at the start,
+  Run13 also on its real problems (engine files missing from the folder, a README.pdf added to the folder, RUN-END uploaded at the start,
   test games without records).
 
 ## 9. Troubleshooting
 | Symptom | Likely cause and fix |
 |---|---|
-| `py` is not recognised | Python isn't on PATH; reinstall with "Add python.exe to PATH", or use `python` |
-| `No 'runs' folder found` | The v5.1 folder isn't next to `runs\`. Move it, or add `--runs <folder>` once |
+| `py` / `python3` not found | Windows: reinstall Python with "Add python.exe to PATH", or use `python`. macOS: `xcode-select --install` once. Linux: install `python3` |
+| `No 'runs' folder found` | The kit folder isn't next to `runs\`. Move it, or add `--runs <folder>` once |
 | `matches 2 run folders` | Two folder names contain the number or text you gave; give more of the name |
 | F3 failures for files ending in ` (1)` | `after_run.py` undoes these itself. If two different files share a name, its summary says which one it used |
 | F2 for files the RUNLOG lists | They never reached the chat, or weren't downloaded. `_check\RESEND.md` is the filled-in message to attach, before RUN-END (instruments §3 D) |

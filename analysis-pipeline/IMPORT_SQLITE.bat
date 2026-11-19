@@ -1,6 +1,6 @@
 @echo off
-rem Double-click: works on the newest run folder. Or drag a run folder onto this file.
+rem Windows: double-click, or drag a run folder onto this file.
 cd /d "%~dp0"
-where py >nul 2>nul && (py -3 tools\import_sqlite.py %*) || (python tools\import_sqlite.py %*)
-echo.
-pause
+set KIT_PAUSE=1
+where py >nul 2>nul && (py -3 kit.py import %*) || (python kit.py import %*)
+if errorlevel 9009 (echo Python 3 was not found. Install it from python.org and tick "Add python.exe to PATH". & pause)

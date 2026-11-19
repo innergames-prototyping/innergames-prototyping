@@ -5,7 +5,7 @@
     python tools/playtime_recompute.py 14 --timings my_timings.json
 
 Where it looks for the timings (first hit wins): --timings, the run folder, then
-v5.1/games/<game>/01_timings.json for the run's game. Without any timings file it still runs and
+<kit>/games/<game>/01_timings.json for the run's game. Without any timings file it still runs and
 lists which categories carry most of the play time: the ones to time first.
 
 It applies contract section 7.3 to the run's own D03_duration_table.json and events_D05:
@@ -91,7 +91,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("run", nargs="?", help="run number, name or path (default: the newest run folder)")
     ap.add_argument("--timings", help="a 01_timings.json to use instead of the one found automatically")
-    ap.add_argument("--runs", help="the folder holding the run folders (default: ../runs next to the v5.1 folder)")
+    ap.add_argument("--runs", help="the folder holding the run folders (default: ../runs next to the kit folder)")
     a = ap.parse_args(argv)
 
     run = RF.find_run(a.run, a.runs)
@@ -230,7 +230,7 @@ def main(argv=None):
     miss = [r["player_count"] for r in results if r["player_count"] not in have]
     if miss:
         L.append(f"Observed sessions for {', '.join(map(str, miss))} players (play minutes, setup minutes, first play or not).")
-    L.append("Form: `templates/01_timings.template.json` in the v5.1 folder. Fill any subset; put it in the run folder "
+    L.append("Form: `templates/01_timings.template.json` in the kit folder. Fill any subset; put it in the run folder "
              "or in `games/<game>/01_timings.json`, then run this script again.")
     with open(os.path.join(outd, "PLAYTIME_RECOMPUTE.md"), "w", encoding="utf-8") as fh:
         fh.write("\n".join(L) + "\n")
