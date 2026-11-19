@@ -1,0 +1,618 @@
+{
+ "spec_version": "extraction-1.0",
+ "game": {
+  "title": "7 Wonders Duel Solo",
+  "credits": [
+   "Designers: Antoine Bauza & Bruno Cathala",
+   "Illustrator: Miguel Coimbra",
+   "Development and publication: Team Repos Production",
+   "© REPOS PRODUCTION 2020",
+   "All rights reserved.",
+   "Rue des comédiens, 22",
+   "1000 Bruxelles - Belgique",
+   "+32 471 95 41 32 • www.rprod.com"
+  ]
+ },
+ "sources": [
+  {
+   "file": "7_wonders_duel_solo_cards_en.pdf",
+   "pages": 4,
+   "content": "component sheets: page 1 leader card fronts, page 2 leader card backs, page 3 decision card fronts, page 4 decision card backs",
+   "layout": "leaders: 2 columns, rows of 2, last row one sideways card (Bilkis); decisions: 2 columns x 6 rows, landscape; backs mirrored left to right"
+  },
+  {
+   "file": "7_wonders_duel_solo_rules_en.pdf",
+   "pages": 2,
+   "content": "page 1: folded rules leaflet (panels 4 and 1 upright on top, panels 3 and 2 upside down below); page 2: print-and-play folding diagram",
+   "layout": "A4 sheet, 4 panels"
+  }
+ ],
+ "component_kinds": [
+  {
+   "id": "leader",
+   "name": "Leader card",
+   "fields": [
+    {
+     "name": "progress_tokens",
+     "type": "list",
+     "description": "Words printed in small capitals under each round Progress token icon in the beige band, read left to right; empty list if no token icon is shown"
+    },
+    {
+     "name": "victory_points",
+     "type": "integer",
+     "description": "Number inside the laurel wreath icon in the beige band; null if there is no laurel wreath"
+    },
+    {
+     "name": "card_colour",
+     "type": "enum",
+     "enum_values": [
+      "yellow",
+      "blue",
+      "purple",
+      "grey",
+      "brown"
+     ],
+     "description": "Colour of the small framed card icon at the right of the beige band (the icon with a grey figure silhouette)"
+    },
+    {
+     "name": "turn_symbol",
+     "type": "enum",
+     "enum_values": [
+      "none",
+      "arrows with dot",
+      "arrows with triangle",
+      "both"
+     ],
+     "description": "Circular-arrow symbols printed on the picture at the top right corner, above the beige band: arrows around a dot, arrows around a triangle, or both; 'none' if there is no such symbol"
+    }
+   ],
+   "count_found": 5,
+   "count_in_rules": 5,
+   "back": "Pale background with the teal '7 Wonders Duel Solo' logo box in the lower left and a white silhouette cut-out in the middle",
+   "notes": ""
+  },
+  {
+   "id": "decision",
+   "name": "Decision card",
+   "fields": [
+    {
+     "name": "arrow",
+     "type": "enum",
+     "enum_values": [
+      "left",
+      "right"
+     ],
+     "description": "Direction the large grey arrow points, from the arrow in the top corner: 'right' if it points to the right, 'left' if it points to the left"
+    },
+    {
+     "name": "slot_1",
+     "type": "enum",
+     "enum_values": [
+      "green",
+      "red",
+      "silhouette"
+     ],
+     "description": "Colour or figure of the leftmost card-shaped rectangle in the middle row: green, red, or silhouette (a white card with a grey figure)"
+    },
+    {
+     "name": "slot_2",
+     "type": "enum",
+     "enum_values": [
+      "green",
+      "red",
+      "silhouette"
+     ],
+     "description": "Colour or figure of the middle card-shaped rectangle in the middle row: green, red, or silhouette (a white card with a grey figure)"
+    },
+    {
+     "name": "slot_3",
+     "type": "enum",
+     "enum_values": [
+      "green",
+      "red",
+      "silhouette"
+     ],
+     "description": "Colour or figure of the rightmost card-shaped rectangle in the middle row: green, red, or silhouette (a white card with a grey figure)"
+    },
+    {
+     "name": "large_slot",
+     "type": "enum",
+     "enum_values": [
+      "none",
+      "1",
+      "2",
+      "3"
+     ],
+     "description": "Which card-shaped rectangle in the middle row is drawn larger than the other two (1 = leftmost, 3 = rightmost); 'none' if all three are the same size"
+    },
+    {
+     "name": "bottom_symbol_left",
+     "type": "enum",
+     "enum_values": [
+      "none",
+      "arrows with dot",
+      "arrows with triangle"
+     ],
+     "description": "Circular-arrow symbol printed in the bottom left corner: arrows around a dot, arrows around a triangle; 'none' if there is no symbol"
+    },
+    {
+     "name": "bottom_symbol_right",
+     "type": "enum",
+     "enum_values": [
+      "none",
+      "arrows with dot",
+      "arrows with triangle"
+     ],
+     "description": "Circular-arrow symbol printed in the bottom right corner: arrows around a dot, arrows around a triangle; 'none' if there is no symbol"
+    }
+   ],
+   "count_found": 12,
+   "count_in_rules": 12,
+   "back": "Beige card with a grey bust silhouette in the middle and a Greek key border along the bottom; no text",
+   "notes": ""
+  }
+ ],
+ "items": [
+  {
+   "id": "7_wonders_duel_solo_cards_en#p1_r0_c0",
+   "kind": "leader",
+   "source": {
+    "file": "7_wonders_duel_solo_cards_en.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 1
+   },
+   "title": "HAMMURABI",
+   "fields": {
+    "progress_tokens": [
+     "ECONOMY"
+    ],
+    "victory_points": 5,
+    "card_colour": "yellow",
+    "turn_symbol": "arrows with dot"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d001 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "7_wonders_duel_solo_cards_en#p1_r0_c1",
+   "kind": "leader",
+   "source": {
+    "file": "7_wonders_duel_solo_cards_en.pdf",
+    "page": 1,
+    "row": 0,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 0,
+    "back_col": 0
+   },
+   "title": "CLEOPATRA",
+   "fields": {
+    "progress_tokens": [
+     "PHILOSOPHY",
+     "AGRICULTURE"
+    ],
+    "victory_points": null,
+    "card_colour": "blue",
+    "turn_symbol": "arrows with triangle"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d002 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "7_wonders_duel_solo_cards_en#p1_r1_c0",
+   "kind": "leader",
+   "source": {
+    "file": "7_wonders_duel_solo_cards_en.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 1
+   },
+   "title": "CAESAR",
+   "fields": {
+    "progress_tokens": [
+     "STRATEGY"
+    ],
+    "victory_points": null,
+    "card_colour": "purple",
+    "turn_symbol": "none"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d003 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "7_wonders_duel_solo_cards_en#p1_r1_c1",
+   "kind": "leader",
+   "source": {
+    "file": "7_wonders_duel_solo_cards_en.pdf",
+    "page": 1,
+    "row": 1,
+    "col": 1,
+    "back_page": 2,
+    "back_row": 1,
+    "back_col": 0
+   },
+   "title": "ARISTOTLE",
+   "fields": {
+    "progress_tokens": [
+     "LAW",
+     "MATHEMATICS"
+    ],
+    "victory_points": null,
+    "card_colour": "grey",
+    "turn_symbol": "arrows with dot"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "medium",
+   "notes": "design d004 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "7_wonders_duel_solo_cards_en#p1_r2_c0",
+   "kind": "leader",
+   "source": {
+    "file": "7_wonders_duel_solo_cards_en.pdf",
+    "page": 1,
+    "row": 2,
+    "col": 0,
+    "back_page": 2,
+    "back_row": 2,
+    "back_col": 0
+   },
+   "title": "BILKIS",
+   "fields": {
+    "progress_tokens": [
+     "ECONOMY"
+    ],
+    "victory_points": null,
+    "card_colour": "brown",
+    "turn_symbol": "both"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d005 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "7_wonders_duel_solo_cards_en#p3_r0_c0",
+   "kind": "decision",
+   "source": {
+    "file": "7_wonders_duel_solo_cards_en.pdf",
+    "page": 3,
+    "row": 0,
+    "col": 0,
+    "back_page": 4,
+    "back_row": 0,
+    "back_col": 1
+   },
+   "title": null,
+   "fields": {
+    "arrow": "right",
+    "slot_1": "green",
+    "slot_2": "red",
+    "slot_3": "silhouette",
+    "large_slot": "1",
+    "bottom_symbol_left": "none",
+    "bottom_symbol_right": "none"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d006 (3 identical copies); 2 independent reads"
+  },
+  {
+   "id": "7_wonders_duel_solo_cards_en#p3_r0_c1",
+   "kind": "decision",
+   "source": {
+    "file": "7_wonders_duel_solo_cards_en.pdf",
+    "page": 3,
+    "row": 0,
+    "col": 1,
+    "back_page": 4,
+    "back_row": 0,
+    "back_col": 0
+   },
+   "title": null,
+   "fields": {
+    "arrow": "left",
+    "slot_1": "silhouette",
+    "slot_2": "red",
+    "slot_3": "green",
+    "large_slot": "3",
+    "bottom_symbol_left": "none",
+    "bottom_symbol_right": "none"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d007 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "7_wonders_duel_solo_cards_en#p3_r1_c0",
+   "kind": "decision",
+   "source": {
+    "file": "7_wonders_duel_solo_cards_en.pdf",
+    "page": 3,
+    "row": 1,
+    "col": 0,
+    "back_page": 4,
+    "back_row": 1,
+    "back_col": 1
+   },
+   "title": null,
+   "fields": {
+    "arrow": "right",
+    "slot_1": "green",
+    "slot_2": "red",
+    "slot_3": "silhouette",
+    "large_slot": "1",
+    "bottom_symbol_left": "none",
+    "bottom_symbol_right": "none"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d006 (3 identical copies); 2 independent reads"
+  },
+  {
+   "id": "7_wonders_duel_solo_cards_en#p3_r1_c1",
+   "kind": "decision",
+   "source": {
+    "file": "7_wonders_duel_solo_cards_en.pdf",
+    "page": 3,
+    "row": 1,
+    "col": 1,
+    "back_page": 4,
+    "back_row": 1,
+    "back_col": 0
+   },
+   "title": null,
+   "fields": {
+    "arrow": "left",
+    "slot_1": "silhouette",
+    "slot_2": "green",
+    "slot_3": "red",
+    "large_slot": "3",
+    "bottom_symbol_left": "none",
+    "bottom_symbol_right": "none"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d008 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "7_wonders_duel_solo_cards_en#p3_r2_c0",
+   "kind": "decision",
+   "source": {
+    "file": "7_wonders_duel_solo_cards_en.pdf",
+    "page": 3,
+    "row": 2,
+    "col": 0,
+    "back_page": 4,
+    "back_row": 2,
+    "back_col": 1
+   },
+   "title": null,
+   "fields": {
+    "arrow": "right",
+    "slot_1": "green",
+    "slot_2": "red",
+    "slot_3": "silhouette",
+    "large_slot": "1",
+    "bottom_symbol_left": "none",
+    "bottom_symbol_right": "none"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d006 (3 identical copies); 2 independent reads"
+  },
+  {
+   "id": "7_wonders_duel_solo_cards_en#p3_r2_c1",
+   "kind": "decision",
+   "source": {
+    "file": "7_wonders_duel_solo_cards_en.pdf",
+    "page": 3,
+    "row": 2,
+    "col": 1,
+    "back_page": 4,
+    "back_row": 2,
+    "back_col": 0
+   },
+   "title": null,
+   "fields": {
+    "arrow": "left",
+    "slot_1": "silhouette",
+    "slot_2": "green",
+    "slot_3": "red",
+    "large_slot": "3",
+    "bottom_symbol_left": "none",
+    "bottom_symbol_right": "none"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d009 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "7_wonders_duel_solo_cards_en#p3_r3_c0",
+   "kind": "decision",
+   "source": {
+    "file": "7_wonders_duel_solo_cards_en.pdf",
+    "page": 3,
+    "row": 3,
+    "col": 0,
+    "back_page": 4,
+    "back_row": 3,
+    "back_col": 1
+   },
+   "title": null,
+   "fields": {
+    "arrow": "right",
+    "slot_1": "red",
+    "slot_2": "green",
+    "slot_3": "silhouette",
+    "large_slot": "1",
+    "bottom_symbol_left": "none",
+    "bottom_symbol_right": "none"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d010 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "7_wonders_duel_solo_cards_en#p3_r3_c1",
+   "kind": "decision",
+   "source": {
+    "file": "7_wonders_duel_solo_cards_en.pdf",
+    "page": 3,
+    "row": 3,
+    "col": 1,
+    "back_page": 4,
+    "back_row": 3,
+    "back_col": 0
+   },
+   "title": null,
+   "fields": {
+    "arrow": "left",
+    "slot_1": "silhouette",
+    "slot_2": "green",
+    "slot_3": "red",
+    "large_slot": "3",
+    "bottom_symbol_left": "none",
+    "bottom_symbol_right": "none"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d009 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "7_wonders_duel_solo_cards_en#p3_r4_c0",
+   "kind": "decision",
+   "source": {
+    "file": "7_wonders_duel_solo_cards_en.pdf",
+    "page": 3,
+    "row": 4,
+    "col": 0,
+    "back_page": 4,
+    "back_row": 4,
+    "back_col": 1
+   },
+   "title": null,
+   "fields": {
+    "arrow": "right",
+    "slot_1": "red",
+    "slot_2": "green",
+    "slot_3": "silhouette",
+    "large_slot": "1",
+    "bottom_symbol_left": "none",
+    "bottom_symbol_right": "none"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d011 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "7_wonders_duel_solo_cards_en#p3_r4_c1",
+   "kind": "decision",
+   "source": {
+    "file": "7_wonders_duel_solo_cards_en.pdf",
+    "page": 3,
+    "row": 4,
+    "col": 1,
+    "back_page": 4,
+    "back_row": 4,
+    "back_col": 0
+   },
+   "title": null,
+   "fields": {
+    "arrow": "left",
+    "slot_1": "silhouette",
+    "slot_2": "red",
+    "slot_3": "green",
+    "large_slot": "3",
+    "bottom_symbol_left": "none",
+    "bottom_symbol_right": "none"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d007 (2 identical copies); 2 independent reads"
+  },
+  {
+   "id": "7_wonders_duel_solo_cards_en#p3_r5_c0",
+   "kind": "decision",
+   "source": {
+    "file": "7_wonders_duel_solo_cards_en.pdf",
+    "page": 3,
+    "row": 5,
+    "col": 0,
+    "back_page": 4,
+    "back_row": 5,
+    "back_col": 1
+   },
+   "title": null,
+   "fields": {
+    "arrow": "right",
+    "slot_1": "silhouette",
+    "slot_2": "red",
+    "slot_3": "green",
+    "large_slot": "1",
+    "bottom_symbol_left": "arrows with triangle",
+    "bottom_symbol_right": "none"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d012 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "7_wonders_duel_solo_cards_en#p3_r5_c1",
+   "kind": "decision",
+   "source": {
+    "file": "7_wonders_duel_solo_cards_en.pdf",
+    "page": 3,
+    "row": 5,
+    "col": 1,
+    "back_page": 4,
+    "back_row": 5,
+    "back_col": 0
+   },
+   "title": null,
+   "fields": {
+    "arrow": "left",
+    "slot_1": "red",
+    "slot_2": "green",
+    "slot_3": "silhouette",
+    "large_slot": "3",
+    "bottom_symbol_left": "none",
+    "bottom_symbol_right": "arrows with dot"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d013 (1 identical copies); 2 independent reads"
+  }
+ ],
+ "extraction_notes": [
+  "The print-and-play holds 5 leader cards and 12 decision cards (the rules' Contents list). Base-game components the rules name (Wonder cards, Coins, Progress tokens, military pawn, game board) belong to 7 Wonders Duel and are not in these files, so they are not added to rules_items.",
+  "Each of 13 unique designs (pixel-identical fronts grouped) was read by independent single-component model calls until every value had a majority; 12 designs were unanimous, 0 were resolved by hand.",
+  "Model cost of all reads: $0.0811."
+ ]
+}

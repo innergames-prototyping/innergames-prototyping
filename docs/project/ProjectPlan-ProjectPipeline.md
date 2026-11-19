@@ -42,6 +42,15 @@ Phone number:+31645632450
 
 Discord Handle:ralph5408
 
+**Youri de Graef**
+
+Contact E-Mail: [y.degraef@student.fontys.nl](mailto:y.degraef@student.fontys.nl)
+
+Phone Number: +31 640406572
+
+Discord Handle: degraefdigital
+
+
 # Current Situation
 
 InnerGames is a Dutch company that creates board games and workshop for educational purposes for a variety of clients in both the education and buisness sectors.

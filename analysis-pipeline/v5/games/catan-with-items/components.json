@@ -1,0 +1,4631 @@
+{
+ "spec_version": "extraction-1.0",
+ "game": {
+  "title": "CATAN THE GAME",
+  "credits": [
+   "Designed by: Klaus Teuber (1952-2023)",
+   "Ongoing design: Benjamin Teuber",
+   "Development team: Jasmin Balle, Arnd Beenen, Morgan Dontanville, Arnd Fischer, Bianca Freund, and Sonja Krützfeldt",
+   "Art: Quentin Regnes (cover), Eric Hibbeler with assistance from Kin Wald (interior)",
+   "Graphic design: Az Sperry (ENG), Michaela Kienle (GER)",
+   "3D Graphics: Alex Colón Hernández",
+   "Lead editor & rules redesign for 6th Edition (ENG): Anne Reynolds",
+   "Lead editor & rules redesign for 6th Edition (GER): Tina Landwehr-Rödde",
+   "Editor of 1st Edition: Reiner Müller",
+   "Producer: Ron Magin",
+   "Special thanks: Brea Blankenfeld, Sebastian Castro Casas, Nadine Fiedler, Caroline Fischer, Kevin Hovdestad, Riley Jouppi, Aud Ketilsdatter (LSKC/345-2), Stephanie Newman, Donna Prior, Sabrina Risch, Kelli Schmitz, and especially Guido Teuber",
+   "Technical editing/proofreading support (ENG): Steven Kimball, Jason D. Kingsley",
+   "Production team (US): Justin Anger, Emily Frenchik, Estelle Gavin, Chris Jensen, and Austin Litzler",
+   "Head of CATAN Studio: Pete Fenlon",
+   "You have purchased a game of the highest quality. However, if you find any components missing or damaged, please visit: catanstudio.com/support For all other inquiries, contact us at: info@catanstudio.com",
+   "Copyright © 2025 CATAN GmbH and CATAN Studio. CATAN, the \"CATAN Sun,\" the CATAN Brand logo, and the CATAN Hex Icon—and all other marks herein—are trademarks of CATAN GmbH (catan.com) in various territories of the world and are used under license from CATAN GmbH. \"Gamegenic\" and the \"Gamegenic logo\" are TM & © Gamegenic GmbH, Germany. All rights reserved. Published by CATAN Studio, 1995 W. County Rd. B2, Roseville, MN 55113 USA. Phone +1.651.639.1905."
+  ]
+ },
+ "sources": [
+  {
+   "file": "catan-rules.pdf",
+   "pages": 12,
+   "content": "CATAN rulebook, 12 pages. Page 1 cover; pages 2, 4-12 rules text with captions and examples; page 3 is the component overview, one picture per component design with its printed count",
+   "layout": "page 3 only: one box per pictured component design (52 designs); the card backs and the second side of the player aid are not separate items"
+  }
+ ],
+ "component_kinds": [
+  {
+   "id": "sea_frame_piece",
+   "name": "Sea frame piece",
+   "fields": [],
+   "count_found": 6,
+   "count_in_rules": 6,
+   "back": "not shown on page 3",
+   "notes": ""
+  },
+  {
+   "id": "terrain_hex",
+   "name": "Terrain hex",
+   "fields": [
+    {
+     "name": "terrain_picture",
+     "type": "enum",
+     "description": "the landscape drawn on the hex: hills (orange-red broken land), forests (dense green trees), pastures (green meadow), fields (golden grain fields), mountains (grey rock), desert (pale sand)",
+     "enum_values": [
+      "hills",
+      "forests",
+      "pastures",
+      "fields",
+      "mountains",
+      "desert"
+     ]
+    }
+   ],
+   "count_found": 19,
+   "count_in_rules": 19,
+   "back": "not shown on page 3",
+   "notes": ""
+  },
+  {
+   "id": "number_disc",
+   "name": "Number disc",
+   "fields": [
+    {
+     "name": "disc_number",
+     "type": "integer",
+     "description": "the large number printed in the centre of the disc (2 to 12); do not read the small dots"
+    },
+    {
+     "name": "pip_count",
+     "type": "integer",
+     "description": "number of small dots printed under the centre number; count only the dots"
+    },
+    {
+     "name": "number_colour",
+     "type": "enum",
+     "description": "colour of the large centre number: red or black",
+     "enum_values": [
+      "red",
+      "black"
+     ]
+    }
+   ],
+   "count_found": 18,
+   "count_in_rules": 18,
+   "back": "not shown on page 3",
+   "notes": ""
+  },
+  {
+   "id": "bonus_vp_tile",
+   "name": "Bonus victory point tile",
+   "fields": [],
+   "count_found": 2,
+   "count_in_rules": 2,
+   "back": "not shown on page 3",
+   "notes": ""
+  },
+  {
+   "id": "player_aid",
+   "name": "Player aid",
+   "fields": [],
+   "count_found": 4,
+   "count_in_rules": 4,
+   "back": "the other side is headed PLAYER AID, TURN OVERVIEW (not cut as a separate item)",
+   "notes": "one physical card per item; the front is cut"
+  },
+  {
+   "id": "development_card",
+   "name": "Development card",
+   "fields": [],
+   "count_found": 25,
+   "count_in_rules": 25,
+   "back": "plain red card back with a round swirl emblem",
+   "notes": ""
+  },
+  {
+   "id": "resource_card",
+   "name": "Resource card",
+   "fields": [
+    {
+     "name": "resource_picture",
+     "type": "enum",
+     "description": "the resource the large middle picture shows: brick (red clay blocks), wood (logs), wool (sheep), wheat (golden sheaf on a field), ore (grey rock). Read the picture, not the corner icons",
+     "enum_values": [
+      "brick",
+      "wood",
+      "wool",
+      "wheat",
+      "ore"
+     ]
+    }
+   ],
+   "count_found": 95,
+   "count_in_rules": 95,
+   "back": "tan card back with a hexagon emblem",
+   "notes": ""
+  },
+  {
+   "id": "card_tray",
+   "name": "Card tray",
+   "fields": [],
+   "count_found": 2,
+   "count_in_rules": 2,
+   "back": "not shown on page 3",
+   "notes": ""
+  },
+  {
+   "id": "die",
+   "name": "Die",
+   "fields": [
+    {
+     "name": "colour",
+     "type": "enum",
+     "description": "colour of the die body: red (with a CATAN logo) or yellow",
+     "enum_values": [
+      "red",
+      "yellow"
+     ]
+    }
+   ],
+   "count_found": 2,
+   "count_in_rules": 2,
+   "back": "not shown on page 3",
+   "notes": ""
+  },
+  {
+   "id": "robber",
+   "name": "Robber",
+   "fields": [],
+   "count_found": 1,
+   "count_in_rules": 1,
+   "back": "not shown on page 3",
+   "notes": ""
+  },
+  {
+   "id": "settlement",
+   "name": "Settlement",
+   "fields": [
+    {
+     "name": "colour",
+     "type": "enum",
+     "description": "colour of the piece body",
+     "enum_values": [
+      "blue",
+      "red",
+      "white",
+      "orange"
+     ]
+    }
+   ],
+   "count_found": 20,
+   "count_in_rules": 20,
+   "back": "not shown on page 3",
+   "notes": ""
+  },
+  {
+   "id": "city",
+   "name": "City",
+   "fields": [
+    {
+     "name": "colour",
+     "type": "enum",
+     "description": "colour of the piece body",
+     "enum_values": [
+      "blue",
+      "red",
+      "white",
+      "orange"
+     ]
+    }
+   ],
+   "count_found": 16,
+   "count_in_rules": 16,
+   "back": "not shown on page 3",
+   "notes": ""
+  },
+  {
+   "id": "road",
+   "name": "Road",
+   "fields": [
+    {
+     "name": "colour",
+     "type": "enum",
+     "description": "colour of the piece body",
+     "enum_values": [
+      "blue",
+      "red",
+      "white",
+      "orange"
+     ]
+    }
+   ],
+   "count_found": 60,
+   "count_in_rules": 60,
+   "back": "not shown on page 3",
+   "notes": ""
+  }
+ ],
+ "items": [
+  {
+   "id": "catan-rules#p3_r0_c0",
+   "kind": "sea_frame_piece",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 0,
+    "col": 0
+   },
+   "title": null,
+   "fields": {},
+   "text": "3:1",
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d001 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r0_c1",
+   "kind": "sea_frame_piece",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 0,
+    "col": 1
+   },
+   "title": null,
+   "fields": {},
+   "text": "3:1 / 2:1",
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d002 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r0_c2",
+   "kind": "sea_frame_piece",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 0,
+    "col": 2
+   },
+   "title": null,
+   "fields": {},
+   "text": "2:1 / 2:1 / 1 / 3 / 1 / 5",
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d003 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r0_c3",
+   "kind": "sea_frame_piece",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 0,
+    "col": 3
+   },
+   "title": null,
+   "fields": {},
+   "text": "2:1 / 3:1 / 2 / 6 / 6",
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d004 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r0_c4",
+   "kind": "sea_frame_piece",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 0,
+    "col": 4
+   },
+   "title": null,
+   "fields": {},
+   "text": "3:1 / 2:1 / 6 / 3 / 6",
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d005 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r0_c5",
+   "kind": "sea_frame_piece",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 0,
+    "col": 5
+   },
+   "title": null,
+   "fields": {},
+   "text": "2:1 / 2:1 / 3:1",
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d006 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r1_c0",
+   "kind": "number_disc",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 1,
+    "col": 0
+   },
+   "title": null,
+   "fields": {
+    "disc_number": 2,
+    "pip_count": 1,
+    "number_colour": "black"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d007 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r1_c1",
+   "kind": "number_disc",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 1,
+    "col": 1
+   },
+   "title": null,
+   "fields": {
+    "disc_number": 3,
+    "pip_count": 2,
+    "number_colour": "black"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d008 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r2_c0",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 2,
+    "col": 0
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "hills"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d009 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r2_c1",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 2,
+    "col": 1
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "forests"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d010 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r2_c2",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 2,
+    "col": 2
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "pastures"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d011 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r2_c3",
+   "kind": "bonus_vp_tile",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 2,
+    "col": 3
+   },
+   "title": "LONGEST ROUTE",
+   "fields": {},
+   "text": "The first player to play 5 continuous roads / receives this tile. If another player plays / more, they immediately receive this tile.",
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d012 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r2_c4",
+   "kind": "bonus_vp_tile",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 2,
+    "col": 4
+   },
+   "title": "LARGEST ARMY",
+   "fields": {},
+   "text": "The first player to play 3 Knight cards receives / this tile. If another player plays more Knight / cards, they immediately receive this tile.",
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d013 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r2_c5",
+   "kind": "number_disc",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 2,
+    "col": 5
+   },
+   "title": null,
+   "fields": {
+    "disc_number": 4,
+    "pip_count": 3,
+    "number_colour": "black"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d014 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r2_c6",
+   "kind": "number_disc",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 2,
+    "col": 6
+   },
+   "title": null,
+   "fields": {
+    "disc_number": 5,
+    "pip_count": 4,
+    "number_colour": "black"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d015 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r3_c0",
+   "kind": "number_disc",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 3,
+    "col": 0
+   },
+   "title": null,
+   "fields": {
+    "disc_number": 6,
+    "pip_count": 5,
+    "number_colour": "red"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d016 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r3_c1",
+   "kind": "number_disc",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 3,
+    "col": 1
+   },
+   "title": null,
+   "fields": {
+    "disc_number": 8,
+    "pip_count": 5,
+    "number_colour": "red"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d017 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r4_c0",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 4,
+    "col": 0
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "fields"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d018 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r4_c1",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 4,
+    "col": 1
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "mountains"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d019 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r4_c2",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 4,
+    "col": 2
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "desert"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d020 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r4_c3",
+   "kind": "player_aid",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 4,
+    "col": 3
+   },
+   "title": "BUILDING COSTS",
+   "fields": {},
+   "text": "Road / 0 VP / Longest Route / = 2 VPs / Settlement / 1 VP / City / 2 VPs / Development Card / ? VPs / Largest Army / = 2 VPs",
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d021 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r4_c4",
+   "kind": "number_disc",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 4,
+    "col": 4
+   },
+   "title": null,
+   "fields": {
+    "disc_number": 9,
+    "pip_count": 4,
+    "number_colour": "black"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d022 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r4_c5",
+   "kind": "number_disc",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 4,
+    "col": 5
+   },
+   "title": null,
+   "fields": {
+    "disc_number": 10,
+    "pip_count": 3,
+    "number_colour": "black"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "medium",
+   "notes": "design d023 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r5_c0",
+   "kind": "number_disc",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 5,
+    "col": 0
+   },
+   "title": null,
+   "fields": {
+    "disc_number": 11,
+    "pip_count": 2,
+    "number_colour": "black"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d024 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r5_c1",
+   "kind": "number_disc",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 5,
+    "col": 1
+   },
+   "title": null,
+   "fields": {
+    "disc_number": 12,
+    "pip_count": 1,
+    "number_colour": "black"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d025 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r6_c0",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 6,
+    "col": 0
+   },
+   "title": "MONOPOLY",
+   "fields": {},
+   "text": "Announce one type of / resource. Each player must give you all their / resource cards of that type.",
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d026 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r6_c1",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 6,
+    "col": 1
+   },
+   "title": "ROAD BUILDING",
+   "fields": {},
+   "text": "Build 2 roads at no cost.",
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d027 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r6_c2",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 6,
+    "col": 2
+   },
+   "title": "INVENTION",
+   "fields": {},
+   "text": "Take any 2 resource cards from the supply.",
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d028 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r6_c3",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 6,
+    "col": 3
+   },
+   "title": "KNIGHT",
+   "fields": {},
+   "text": "Move the robber to a / new hex. Steal 1 random / resource card from a player / with a building on that hex.",
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d029 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r6_c4",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 6,
+    "col": 4
+   },
+   "title": "VICTORY POINT",
+   "fields": {},
+   "text": "Play any number of Victory Point cards (even on the turn you build them) to win the game.",
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d030 (1 identical copies); 3 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r7_c0",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 7,
+    "col": 0
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d031 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r7_c1",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 7,
+    "col": 1
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d032 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r7_c2",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 7,
+    "col": 2
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d033 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r7_c3",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 7,
+    "col": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d034 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r7_c4",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 7,
+    "col": 4
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d035 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r8_c0",
+   "kind": "card_tray",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 8,
+    "col": 0
+   },
+   "title": null,
+   "fields": {},
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d036 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r8_c1",
+   "kind": "die",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 8,
+    "col": 1
+   },
+   "title": "CATAN",
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d037 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r8_c2",
+   "kind": "die",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 8,
+    "col": 2
+   },
+   "title": null,
+   "fields": {
+    "colour": "yellow"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d038 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r8_c3",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 8,
+    "col": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d039 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r8_c4",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 8,
+    "col": 4
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d040 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r8_c5",
+   "kind": "city",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 8,
+    "col": 5
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d041 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r8_c6",
+   "kind": "city",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 8,
+    "col": 6
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d042 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r9_c0",
+   "kind": "card_tray",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 9,
+    "col": 0
+   },
+   "title": null,
+   "fields": {},
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d043 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r9_c1",
+   "kind": "robber",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 9,
+    "col": 1
+   },
+   "title": null,
+   "fields": {},
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d044 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r9_c2",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 9,
+    "col": 2
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "medium",
+   "notes": "design d045 (1 identical copies); 5 independent reads; design overridden: white settlement piece on the design sheet; no reader returned a kind for it"
+  },
+  {
+   "id": "catan-rules#p3_r9_c3",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 9,
+    "col": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d046 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r9_c4",
+   "kind": "city",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 9,
+    "col": 4
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d047 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r9_c5",
+   "kind": "city",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 9,
+    "col": 5
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d048 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r10_c0",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 10,
+    "col": 0
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d049 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r10_c1",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 10,
+    "col": 1
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d050 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r10_c2",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 10,
+    "col": 2
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d051 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_r10_c3",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3,
+    "row": 10,
+    "col": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": false,
+   "confidence": "high",
+   "notes": "design d052 (1 identical copies); 2 independent reads"
+  },
+  {
+   "id": "catan-rules#p3_terrain_hex_01",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "hills"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_terrain_hex_02",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "hills"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_terrain_hex_03",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "forests"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_terrain_hex_04",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "forests"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_terrain_hex_05",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "forests"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_terrain_hex_06",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "pastures"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_terrain_hex_07",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "pastures"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_terrain_hex_08",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "pastures"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_terrain_hex_09",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "fields"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_terrain_hex_10",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "fields"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_terrain_hex_11",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "fields"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_terrain_hex_12",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "mountains"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_terrain_hex_13",
+   "kind": "terrain_hex",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "terrain_picture": "mountains"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_number_disc_01",
+   "kind": "number_disc",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "disc_number": 3,
+    "pip_count": null,
+    "number_colour": null
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_number_disc_02",
+   "kind": "number_disc",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "disc_number": 4,
+    "pip_count": null,
+    "number_colour": null
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_number_disc_03",
+   "kind": "number_disc",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "disc_number": 5,
+    "pip_count": null,
+    "number_colour": null
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_number_disc_04",
+   "kind": "number_disc",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "disc_number": 6,
+    "pip_count": null,
+    "number_colour": null
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_number_disc_05",
+   "kind": "number_disc",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "disc_number": 8,
+    "pip_count": null,
+    "number_colour": null
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_number_disc_06",
+   "kind": "number_disc",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "disc_number": 9,
+    "pip_count": null,
+    "number_colour": null
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_number_disc_07",
+   "kind": "number_disc",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "disc_number": 10,
+    "pip_count": null,
+    "number_colour": null
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_number_disc_08",
+   "kind": "number_disc",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "disc_number": 11,
+    "pip_count": null,
+    "number_colour": null
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_01",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Monopoly",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_02",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Road Building",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_03",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Invention",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_04",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Knight",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_05",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Knight",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_06",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Knight",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_07",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Knight",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_08",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Knight",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_09",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Knight",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_10",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Knight",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_11",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Knight",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_12",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Knight",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_13",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Knight",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_14",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Knight",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_15",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Knight",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_16",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Knight",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_17",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Victory Point",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_18",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Victory Point",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_19",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Victory Point",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_development_card_20",
+   "kind": "development_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": "Victory Point",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_01",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_02",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_03",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_04",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_05",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_06",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_07",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_08",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_09",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_10",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_11",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_12",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_13",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_14",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_15",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_16",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_17",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_18",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "brick"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_19",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_20",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_21",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_22",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_23",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_24",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_25",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_26",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_27",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_28",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_29",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_30",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_31",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_32",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_33",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_34",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_35",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_36",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wood"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_37",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_38",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_39",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_40",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_41",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_42",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_43",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_44",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_45",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_46",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_47",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_48",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_49",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_50",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_51",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_52",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_53",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_54",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wool"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_55",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_56",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_57",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_58",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_59",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_60",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_61",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_62",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_63",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_64",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_65",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_66",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_67",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_68",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_69",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_70",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_71",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_72",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "wheat"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_73",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_74",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_75",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_76",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_77",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_78",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_79",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_80",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_81",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_82",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_83",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_84",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_85",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_86",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_87",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_88",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_89",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_resource_card_90",
+   "kind": "resource_card",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "resource_picture": "ore"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_player_aid_01",
+   "kind": "player_aid",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_player_aid_02",
+   "kind": "player_aid",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_player_aid_03",
+   "kind": "player_aid",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_settlement_01",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_settlement_02",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_settlement_03",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_settlement_04",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_settlement_05",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_settlement_06",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_settlement_07",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_settlement_08",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_settlement_09",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_settlement_10",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_settlement_11",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_settlement_12",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_settlement_13",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_settlement_14",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_settlement_15",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_settlement_16",
+   "kind": "settlement",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_city_01",
+   "kind": "city",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_city_02",
+   "kind": "city",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_city_03",
+   "kind": "city",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_city_04",
+   "kind": "city",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_city_05",
+   "kind": "city",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_city_06",
+   "kind": "city",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_city_07",
+   "kind": "city",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_city_08",
+   "kind": "city",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_city_09",
+   "kind": "city",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_city_10",
+   "kind": "city",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_city_11",
+   "kind": "city",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_city_12",
+   "kind": "city",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_01",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_02",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_03",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_04",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_05",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_06",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_07",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_08",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_09",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_10",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_11",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_12",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_13",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_14",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "blue"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_15",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_16",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_17",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_18",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_19",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_20",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_21",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_22",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_23",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_24",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_25",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_26",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_27",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_28",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "red"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_29",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_30",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_31",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_32",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_33",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_34",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_35",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_36",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_37",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_38",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_39",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_40",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_41",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_42",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "white"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_43",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_44",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_45",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_46",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_47",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_48",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_49",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_50",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_51",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_52",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_53",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_54",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_55",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "catan-rules#p3_road_56",
+   "kind": "road",
+   "source": {
+    "file": "catan-rules.pdf",
+    "page": 3
+   },
+   "title": null,
+   "fields": {
+    "colour": "orange"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  }
+ ],
+ "extraction_notes": [
+  "game.credits was typed from the page 12 render, not read by the readers",
+  "Each of 52 unique designs (pixel-identical fronts grouped) was read by independent single-component model calls until every value had a majority; 50 designs were unanimous, 1 were resolved by hand.",
+  "Model cost of all reads: $0.2432."
+ ]
+}

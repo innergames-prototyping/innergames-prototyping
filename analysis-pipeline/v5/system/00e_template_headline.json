@@ -1,0 +1,114 @@
+{
+  "schema": "headline_v1",
+  "game": "<title as printed on the rulebook>",
+  "rulebook_file": "<file name of the rulebook>",
+  "player_counts": [],
+  "targets": {
+    "basis": "<play|session>",
+    "tolerance_pct": null,
+    "min_by_player_count": {}
+  },
+  "headline_clock": "typical",
+  "engine_version_final": "v1",
+  "games_executed": null,
+  "duration_table": [
+    {
+      "event_type": "<vocabulary name>",
+      "low_s": null,
+      "typical_s": null,
+      "high_s": null,
+      "tag": "<C|L|G>"
+    }
+  ],
+  "playtime": [
+    {
+      "player_count": null,
+      "engine_version": "v1",
+      "n_games": null,
+      "play_min": {
+        "typical": {"p10": null, "median": null, "p90": null, "mean": null},
+        "sampled": {"p10": null, "median": null, "p90": null, "mean": null},
+        "low_median": null,
+        "high_median": null
+      },
+      "session_min_typical_median": null,
+      "round_min_typical_mean": null,
+      "turn_min_typical_mean": null,
+      "rounds_played_median": null,
+      "turns_played_median": null,
+      "p_play_exceeds_target": {"typical": null, "sampled": null},
+      "p_play_within_tolerance": {"typical": null, "sampled": null},
+      "p_play_below_tolerance": {"typical": null, "sampled": null},
+      "verdict": "<short|on_target|long>"
+    }
+  ],
+  "outcome": [
+    {
+      "player_count": null,
+      "engine_version": "v1",
+      "n_games": null,
+      "score_per_player_mean": null,
+      "winning_score_median": null,
+      "tie_share": null,
+      "players_with_zero_score_per_game_mean": null,
+      "players_reaching_zero_lives_per_game_mean": null,
+      "win_share_by_seat": [
+        {"seat": 1, "share": null, "ci95": [null, null], "fair": null}
+      ],
+      "win_share_by_role": [
+        {"role": "<vocabulary name>", "share": null, "ci95": [null, null], "fair": null}
+      ]
+    }
+  ],
+  "d4_single_game": {
+    "seed": null,
+    "play_min_typical": null,
+    "batch_play_min_typical": {"p10": null, "median": null, "p90": null},
+    "representative": null,
+    "reason": "<one sentence>"
+  },
+  "d7_audit": {
+    "engine_before": "v1",
+    "engine_after": "v2",
+    "gaps_found": null,
+    "gaps_fixed": null,
+    "gaps_unfixed": null,
+    "rerun_play_min_typical_median": {"before": null, "after": null}
+  },
+  "interpretations": [
+    {
+      "id": "I1",
+      "topic": "<one line>",
+      "reading": "<one line>",
+      "tag": "<C|L|G>",
+      "tested_arm_ids": []
+    }
+  ],
+  "d8_arms": [
+    {
+      "arm_id": "S1",
+      "arm_kind": "<strategy|reading>",
+      "description": "<one line>",
+      "reading_id": null,
+      "focal": "<rotating_seat|role:<vocabulary name>|all>",
+      "n_pairs": null,
+      "engine_version": "v1",
+      "score_diff": {"mean": null, "ci95": [null, null]},
+      "win_diff_pp": {"mean": null, "ci95": [null, null]},
+      "opponent_score_diff": {"mean": null, "ci95": [null, null]},
+      "playtime_diff_min": {"mean": null, "ci95": [null, null]},
+      "significant": null
+    }
+  ],
+  "designer_questions": [
+    {
+      "rank": 1,
+      "question": "<one sentence>",
+      "measured_difference": "<one sentence with the number>",
+      "source_arm_ids": []
+    }
+  ],
+  "untested": [
+    {"item": "<one line>", "reason": "<one line>"}
+  ]
+}

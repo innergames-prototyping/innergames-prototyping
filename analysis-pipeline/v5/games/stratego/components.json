@@ -1,0 +1,1544 @@
+{
+ "spec_version": "extraction-1.0",
+ "game": {
+  "title": "Stratego",
+  "credits": [
+   "© 1986, 1996 Milton Bradley Company.",
+   "All Rights Reserved. 4714-I"
+  ]
+ },
+ "sources": [
+  {
+   "file": "Stratego.pdf",
+   "pages": 6,
+   "content": "rulebook (instructions): page 1 intro and contents, pages 2-6 assembly, setup, gameplay and tournament rules; no component sheets, the pieces appear only as pictures in the rules",
+   "layout": "none"
+  }
+ ],
+ "component_kinds": [
+  {
+   "id": "movable_piece",
+   "name": "Movable army piece",
+   "fields": [
+    {
+     "name": "army",
+     "type": "enum",
+     "enum_values": [
+      "red",
+      "blue"
+     ],
+     "description": "army the piece belongs to, as the rules name it (Red Army or Blue Army); not printed on the piece itself"
+    },
+    {
+     "name": "rank_symbol",
+     "type": "enum",
+     "enum_values": [
+      "10",
+      "9",
+      "8",
+      "7",
+      "6",
+      "5",
+      "4",
+      "3",
+      "2",
+      "S"
+     ],
+     "description": "rank number or letter printed in the top left corner of the piece's picture; S is the Spy"
+    }
+   ],
+   "count_found": 66,
+   "count_in_rules": 66,
+   "back": null,
+   "notes": "Not shown in any file; counted from the rules: 33 movable pieces in each army (page 2)."
+  },
+  {
+   "id": "immovable_piece",
+   "name": "Piece that does not move",
+   "fields": [
+    {
+     "name": "army",
+     "type": "enum",
+     "enum_values": [
+      "red",
+      "blue"
+     ],
+     "description": "army the piece belongs to, as the rules name it (Red Army or Blue Army); not printed on the piece itself"
+    },
+    {
+     "name": "picture",
+     "type": "enum",
+     "enum_values": [
+      "bomb",
+      "flag"
+     ],
+     "description": "picture on the piece: a bomb or a flag"
+    }
+   ],
+   "count_found": 14,
+   "count_in_rules": 14,
+   "back": null,
+   "notes": "Not shown in any file; counted from the rules: 6 bombs and 1 flag in each army (page 2)."
+  },
+  {
+   "id": "gameboard",
+   "name": "Gameboard",
+   "fields": [],
+   "count_found": 1,
+   "count_in_rules": null,
+   "back": null,
+   "notes": "Not shown in any file; named in the contents list (page 1)."
+  },
+  {
+   "id": "fortress_screen",
+   "name": "Fortress screen",
+   "fields": [],
+   "count_found": 1,
+   "count_in_rules": null,
+   "back": null,
+   "notes": "Not shown in any file; named in the contents list (page 1)."
+  },
+  {
+   "id": "display_tray",
+   "name": "Display tray",
+   "fields": [],
+   "count_found": 1,
+   "count_in_rules": null,
+   "back": null,
+   "notes": "Not shown in any file; named in the contents list (page 1)."
+  },
+  {
+   "id": "label_sheet",
+   "name": "Label sheet",
+   "fields": [],
+   "count_found": 1,
+   "count_in_rules": null,
+   "back": null,
+   "notes": "Not shown in any file; named in the contents list (page 1)."
+  }
+ ],
+ "items": [
+  {
+   "id": "Stratego#p2_movable_piece_01",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Marshal",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "10"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_02",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "General",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "9"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_03",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Colonel",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "8"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_04",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Colonel",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "8"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_05",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Major",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "7"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_06",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Major",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "7"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_07",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Major",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "7"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_08",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Captain",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "6"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_09",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Captain",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "6"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_10",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Captain",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "6"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_11",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Captain",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "6"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_12",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Lieutenant",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "5"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_13",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Lieutenant",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "5"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_14",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Lieutenant",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "5"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_15",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Lieutenant",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "5"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_16",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Sergeant",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "4"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_17",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Sergeant",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "4"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_18",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Sergeant",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "4"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_19",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Sergeant",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "4"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_20",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Miner",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "3"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_21",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Miner",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "3"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_22",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Miner",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "3"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_23",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Miner",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "3"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_24",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Miner",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "3"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_25",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Scout",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "2"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_26",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Scout",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "2"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_27",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Scout",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "2"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_28",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Scout",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "2"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_29",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Scout",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "2"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_30",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Scout",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "2"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_31",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Scout",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "2"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_32",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Scout",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "2"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_33",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Spy",
+   "fields": {
+    "army": "red",
+    "rank_symbol": "S"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_immovable_piece_01",
+   "kind": "immovable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Bomb",
+   "fields": {
+    "army": "red",
+    "picture": "bomb"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_immovable_piece_02",
+   "kind": "immovable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Bomb",
+   "fields": {
+    "army": "red",
+    "picture": "bomb"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_immovable_piece_03",
+   "kind": "immovable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Bomb",
+   "fields": {
+    "army": "red",
+    "picture": "bomb"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_immovable_piece_04",
+   "kind": "immovable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Bomb",
+   "fields": {
+    "army": "red",
+    "picture": "bomb"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_immovable_piece_05",
+   "kind": "immovable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Bomb",
+   "fields": {
+    "army": "red",
+    "picture": "bomb"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_immovable_piece_06",
+   "kind": "immovable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Bomb",
+   "fields": {
+    "army": "red",
+    "picture": "bomb"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_immovable_piece_07",
+   "kind": "immovable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Flag",
+   "fields": {
+    "army": "red",
+    "picture": "flag"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_34",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Marshal",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "10"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_35",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "General",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "9"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_36",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Colonel",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "8"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_37",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Colonel",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "8"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_38",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Major",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "7"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_39",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Major",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "7"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_40",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Major",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "7"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_41",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Captain",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "6"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_42",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Captain",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "6"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_43",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Captain",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "6"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_44",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Captain",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "6"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_45",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Lieutenant",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "5"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_46",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Lieutenant",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "5"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_47",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Lieutenant",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "5"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_48",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Lieutenant",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "5"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_49",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Sergeant",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "4"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_50",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Sergeant",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "4"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_51",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Sergeant",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "4"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_52",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Sergeant",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "4"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_53",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Miner",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "3"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_54",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Miner",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "3"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_55",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Miner",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "3"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_56",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Miner",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "3"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_57",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Miner",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "3"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_58",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Scout",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "2"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_59",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Scout",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "2"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_60",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Scout",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "2"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_61",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Scout",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "2"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_62",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Scout",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "2"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_63",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Scout",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "2"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_64",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Scout",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "2"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_65",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Scout",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "2"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_movable_piece_66",
+   "kind": "movable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Spy",
+   "fields": {
+    "army": "blue",
+    "rank_symbol": "S"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_immovable_piece_08",
+   "kind": "immovable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Bomb",
+   "fields": {
+    "army": "blue",
+    "picture": "bomb"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_immovable_piece_09",
+   "kind": "immovable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Bomb",
+   "fields": {
+    "army": "blue",
+    "picture": "bomb"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_immovable_piece_10",
+   "kind": "immovable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Bomb",
+   "fields": {
+    "army": "blue",
+    "picture": "bomb"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_immovable_piece_11",
+   "kind": "immovable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Bomb",
+   "fields": {
+    "army": "blue",
+    "picture": "bomb"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_immovable_piece_12",
+   "kind": "immovable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Bomb",
+   "fields": {
+    "army": "blue",
+    "picture": "bomb"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_immovable_piece_13",
+   "kind": "immovable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Bomb",
+   "fields": {
+    "army": "blue",
+    "picture": "bomb"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p2_immovable_piece_14",
+   "kind": "immovable_piece",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 2
+   },
+   "title": "Flag",
+   "fields": {
+    "army": "blue",
+    "picture": "flag"
+   },
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p1_gameboard_01",
+   "kind": "gameboard",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 1
+   },
+   "title": "Gameboard",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p1_fortress_screen_01",
+   "kind": "fortress_screen",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 1
+   },
+   "title": "Fortress Screen",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p1_display_tray_01",
+   "kind": "display_tray",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 1
+   },
+   "title": "Display Tray",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  },
+  {
+   "id": "Stratego#p1_label_sheet_01",
+   "kind": "label_sheet",
+   "source": {
+    "file": "Stratego.pdf",
+    "page": 1
+   },
+   "title": "Label Sheet",
+   "fields": {},
+   "text": null,
+   "from_rules": true,
+   "confidence": "high",
+   "notes": ""
+  }
+ ],
+ "extraction_notes": [
+  "The PDF is a rulebook only, with no component sheet: no component is cut out of a file. Every component comes from the rules' contents list (page 1) and the army composition (page 2), as rules_items.",
+  "Movable piece and bomb/flag counts are per army (33 movable and 7 non-moving pieces each, 40 per army, as printed on page 2 and in the contents list); count_in_rules is the total for both armies.",
+  "Each of 0 unique designs (pixel-identical fronts grouped) was read by independent single-component model calls until every value had a majority; 0 designs were unanimous, 0 were resolved by hand.",
+  "Model cost of all reads: $0.0743."
+ ]
+}
