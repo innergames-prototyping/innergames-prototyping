@@ -26,6 +26,10 @@ _Avoid_: Simulation (for the whole phase), testing
 A point in a run where it can wait for a person to approve or steer it before it continues. A run passes its checkpoints without waiting unless the person who starts it asks to verify.
 _Avoid_: Pause, gate, review step
 
+**Steering**:
+What a person gives at a checkpoint to change how the run continues. At the checkpoint after extraction it is a corrected rules text or component list. At the checkpoint before the simulation it is extra designer numbers, answers to designer questions and a note.
+_Avoid_: Feedback, correction, override
+
 ### Game knowledge
 
 **Designer numbers**:
