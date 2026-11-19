@@ -37,3 +37,17 @@ Fumadocs builds the site from the files in `docs/`, so the folder layout and the
 - Mark breaking changes with `!` after the type or scope and explain them in a `BREAKING CHANGE:` footer.
 - One logical change per commit.
 - Do not add `Co-Authored-By` or other AI attribution lines to commits or pull requests.
+
+## Agent skills
+
+### Issue tracker
+
+GitHub Issues in `innergames-prototyping/innergames-prototyping`, through the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The five default labels: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: `GLOSSARY.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.

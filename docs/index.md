@@ -17,3 +17,9 @@ Documentation for the InnerGames Prototyping project.
 - [Client Meeting 29 Oct 2026](./team/Client-Meeting-2026-10-29.md)
 - [Client Meeting 4 Nov 2026](./team/Client-Meeting-2026-11-04.md)
 - [Retrospective Board](./team/RetrospectiveBoard.md)
+
+## Agents
+
+- [Issue Tracker](./agents/issue-tracker.md)
+- [Triage Labels](./agents/triage-labels.md)
+- [Domain Docs](./agents/domain.md)
