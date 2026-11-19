@@ -1,0 +1,11 @@
+{
+  "schema": "focus_v1",
+  "game": "<game title>",
+  "focus_items": [
+    {"name": "<what gameplay revolves around, as the rulebook names it, e.g. 'player cards'>", "note": "<optional: why it matters>"}
+  ],
+  "_how_to_fill": [
+    "Name 1 to 3 elements. Use the rulebook's own words; the run maps them to its vocabulary names.",
+    "Without this file the run chooses the focus items itself and says why."
+  ]
+}
