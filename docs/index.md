@@ -9,6 +9,10 @@ Documentation for the InnerGames Prototyping project.
 - [Technical Requirements](./project/TechnicalRequirements.md)
 - [Design Responsibilities](./project/Design-Responsibilities.md)
 
+## Backend
+
+- [Pipeline Flow](./backend/pipeline-flow.md)
+
 ## Team
 
 - [Collaboration Agreement](./team/CollaborationAgreement.md)
