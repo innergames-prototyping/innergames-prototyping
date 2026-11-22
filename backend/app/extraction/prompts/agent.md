@@ -95,7 +95,12 @@ Fix problems through the layout:
   reference or summary card, is still a component.
 - Sideways items: `rotate` (degrees clockwise) for the page, `rotate_items` per item or row
   (`{"r3c2": 0, "r5": 90}`). Readers all misread sideways symbols the same way (a sideways minus looks
-  like a zero), so voting can't catch it.
+  like a zero), so voting can't catch it. `crop` levels text that runs at any other angle by itself,
+  to the nearest of level, sideways or upside down (`level` in `work/items.json`, degrees
+  counterclockwise); `rotate` then does the rest.
+- Text running in several directions on one item, such as round a ring-shaped board: cut it with
+  `boxes` into parts whose text runs one way, each with its labels whole. A part whose text all runs
+  one way is levelled; one that mixes directions is left as it is.
 - Cards with their own text on both sides (no back shared by the deck): pair them with `back_page`
   like any other back, and take the side with the card's name or number as the front. A back that
   no other design shares is read too, into the item's `back`.

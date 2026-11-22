@@ -14,7 +14,15 @@ import numpy as np
 from PIL import Image, ImageDraw
 from scipy import ndimage
 
-from .images import PREVIEW_SIDE, contact_sheet, ink_mask, page_background, rotate, trim
+from .images import (
+    PREVIEW_SIDE,
+    contact_sheet,
+    ink_mask,
+    level,
+    page_background,
+    rotate,
+    trim,
+)
 from .models import Layout
 from .regions import region_box
 from .workspace import ExtractionError, Workspace, save_json
@@ -156,15 +164,25 @@ def crop_files(ws: Workspace, layout: Layout, number: int) -> tuple[list[dict], 
                 f"two items get the key {key!r}; rename the files or use another `fronts` pattern"
             )
         folder.mkdir(parents=True)
-        front = rotate(Image.open(path).convert("RGB"), degrees)
+        front, tilt = level(rotate(Image.open(path).convert("RGB"), degrees))
         front.save(folder / "front.png")
         if layout.backs:
             back_path = ws.input / (back_prefix + name + back_suffix)
             if back_path.exists():
-                rotate(Image.open(back_path).convert("RGB"), degrees).save(folder / "back.png")
+                back, _ = level(rotate(Image.open(back_path).convert("RGB"), degrees))
+                back.save(folder / "back.png")
             else:
                 no_back.append(name)
-        entries.append({"key": key, "label": name, "file": relative, "page": 1, "rotate": degrees})
+        entries.append(
+            {
+                "key": key,
+                "label": name,
+                "file": relative,
+                "page": 1,
+                "rotate": degrees,
+                "level": tilt,
+            }
+        )
         thumbs.append((name, front))
     sheets = [
         contact_sheet(
@@ -257,7 +275,8 @@ def crop_page(ws: Workspace, layout: Layout) -> tuple[list[dict], list[str]]:
         key = item_key(stem, layout.page, r, c)
         folder = ws.item_dir(key)
         folder.mkdir(parents=True, exist_ok=True)
-        rotate(cell, degrees).save(folder / "front.png")
+        upright, tilt = level(rotate(cell, degrees))
+        upright.save(folder / "front.png")
         entry: dict[str, Any] = {
             "key": key,
             "file": layout.file,
@@ -265,12 +284,13 @@ def crop_page(ws: Workspace, layout: Layout) -> tuple[list[dict], list[str]]:
             "row": r,
             "col": c,
             "rotate": degrees,
+            "level": tilt,
             "box": box,
         }
         if back is not None:
             entry |= _save_back(back, layout, folder, (box, mask, r, c), degrees, row_len, n_rows)
         entries.append(entry)
-        thumbs.append((f"r{r}c{c}", rotate(cell, degrees)))
+        thumbs.append((f"r{r}c{c}", upright))
         scaled = [v * scale for v in box]
         draw.rectangle(scaled, outline="red", width=2)
         draw.text((scaled[0] + 4, scaled[1] + 3), f"r{r}c{c}", fill="red")
@@ -310,7 +330,8 @@ def _save_back(
     cell = cut(back, back_box, back_mask)
     if cell is None:
         return {}
-    rotate(cell, degrees).save(folder / "back.png")
+    upright, _ = level(rotate(cell, degrees))
+    upright.save(folder / "back.png")
     return {"back_page": layout.back_page, "back_row": back_row, "back_col": back_col}
 
 
