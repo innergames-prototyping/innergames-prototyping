@@ -13,6 +13,7 @@ from pydantic import BaseModel
 from starlette.datastructures import UploadFile as FormFile
 
 from ..analysis.session import AnalysisError, Steering
+from .replay import ReplayFrame, frame
 from .runs import (
     AnalysisRequest,
     Checkpoint,
@@ -210,6 +211,20 @@ async def continue_run(request: Request, run_id: str) -> RunStatus:
         raise HTTPException(409, str(e)) from e
     except AnalysisError as e:
         raise HTTPException(422, str(e)) from e
+
+
+@runs_router.get("/{run_id}/replay")
+async def replay_run(
+    request: Request, run_id: str, elapsed_s: Annotated[float, Query(ge=0)] = 0
+) -> ReplayFrame:
+    """The finished run as it was `elapsed_s` seconds after its start."""
+    runs = _runs(request)
+    try:
+        return frame(runs.get(run_id), runs.events(run_id), elapsed_s)
+    except RunNotFoundError as e:
+        raise _not_found(run_id) from e
+    except ValueError as e:
+        raise HTTPException(409, str(e)) from e
 
 
 runs_router.add_api_route("", list_extractions, methods=["GET"])
