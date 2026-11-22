@@ -6,6 +6,7 @@
 | `INNERGAMES_AGENT_MODEL`     | `haiku`         | Model of the extraction agent                 |
 | `INNERGAMES_READER_MODEL`    | `haiku`         | Model of the tool-less reader calls           |
 | `INNERGAMES_PARALLEL_READS`  | `12`            | Reader calls that run at the same time        |
+| `INNERGAMES_ANALYSIS_MODEL`  | `claude-opus-5-5` | Model of the analysis session |
 
 How the app reaches Claude: with `ANTHROPIC_API_KEY` set, Claude Code uses that key.
 Without it, Claude Code uses the login of the local Claude Code installation.
@@ -22,6 +23,7 @@ class Settings:
     agent_model: str
     reader_model: str
     parallel_reads: int
+    analysis_model: str = "claude-opus-5-5"
 
     @property
     def runs_dir(self) -> Path:
@@ -34,4 +36,5 @@ def load_settings() -> Settings:
         agent_model=os.environ.get("INNERGAMES_AGENT_MODEL", "haiku"),
         reader_model=os.environ.get("INNERGAMES_READER_MODEL", "haiku"),
         parallel_reads=int(os.environ.get("INNERGAMES_PARALLEL_READS", "12")),
+        analysis_model=os.environ.get("INNERGAMES_ANALYSIS_MODEL", "claude-opus-5-5"),
     )

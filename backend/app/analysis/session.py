@@ -41,6 +41,7 @@ ENVIRONMENT = (
     "report files_failed=none unless a file is missing and files_written as §3.4 says. python3 "
     "is on the PATH, with the standard library only."
 )
+UPSTREAM = {"rules.md": "01_rules.txt", "components.json": "01_components.json"}
 SCHEMAS = {"01_timings.json": "timings_v1", "01_focus.json": "focus_v1"}
 
 EventSink = Callable[[str, str], None]
@@ -72,6 +73,12 @@ def verify_kit(kit: Path = KIT) -> list[Path]:
     return files
 
 
+def check_designer_numbers(timings: dict[str, Any] | None, focus: dict[str, Any] | None) -> None:
+    for name, data in {"01_timings.json": timings, "01_focus.json": focus}.items():
+        if data is not None and data.get("schema") != SCHEMAS[name]:
+            raise AnalysisError(f"{name} needs schema {SCHEMAS[name]}")
+
+
 def prepare(
     folder: Path,
     rules: Path,
@@ -80,10 +87,8 @@ def prepare(
     focus: dict[str, Any] | None = None,
 ) -> None:
     """Fills `folder` with the kit files, the two extraction results and the designer numbers."""
+    check_designer_numbers(timings, focus)
     designer = {"01_timings.json": timings, "01_focus.json": focus}
-    for name, data in designer.items():
-        if data is not None and data.get("schema") != SCHEMAS[name]:
-            raise AnalysisError(f"{name} needs schema {SCHEMAS[name]}")
     kit_files = verify_kit()
     folder.mkdir(parents=True, exist_ok=False)
     for file in kit_files:
@@ -93,6 +98,22 @@ def prepare(
     for name, data in designer.items():
         if data is not None:
             (folder / name).write_text(json.dumps(data, ensure_ascii=False, indent=1))
+
+
+async def analyse_results(
+    results: Path,
+    folder: Path,
+    model: str,
+    timings: dict[str, Any] | None,
+    focus: dict[str, Any] | None,
+    on_event: EventSink,
+) -> AnalysisResult:
+    """Runs the analysis on an extraction's `results/` folder."""
+    missing = [name for name in UPSTREAM if not (results / name).is_file()]
+    if missing:
+        raise AnalysisError(f"the extraction has no {', '.join(missing)}")
+    prepare(folder, results / "rules.md", results / "components.json", timings, focus)
+    return await run_session(folder, model, on_event)
 
 
 def session_options(folder: Path, model: str, resume: str | None = None) -> ClaudeAgentOptions:

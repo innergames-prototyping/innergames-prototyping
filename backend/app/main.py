@@ -2,7 +2,7 @@
 
 from fastapi import FastAPI
 
-from .extraction.api import router
+from .extraction.api import router, runs_router
 from .extraction.reader import ClaudeReader
 from .extraction.runs import RunManager
 from .settings import Settings, load_settings
@@ -16,6 +16,7 @@ def create_app(settings: Settings | None = None, runs: RunManager | None = None)
         settings, ClaudeReader(settings.reader_model, cwd=settings.data_dir)
     )
     app.include_router(router)
+    app.include_router(runs_router)
     return app
 
 
