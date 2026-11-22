@@ -41,6 +41,15 @@ ENVIRONMENT = (
     "report files_failed=none unless a file is missing and files_written as §3.4 says. python3 "
     "is on the PATH, with the standard library only."
 )
+CHECKPOINT_LINE = "CHECKPOINT B"
+CHECKPOINT_NOTE = (
+    " This run has one review point, the only exception to the brief's 'one turn' rule. When D1, "
+    "D2 and D3 are written to out/ (D01_rules_dossier.md, D01_board_layout.json, the D02 engine "
+    "and runner, D03_playtime_model.md, D03_duration_table.json), and before you run any D4 "
+    "batch, end your turn. Make the last line of that message exactly: CHECKPOINT B. Do not write "
+    "a RUNLOG line then. A later message tells you to continue."
+)
+CHECKPOINT_FILES = ["D01_rules_dossier.md", "D03_duration_table.json"]
 UPSTREAM = {"rules.md": "01_rules.txt", "components.json": "01_components.json"}
 SCHEMAS = {"01_timings.json": "timings_v1", "01_focus.json": "focus_v1"}
 
@@ -59,6 +68,17 @@ class AnalysisResult:
     is_error: bool
     runlog: str | None
     validator_exit: int | None
+    at_checkpoint: bool = False
+
+
+@dataclass(frozen=True)
+class Steering:
+    """What a person gives at checkpoint B."""
+
+    timings: dict[str, Any] | None = None
+    focus: dict[str, Any] | None = None
+    answers: tuple[str, ...] = ()
+    note: str = ""
 
 
 def verify_kit(kit: Path = KIT) -> list[Path]:
@@ -107,19 +127,26 @@ async def analyse_results(
     timings: dict[str, Any] | None,
     focus: dict[str, Any] | None,
     on_event: EventSink,
+    stop_at_b: bool = False,
 ) -> AnalysisResult:
     """Runs the analysis on an extraction's `results/` folder."""
     missing = [name for name in UPSTREAM if not (results / name).is_file()]
     if missing:
         raise AnalysisError(f"the extraction has no {', '.join(missing)}")
     prepare(folder, results / "rules.md", results / "components.json", timings, focus)
-    return await run_session(folder, model, on_event)
+    return await run_session(folder, model, on_event, stop_at_b=stop_at_b)
 
 
-def session_options(folder: Path, model: str, resume: str | None = None) -> ClaudeAgentOptions:
+def session_options(
+    folder: Path, model: str, resume: str | None = None, stop_at_b: bool = False
+) -> ClaudeAgentOptions:
     """Isolated like every app session, but with the file and shell tools the kit needs."""
     return ClaudeAgentOptions(
-        system_prompt={"type": "preset", "preset": "claude_code", "append": ENVIRONMENT},
+        system_prompt={
+            "type": "preset",
+            "preset": "claude_code",
+            "append": ENVIRONMENT + (CHECKPOINT_NOTE if stop_at_b else ""),
+        },
         model=model,
         effort="high",
         cwd=folder,
@@ -136,9 +163,15 @@ def session_options(folder: Path, model: str, resume: str | None = None) -> Clau
 
 
 async def run_session(
-    folder: Path, model: str, on_event: EventSink | None = None
+    folder: Path,
+    model: str,
+    on_event: EventSink | None = None,
+    *,
+    prompt: str = PROMPT,
+    resume: str | None = None,
+    stop_at_b: bool = False,
 ) -> AnalysisResult:
-    """Runs the brief to its end in `folder`, then runs the kit's validator on `out/`."""
+    """Runs the session until it ends its turn. Validates `out/` unless it stopped at B."""
     log = folder / "events.jsonl"
 
     def emit(kind: str, text: str) -> None:
@@ -149,7 +182,8 @@ async def run_session(
             on_event(kind, text)
 
     reply, result = "", None
-    async for message in query(prompt=PROMPT, options=session_options(folder, model)):
+    options = session_options(folder, model, resume, stop_at_b)
+    async for message in query(prompt=prompt, options=options):
         if isinstance(message, AssistantMessage):
             for block in message.content:
                 if isinstance(block, ToolUseBlock):
@@ -163,7 +197,10 @@ async def run_session(
         raise AnalysisError("the session ended without a result")
     final = result.result or reply
     runlog = find_runlog(final)
-    exit_code = validate(folder, runlog) if (folder / "out").is_dir() else None
+    at_checkpoint = stop_at_b and not result.is_error and is_at_checkpoint(folder, final, runlog)
+    exit_code = None
+    if not at_checkpoint and (folder / "out").is_dir():
+        exit_code = validate(folder, runlog)
     return AnalysisResult(
         session_id=result.session_id,
         reply=final,
@@ -171,7 +208,53 @@ async def run_session(
         is_error=result.is_error,
         runlog=runlog,
         validator_exit=exit_code,
+        at_checkpoint=at_checkpoint,
     )
+
+
+def is_at_checkpoint(folder: Path, reply: str, runlog: str | None) -> bool:
+    """The session asked to stop at B and wrote the files B shows."""
+    lines = reply.strip().splitlines()
+    return (
+        runlog is None
+        and bool(lines)
+        and lines[-1].strip() == CHECKPOINT_LINE
+        and all((folder / "out" / name).is_file() for name in CHECKPOINT_FILES)
+    )
+
+
+def apply_steering(folder: Path, steering: Steering) -> str:
+    """Writes the extra designer numbers and returns the message that continues the session."""
+    check_designer_numbers(steering.timings, steering.focus)
+    parts = ["Checkpoint B is passed. Continue the brief from D4 to the end, with the RUNLOG line."]
+    if steering.timings is not None:
+        path = folder / "01_timings.json"
+        merged = steering.timings
+        if path.exists():
+            merged = json.loads(path.read_text())
+            merged.setdefault("categories", {}).update(steering.timings.get("categories", {}))
+            merged["sessions"] = merged.get("sessions", []) + steering.timings.get("sessions", [])
+        path.write_text(json.dumps(merged, ensure_ascii=False, indent=1))
+        parts.append("01_timings.json changed. Read it again and update D3 before you simulate.")
+    if steering.focus is not None:
+        (folder / "01_focus.json").write_text(
+            json.dumps(steering.focus, ensure_ascii=False, indent=1)
+        )
+        parts.append("01_focus.json changed. Read it again and use its focus items.")
+    if steering.answers:
+        answers = "\n".join(f"- {answer}" for answer in steering.answers)
+        parts.append(f"The game designer's answers:\n{answers}")
+    if steering.note:
+        parts.append(f"A note from the person who reviewed the run:\n{steering.note}")
+    return "\n\n".join(parts)
+
+
+async def resume_analysis(
+    folder: Path, model: str, session_id: str, steering: Steering, on_event: EventSink
+) -> AnalysisResult:
+    """Continues a session that stopped at B."""
+    prompt = apply_steering(folder, steering)
+    return await run_session(folder, model, on_event, prompt=prompt, resume=session_id)
 
 
 def find_runlog(reply: str) -> str | None:

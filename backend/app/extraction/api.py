@@ -10,14 +10,18 @@ from typing import Annotated, Any
 from fastapi import APIRouter, Form, HTTPException, Query, Request, UploadFile
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
+from starlette.datastructures import UploadFile as FormFile
 
-from ..analysis.session import AnalysisError
+from ..analysis.session import AnalysisError, Steering
 from .runs import (
     AnalysisRequest,
+    Checkpoint,
+    CheckpointASteering,
     RunBusyError,
     RunEvent,
     RunManager,
     RunNotFoundError,
+    RunNotWaitingError,
     RunStatus,
 )
 from .workspace import ExtractionError
@@ -110,6 +114,14 @@ class AnalysisStart(BaseModel):
     source_run: str
     timings: dict[str, Any] | None = None
     focus: dict[str, Any] | None = None
+    verify: list[Checkpoint] = []
+
+
+class CheckpointBBody(BaseModel):
+    timings: dict[str, Any] | None = None
+    focus: dict[str, Any] | None = None
+    answers: list[str] = []
+    note: str = ""
 
 
 def _designer_json(name: str, text: str | None) -> dict[str, Any] | None:
@@ -130,6 +142,7 @@ async def start_run(
     files: list[UploadFile],
     timings: Annotated[str | None, Form()] = None,
     focus: Annotated[str | None, Form()] = None,
+    verify: Annotated[list[Checkpoint] | None, Form()] = None,
 ) -> RunStatus:
     """Starts one run: extraction, then analysis."""
     analysis = AnalysisRequest(_designer_json("timings", timings), _designer_json("focus", focus))
@@ -139,7 +152,7 @@ async def start_run(
             400, f"Only PDF (a real PDF), PNG and JPG files are accepted. Refused: {refused}"
         )
     try:
-        return _runs(request).start(dict(uploads), analysis)
+        return _runs(request).start(dict(uploads), analysis, verify)
     except RunBusyError as e:
         raise HTTPException(409, str(e)) from e
     except AnalysisError as e:
@@ -153,11 +166,47 @@ async def start_analysis(request: Request, body: AnalysisStart) -> RunStatus:
     """Starts a run that does only the analysis, on an earlier run's extraction results."""
     try:
         return _runs(request).start_analysis(
-            body.source_run, AnalysisRequest(body.timings, body.focus)
+            body.source_run, AnalysisRequest(body.timings, body.focus), body.verify
         )
     except RunNotFoundError as e:
         raise _not_found(body.source_run) from e
     except RunBusyError as e:
+        raise HTTPException(409, str(e)) from e
+    except AnalysisError as e:
+        raise HTTPException(422, str(e)) from e
+
+
+async def _steering(request: Request) -> CheckpointASteering | Steering | None:
+    """Empty body: approve. Multipart: replaced files (A). JSON: numbers, answers, note (B)."""
+    content_type = request.headers.get("content-type", "")
+    if content_type.startswith("multipart/form-data"):
+        form = await request.form()
+        rules, components = form.get("rules"), form.get("components")
+        if not isinstance(rules, FormFile) and not isinstance(components, FormFile):
+            raise HTTPException(422, "send a rules or components file")
+        return CheckpointASteering(
+            await rules.read() if isinstance(rules, FormFile) else None,
+            await components.read() if isinstance(components, FormFile) else None,
+        )
+    raw = await request.body()
+    if not raw.strip():
+        return None
+    try:
+        body = CheckpointBBody.model_validate_json(raw)
+    except ValueError as e:
+        raise HTTPException(422, "the body does not match the checkpoint B format") from e
+    return Steering(body.timings, body.focus, tuple(body.answers), body.note)
+
+
+@runs_router.post("/{run_id}/continue")
+async def continue_run(request: Request, run_id: str) -> RunStatus:
+    """Empty body approves the checkpoint; a body steers the run."""
+    steering = await _steering(request)
+    try:
+        return _runs(request).continue_run(run_id, steering)
+    except RunNotFoundError as e:
+        raise _not_found(run_id) from e
+    except (RunBusyError, RunNotWaitingError) as e:
         raise HTTPException(409, str(e)) from e
     except AnalysisError as e:
         raise HTTPException(422, str(e)) from e

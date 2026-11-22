@@ -19,7 +19,7 @@ async def agent(ws, settings, reader, limits, on_event):
 
 
 def analyser(calls, validator=0, is_error=False):
-    async def analyse(results, folder, model, timings, focus, on_event):
+    async def analyse(results, folder, model, timings, focus, on_event, stop_at_b=False):
         calls.append((results, folder, model, timings, focus))
         on_event("text", "analysing")
         return AnalysisResult("sid", "Analysed.", 2.0, is_error, "RUNLOG: phases=9", validator)
