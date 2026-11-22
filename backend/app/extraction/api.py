@@ -53,7 +53,7 @@ async def start_extraction(request: Request, files: list[UploadFile]) -> RunStat
 
 @router.get("")
 async def list_extractions(request: Request) -> list[RunStatus]:
-    return _runs(request).list()
+    return _runs(request).list_runs()
 
 
 @router.get("/{run_id}")

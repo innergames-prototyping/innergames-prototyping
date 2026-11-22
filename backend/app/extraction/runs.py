@@ -133,7 +133,7 @@ class RunManager:
             (self._folder(run_id) / "run.json").write_text(status.model_dump_json(indent=1))
         return status
 
-    def list(self) -> list[RunStatus]:
+    def list_runs(self) -> list[RunStatus]:
         """All runs, newest first."""
         if not self.settings.runs_dir.exists():
             return []
