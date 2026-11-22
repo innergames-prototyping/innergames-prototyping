@@ -10,11 +10,12 @@ from typing import Any
 
 from PIL import Image
 
+from .images import tiles
 from .models import ExtractionConfig, Item, ItemSource, Kind, KindField
 from .orient import DIRECTIONS, image_id, orientation
 from .queue import Read, ReadLimits, ReadTarget
 from .reader import Reader
-from .voting import clean, merge_reads, spelling_flags, vote
+from .voting import clean, merge_reads, placed_elsewhere, spelling_flags, vote
 from .workspace import ExtractionError, Workspace, load_json, save_json
 
 # ---------------------------------------------------------------- what readers are asked
@@ -41,9 +42,9 @@ def _kind_schema(kind: Kind) -> dict[str, Any]:
     }
 
 
-def reader_schema(cfg: ExtractionConfig) -> dict[str, Any]:
+def reader_schema(cfg: ExtractionConfig, own_back: bool = False) -> dict[str, Any]:
     kind_ids = [k.id for k in cfg.kinds]
-    return {
+    schema: dict[str, Any] = {
         "type": "object",
         "additionalProperties": False,
         "required": [
@@ -74,6 +75,24 @@ def reader_schema(cfg: ExtractionConfig) -> dict[str, Any]:
             "unreadable": {"type": "string"},
         },
     }
+    if own_back:
+        schema["required"].append("back_text")
+        schema["properties"]["back_text"] = {"type": ["string", "null"]}
+    return schema
+
+
+def _tiles_line(has_back: bool, rows: int, cols: int) -> str:
+    first = 3 if has_back else 2
+    last = first + rows * cols - 1
+    return (
+        f"The front is large, so image 1 is scaled down. Images {first} to {last} are the same "
+        f"front cut into {rows} rows of {cols} tiles at higher resolution, row by row from the "
+        "top left, overlapping a little at the edges. Read the print from the tiles, and "
+        "transcribe each piece of text once even where two tiles show it. On a large component "
+        "such as a board, the names and labels printed on it (spaces, areas, slots, tracks, "
+        "pictured pieces) are its content, not decoration: transcribe every one, tile by tile in "
+        "that order."
+    )
 
 
 def _kind_lines(kind: Kind) -> list[str]:
@@ -84,13 +103,27 @@ def _kind_lines(kind: Kind) -> list[str]:
     return lines
 
 
-def reader_prompt(cfg: ExtractionConfig, has_back: bool) -> str:
+def reader_prompt(
+    cfg: ExtractionConfig,
+    has_back: bool,
+    own_back: bool = False,
+    grid: tuple[int, int] = (0, 0),
+) -> str:
+    """`own_back`: the back belongs to this component alone, so its text is read too. `grid` is
+    the (rows, cols) of the tiles sent after the front and back of a large component."""
     lines = [
         "Image 1 is the front of ONE physical game component"
-        + (", image 2 is its back." if has_back else "."),
-        "",
-        "Possible kinds of component:",
+        + (", image 2 is its back." if has_back else ".")
     ]
+    rows, cols = grid
+    if rows:
+        lines.append(_tiles_line(has_back, rows, cols))
+    if own_back:
+        lines.append(
+            "This back is printed for this component alone, not shared with other components, "
+            "so its text is part of the component."
+        )
+    lines += ["", "Possible kinds of component:"]
     for kind in cfg.kinds:
         lines += _kind_lines(kind)
     lines += [
@@ -122,7 +155,14 @@ def reader_prompt(cfg: ExtractionConfig, has_back: bool) -> str:
         "typo, copied exactly as printed; [] if none.",
         "- unreadable: anything you could not read, and why; empty string if none.",
     ]
-    if has_back:
+    if own_back:
+        lines.append(
+            "- back_text: all printed text on the back (image 2), verbatim and letter by letter "
+            "in the same way as text, lines joined with ' / ', including a name printed on the "
+            "back; null if the back has no text. Words misspelled on the back go in misspelled "
+            "too."
+        )
+    elif has_back:
         lines.append("Image 2 only helps recognise the kind: take no title or text from the back.")
     return "\n".join(lines)
 
@@ -145,7 +185,7 @@ def _vote_text(texts: list[str | None]) -> tuple[str | None, list[dict]]:
     if not any(texts):
         return None, []
     merged, unresolved = merge_reads([t or "" for t in texts])
-    return merged.strip() or None, unresolved
+    return merged.strip() or None, placed_elsewhere(unresolved, merged)
 
 
 def resolve(
@@ -189,8 +229,11 @@ def resolve(
     values["text"], unresolved = _vote_text([o["text"] for o in same])
     if unresolved:
         votes["text"] = unresolved
+    values["back"], back_unresolved = _vote_text([o["back_text"] for o in same if "back_text" in o])
+    if back_unresolved:
+        votes["back"] = back_unresolved
     values["votes"] = votes
-    return values, unsettled, not unresolved
+    return values, unsettled, not unresolved and not back_unresolved
 
 
 # ---------------------------------------------------------------- read files
@@ -210,13 +253,40 @@ def kind_hashes(cfg: ExtractionConfig) -> dict[str, str]:
     return hashes
 
 
+def own_backs(groups: dict[str, Any]) -> set[str]:
+    """Designs whose backs no other design shares. A back shared across designs is the deck's back
+    (its kind or a logo); a back of one design alone carries the component's own information."""
+    item_design = {key: d for d, members in groups["designs"].items() for key in members}
+    with_back: set[str] = set()
+    shared: set[str] = set()
+    for members in groups.get("backs", {}).values():
+        designs = {item_design[key] for key in members if key in item_design}
+        with_back |= designs
+        if len(designs) > 1:
+            shared |= designs
+    return with_back - shared
+
+
+def _items_with_own_back(ws: Workspace, groups: dict[str, Any]) -> set[str]:
+    """The items that are read with their back's text. A copy without a back image is not."""
+    return {
+        key
+        for design in own_backs(groups)
+        for key in groups["designs"][design]
+        if (ws.item_dir(key) / "back.png").exists()
+    }
+
+
 def read_index(ws: Workspace, cfg: ExtractionConfig) -> dict[str, list[dict[str, Any]]]:
     """Reads per item, keeping only reads of the item's current crop, made while the kind the
-    reader chose was described as it is now: re-cropping, rotating, regrouping or rewriting a
-    kind never reuses a read made under other conditions."""
+    reader chose was described as it is now and with the item's back counted the same way:
+    re-cropping, rotating, regrouping or rewriting a kind never reuses a read made under other
+    conditions."""
     crops: dict[str, str | None] = {}
     index: dict[str, list[dict[str, Any]]] = defaultdict(list)
     hashes = kind_hashes(cfg)
+    groups = load_json(ws.work / "groups.json", {"designs": {}})
+    with_own_back = _items_with_own_back(ws, groups)
     for path in sorted((ws.work / "reads").glob("*/*.json")):
         record = load_json(path)
         key = record["item"]
@@ -225,7 +295,8 @@ def read_index(ws: Workspace, cfg: ExtractionConfig) -> dict[str, list[dict[str,
         current_hash = hashes.get(record["output"]["kind"])
         same_crop = record.get("image") == crops[key]
         same_kind_def = record.get("kind_def", current_hash) == current_hash
-        if same_crop and same_kind_def:
+        same_back_role = ("back_text" in record["output"]) == (key in with_own_back)
+        if same_crop and same_kind_def and same_back_role:
             index[key].append(record)
     return index
 
@@ -272,14 +343,15 @@ class DesignTarget(ReadTarget):
         design: str,
         members: list[str],
         all_reads: dict[str, list[dict[str, Any]]],
+        has_own_back: bool = False,
     ):
         super().__init__()
         self.ws, self.cfg, self.reader, self.limits = ws, cfg, reader, limits
         self.design, self.members = design, members
         # The reads of every design being read: a kind is judged wrong across all of them.
         self.all_reads = all_reads
+        self.has_own_back = has_own_back
         self.cost_usd = 0.0
-        self._schema = reader_schema(cfg)
         self._kind_hashes = kind_hashes(cfg)
         self._folder = ws.work / "reads" / design
         self._next_index = len(list(self._folder.glob("*.json")))
@@ -318,11 +390,16 @@ class DesignTarget(ReadTarget):
     async def _read(self, n: int) -> None:
         key = self.members[n % len(self.members)]
         folder = self.ws.item_dir(key)
-        images = [Image.open(folder / "front.png")]
+        front = Image.open(folder / "front.png")
+        images = [front]
         if (folder / "back.png").exists():
             images.append(Image.open(folder / "back.png"))
-        prompt = reader_prompt(self.cfg, has_back=len(images) == 2)
-        answer = await self.reader.ask(images, prompt, self._schema)
+        has_back = len(images) == 2
+        own_back = has_back and self.has_own_back
+        rows, cols, front_tiles = tiles(front)
+        prompt = reader_prompt(self.cfg, has_back, own_back, (rows, cols))
+        schema = reader_schema(self.cfg, own_back)
+        answer = await self.reader.ask(images + front_tiles, prompt, schema)
         record = {
             "item": key,
             "image": image_id(self.ws, key),
@@ -350,8 +427,9 @@ def design_targets(
     index = read_index(ws, cfg)
     wanted = {d: ms for d, ms in groups["designs"].items() if not designs or d in designs}
     all_reads = {d: design_reads(index, ms) for d, ms in wanted.items()}
+    own = own_backs(groups)
     return [
-        DesignTarget(ws, cfg, reader, limits, design, members, all_reads)
+        DesignTarget(ws, cfg, reader, limits, design, members, all_reads, design in own)
         for design, members in wanted.items()
     ]
 
@@ -410,9 +488,8 @@ def _resolve_design(
     proofs = [
         {"printed": w, "context": ""} for r in reads for w in r["output"].get("misspelled") or []
     ]
-    values["spelling"] = spelling_flags(
-        f"{values.get('title') or ''}\n{values.get('text') or ''}", proofs
-    )
+    printed = "\n".join(values.get(name) or "" for name in ("title", "text", "back"))
+    values["spelling"] = spelling_flags(printed, proofs)
     return values | {
         "members": members,
         "reads": len(reads),

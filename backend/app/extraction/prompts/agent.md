@@ -96,6 +96,11 @@ Fix problems through the layout:
 - Sideways items: `rotate` (degrees clockwise) for the page, `rotate_items` per item or row
   (`{"r3c2": 0, "r5": 90}`). Readers all misread sideways symbols the same way (a sideways minus looks
   like a zero), so voting can't catch it.
+- Cards with their own text on both sides (no back shared by the deck): pair them with `back_page`
+  like any other back, and take the side with the card's name or number as the front. A back that
+  no other design shares is read too, into the item's `back`.
+- A component more than about 3,000 px across, such as a board, is also read in tiles at full
+  resolution, so its labels are legible.
 
 **Designs.** `group` puts pixel-identical fronts into one design; any small local difference keeps
 them apart. Check `work/contact/designs_*.png` and `work/contact/backs.png`. Extra designs are
@@ -270,7 +275,7 @@ config:
   out `back_page` only when a page has no backs.
 - `separate`: item keys that must never be grouped with anything (use this if a group looks wrong).
 - `overrides`: keys are a design (`dNNN`) or an item key. `set` may hold `kind`, `title`, `text`,
-  `orientation` and `fields.<name>`.
+  `back`, `orientation` and `fields.<name>`.
 - `rules_items`: one entry per group of components the rules name that the files don't show (see
   Round 3). `assemble` turns each into `count` entries in `items`. Every `kind` must be in `kinds`
   and every key in `fields` must be a declared field of that kind.

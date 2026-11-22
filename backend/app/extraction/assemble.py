@@ -148,6 +148,7 @@ def build_items(
                 title=v.get("title"),
                 fields={f.name: v["fields"].get(f.name) for f in declared},
                 text=v.get("text"),
+                back=v.get("back"),
                 from_rules=False,
                 confidence=_confidence(v),
                 notes="; ".join(notes),

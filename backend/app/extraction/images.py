@@ -2,6 +2,7 @@
 
 import base64
 import io
+import math
 from pathlib import Path
 
 import numpy as np
@@ -10,6 +11,9 @@ from scipy import ndimage
 
 MAX_SIDE = 1568
 """The API shrinks larger images anyway, so images sent to a model are never larger."""
+
+TILE_SIDE = 2000
+"""A component more than twice MAX_SIDE is also read in tiles of about this size."""
 
 PREVIEW_SIDE = 1400
 
@@ -79,6 +83,27 @@ def halves(img: Image.Image) -> list[Image.Image]:
     n = max(w, h)
     spans = [(0, int(n * 0.55)), (int(n * 0.45), n)]
     return [img.crop((a, 0, b, h) if w >= h else (0, a, w, b)) for a, b in spans]
+
+
+def tiles(img: Image.Image, overlap=0.08) -> tuple[int, int, list[Image.Image]]:
+    """A large component cut into a grid of overlapping tiles, so small print survives the API's
+    downsizing. Returns (rows, cols, tiles row by row), or (0, 0, []) when the image is not large
+    enough to need it."""
+    width, height = img.size
+    if max(width, height) <= 2 * MAX_SIDE:
+        return 0, 0, []
+    rows, cols = math.ceil(height / TILE_SIDE), math.ceil(width / TILE_SIDE)
+    tile_width, tile_height = width / cols, height / rows
+    margin_x, margin_y = tile_width * overlap, tile_height * overlap
+    parts = []
+    for row in range(rows):
+        for col in range(cols):
+            left = int(max(0, col * tile_width - margin_x))
+            top = int(max(0, row * tile_height - margin_y))
+            right = int(min(width, (col + 1) * tile_width + margin_x))
+            bottom = int(min(height, (row + 1) * tile_height + margin_y))
+            parts.append(img.crop((left, top, right, bottom)))
+    return rows, cols, parts
 
 
 def png_base64(img: Image.Image) -> str:
