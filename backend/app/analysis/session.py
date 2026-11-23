@@ -7,6 +7,7 @@
 <folder>/check.json     the result of the kit's validator
 """
 
+import asyncio
 import hashlib
 import json
 import os
@@ -200,7 +201,7 @@ async def run_session(
     at_checkpoint = stop_at_b and not result.is_error and is_at_checkpoint(folder, final, runlog)
     exit_code = None
     if not at_checkpoint and (folder / "out").is_dir():
-        exit_code = validate(folder, runlog)
+        exit_code = await asyncio.to_thread(validate, folder, runlog)
     return AnalysisResult(
         session_id=result.session_id,
         reply=final,
