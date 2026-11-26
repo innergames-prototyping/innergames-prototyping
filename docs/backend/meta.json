@@ -1,5 +1,5 @@
 {
   "title": "Backend",
   "defaultOpen": false,
-  "pages": ["pipeline-flow", "..."]
+  "pages": ["how-it-works", "pipeline-flow", "..."]
 }

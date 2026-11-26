@@ -11,6 +11,7 @@ Documentation for the InnerGames Prototyping project.
 
 ## Backend
 
+- [How It Works](./backend/how-it-works.md)
 - [Pipeline Flow](./backend/pipeline-flow.md)
 
 ## Team
