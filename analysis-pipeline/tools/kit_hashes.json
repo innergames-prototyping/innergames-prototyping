@@ -1,0 +1,38 @@
+{
+  "kit": "v5.2",
+  "system": {
+    "00a_START_HERE.md": {
+      "bytes": 9667,
+      "sha256": "7a290d1ae43c41a3fecc7571abde7a60511ba736c84f35642cb950dd7a722f5f"
+    },
+    "00b_output_contract.md": {
+      "bytes": 20193,
+      "sha256": "70778af7a07667ae85bb0636446d468c9fd34dc6a45174181c96d45f596a8add"
+    },
+    "00c_reporting_standard.md": {
+      "bytes": 4338,
+      "sha256": "284698f01be3035c816b80a2f8742d187fd4f71dcda7f0e711395630c335b810"
+    },
+    "00d_stat_definitions.md": {
+      "bytes": 16831,
+      "sha256": "0ba0018de63da8f6a3935c678e2ccc9e57645f41e7f25038e8e5f0e8a64855c4"
+    },
+    "00e_template_headline.json": {
+      "bytes": 4455,
+      "sha256": "cc40c372bf8d06276c3a7d194c130d637cec9789aad79fe80b2245306bafb835"
+    },
+    "00f_template_summary.json": {
+      "bytes": 2770,
+      "sha256": "772f6243e8301960593dad6a475cb67d13506b2b24ed1ceab91557c172a2e39d"
+    },
+    "00g_template_run_manifest.json": {
+      "bytes": 2393,
+      "sha256": "497b24ef0e06fb62a78a57dd0c0f21260fe0e13b90761a190da650ddd4f60d36"
+    },
+    "00h_template_per_game.json": {
+      "bytes": 2683,
+      "sha256": "bab86335bc4ced9a90082e96dff43ad11e5ac12b01630db508714234ea43e423"
+    }
+  },
+  "note": "system/ is byte-identical to kit v5.1: v5.2 changes tools, operator procedure and documentation only"
+}

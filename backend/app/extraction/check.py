@@ -32,7 +32,8 @@ HELP = {
     ),
     "text": (
         "TEXT UNCERTAIN is text readers disagree on, often illegible decorative print. Set the "
-        "text from the image with a `text` override, or drop the illegible part, with the reason."
+        "text from the image with a `text` override (`back` for text on a component's own back), "
+        "or drop the illegible part, with the reason."
     ),
     "spelling": (
         "SPELLING is a misspelled word a reader saw that the voted title or text has corrected. "
@@ -104,9 +105,8 @@ def _design_flags(ws: Workspace, designs: dict[str, dict], report: CheckReport) 
                 }
             )
         elif not v.get("text_settled", True) and not v.get("overridden"):
-            report.text_uncertain.append(
-                {"design": design, "image": image, "spans": v["votes"].get("text", [])}
-            )
+            spans = v["votes"].get("text", []) + v["votes"].get("back", [])
+            report.text_uncertain.append({"design": design, "image": image, "spans": spans})
         for flag in v.get("spelling", []):
             report.spelling.append({"design": design, "image": image} | flag)
 

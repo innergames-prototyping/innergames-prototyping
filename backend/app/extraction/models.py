@@ -147,7 +147,7 @@ class Expect(Strict):
     distribution: dict[str, dict[str, int]] = {}
 
 
-OVERRIDE_KEYS = ("kind", "title", "text", "orientation")
+OVERRIDE_KEYS = ("kind", "title", "text", "back", "orientation")
 
 
 class Override(Strict):

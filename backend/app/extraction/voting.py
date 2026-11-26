@@ -39,7 +39,7 @@ def vote(
 def clean(out: dict[str, Any]) -> dict[str, Any]:
     """Undo reader quirks: HTML entities (&amp;) and the word null instead of a JSON null."""
     out = dict(out)
-    for name in ("title", "text"):
+    for name in ("title", "text", "back_text"):
         if isinstance(out.get(name), str):
             value = html.unescape(out[name]).strip()
             out[name] = None if value.lower() in ("", "null", "none") else value
@@ -182,6 +182,18 @@ def merge_reads(texts: list[str]) -> tuple[str, list[dict[str, Any]]]:
         if contested and _differs_in_words(base_span, alternatives):
             unresolved.append(_unresolved(base, span, alternatives))
     return detokenize(merged), unresolved[::-1]
+
+
+def placed_elsewhere(spans: list[dict[str, Any]], text: str) -> list[dict[str, Any]]:
+    """The disputed passages with a word the voted text lacks. When every word of the alternatives
+    is in the text anyway, readers listed the same labels in another order, which on a component
+    is no disagreement about what is printed."""
+    have = set(text.split())
+    return [
+        span
+        for span in spans
+        if any(w not in have for alt in span["alternatives"] for w in alt.split() if w != "/")
+    ]
 
 
 # ---------------------------------------------------------------- Tesseract comparison

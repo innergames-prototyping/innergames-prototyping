@@ -1,0 +1,29 @@
+{
+  "schema": "timings_v1",
+  "game": "<game title>",
+  "measured_by": "<who timed it and how, e.g. 'Arjen, stopwatch, 2 sessions with first-time players'>",
+  "categories": {
+    "setup":          {"min_s": null, "max_s": null, "typical_s": null, "observations": null, "note": null},
+    "teardown":       {"min_s": null, "max_s": null, "typical_s": null, "observations": null, "note": null},
+    "turn_admin":     {"min_s": null, "max_s": null, "typical_s": null, "observations": null, "note": null},
+    "move":           {"min_s": null, "max_s": null, "typical_s": null, "observations": null, "note": null},
+    "draw_card":      {"min_s": null, "max_s": null, "typical_s": null, "observations": null, "note": null},
+    "resolve_card":   {"min_s": null, "max_s": null, "typical_s": null, "observations": null, "note": null},
+    "decide":         {"min_s": null, "max_s": null, "typical_s": null, "observations": null, "note": null},
+    "random_device":  {"min_s": null, "max_s": null, "typical_s": null, "observations": null, "note": null},
+    "token_handling": {"min_s": null, "max_s": null, "typical_s": null,  "observations": null, "note": null},
+    "board_change":   {"min_s": null, "max_s": null, "typical_s": null, "observations": null, "note": null},
+    "round_end":      {"min_s": null, "max_s": null, "typical_s": null, "observations": null, "note": null},
+    "scoring":        {"min_s": null, "max_s": null, "typical_s": null, "observations": null, "note": null}
+  },
+  "sessions": [
+    {"player_count": null, "play_min": null, "setup_min": null, "first_play": null, "note": null}
+  ],
+  "_how_to_fill": [
+    "Fill only what you measured. Leave everything else null or delete it; nothing is required.",
+    "Times are per occurrence as you see it at the table: one move (all its steps), one card drawn, one card read and carried out. min_s = a fast, focused table; max_s = a slow, chatty table; typical_s is optional.",
+    "A category counts as provided when min_s and max_s are both filled.",
+    "sessions: real games you timed from first turn to final scoring (play_min), one entry per game.",
+    "Category definitions: 00b_output_contract.md section 7.1. Remove this _how_to_fill list or leave it; it is ignored."
+  ]
+}

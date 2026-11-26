@@ -1,0 +1,4 @@
+# Keep launcher line endings right on every OS (git would otherwise convert them)
+*.sh  text eol=lf
+*.py  text eol=lf
+*.bat text eol=crlf

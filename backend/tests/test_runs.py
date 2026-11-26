@@ -47,7 +47,7 @@ def test_run_goes_through_agent_and_proposal(settings):
     assert (settings.runs_dir / run_id / "input" / "rules.pdf").exists()
     assert [e.kind for e in manager.events(run_id)] == ["tool", "text", "step"]
     assert [e.index for e in manager.events(run_id, after=1)] == [2, 3]
-    assert manager.list()[0].id == run_id
+    assert manager.list_runs()[0].id == run_id
 
 
 def test_no_proposal_without_components(settings):

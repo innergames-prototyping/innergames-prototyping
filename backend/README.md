@@ -1,9 +1,11 @@
 # Backend
 
-Python backend (FastAPI, Pydantic). It has one phase for now: **extraction**. From the PDFs and
-images of a board game it makes the rules text (`rules.md`), the list of components
-(`components.json`) and a first game model (`game_model_v1.json`: rules, components, action kinds
-and game variables).
+Python backend (FastAPI, Pydantic). A run has two phases: **extraction** and **analysis**. The
+flow, API and checkpoints are in [Pipeline Flow](../docs/backend/pipeline-flow.md).
+
+From the PDFs and images of a board game, extraction makes the rules text (`rules.md`), the list of
+components (`components.json`) and a first game model (`game_model_v1.json`: rules, components,
+action kinds and game variables).
 
 An agent session (Claude Agent SDK) makes the judgments and works only through app tools. The bulk
 reading is done by many tool-less reader calls. Code: `app/extraction/`, the agent's instructions:

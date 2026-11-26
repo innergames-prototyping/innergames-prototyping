@@ -1,0 +1,5 @@
+{
+  "title": "Agents",
+  "defaultOpen": false,
+  "pages": ["issue-tracker", "triage-labels", "domain", "..."]
+}
